@@ -5,11 +5,10 @@ end
 
 local utils = require("core.utils")
 
-utils.disabled_builtins()
-
 utils.bootstrap()
 
 local sources = {
+  "core.disabled",
   "core.options",
   "core.plugins",
   "core.autocmds",
