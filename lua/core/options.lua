@@ -4,7 +4,7 @@ local colorscheme = "default_theme"
 
 local set = vim.opt
 
-vim.cmd(string.format("colorscheme %s", colorscheme))
+vim.api.nvim_command(("colorscheme %s"):format(colorscheme))
 
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english

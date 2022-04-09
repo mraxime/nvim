@@ -65,7 +65,7 @@ M.on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
   end
 
-  vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+  vim.api.nvim_add_user_command("Format", vim.lsp.buf.formatting, {})
   lsp_highlight_document(client)
 end
 

@@ -6,7 +6,7 @@ vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.g.colors_name = "default_theme"
 
-local util = require("default_theme.util")
+local utils = require("default_theme.utils")
 
 local modules = {
   "base",
@@ -23,6 +23,7 @@ for _, module in ipairs(modules) do
   highlights = vim.tbl_deep_extend("force", highlights, require("default_theme." .. module))
 end
 
-for group, colors in pairs(highlights) do
-  util.highlight(group, colors)
+for group, spec in pairs(highlights) do
+  -- allow for old api for style
+  vim.api.nvim_set_hl(0, group, utils.parse_style(spec))
 end
