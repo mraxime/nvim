@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  notify.setup(require("core.utils").user_plugin_opts("plugins.notify", {
+  notify.setup({
     stages = "fade",
     on_open = nil,
     on_close = nil,
@@ -23,7 +23,7 @@ function M.config()
       DEBUG = "",
       TRACE = "✎",
     },
-  }))
+  })
 
   vim.notify = notify
 end

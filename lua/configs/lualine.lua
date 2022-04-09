@@ -1,6 +1,6 @@
 local M = {}
 
-local status = require "core.status"
+local status = require("core.status")
 
 local function get_hl_by_name(name)
   return string.format("#%06x", vim.api.nvim_get_hl_by_name(name.group, true)[name.prop])
@@ -20,17 +20,17 @@ function M.config()
     return
   end
 
-  local colors = require "default_theme.colors"
+  local colors = require("default_theme.colors")
 
   local conditions = {
     buffer_not_empty = function()
-      return vim.fn.empty(vim.fn.expand "%:t") ~= 1
+      return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
     end,
     hide_in_width = function()
       return vim.fn.winwidth(0) > 80
     end,
     check_git_workspace = function()
-      local filepath = vim.fn.expand "%:p:h"
+      local filepath = vim.fn.expand("%:p:h")
       local gitdir = vim.fn.finddir(".git", filepath .. ";")
       return gitdir and #gitdir > 0 and #gitdir < #filepath
     end,
@@ -43,7 +43,7 @@ function M.config()
     padding = { left = 0, right = 0 },
   }
 
-  local config = {
+  lualine.setup({
     options = {
       disabled_filetypes = { "NvimTree", "neo-tree", "dashboard", "Outline" },
       component_separators = "",
@@ -129,9 +129,7 @@ function M.config()
       lualine_c = {},
       lualine_x = {},
     },
-  }
-
-  lualine.setup(require("core.utils").user_plugin_opts("plugins.lualine", config))
+  })
 end
 
 return M

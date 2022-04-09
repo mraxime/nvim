@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  smart_splits.setup(require("core.utils").user_plugin_opts("plugins.smart-splits", {
+  smart_splits.setup({
     -- Ignored filetypes (only while resizing)
     ignored_filetypes = {
       "nofile",
@@ -21,7 +21,7 @@ function M.config()
     -- regardless of line numbers.
     -- Can be overridden via function parameter, see Usage.
     move_cursor_same_row = false,
-  }))
+  })
 end
 
 return M

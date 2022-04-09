@@ -6,16 +6,15 @@ function M.config()
     return
   end
 
-  local actions = require "telescope.actions"
+  local actions = require("telescope.actions")
 
   local notify_present, _ = pcall(require, "notify")
   if notify_present then
-    telescope.load_extension "notify"
+    telescope.load_extension("notify")
   end
 
-  telescope.setup(require("core.utils").user_plugin_opts("plugins.telescope", {
+  telescope.setup({
     defaults = {
-
       prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
@@ -100,7 +99,7 @@ function M.config()
     },
     pickers = {},
     extensions = {},
-  }))
+  })
 end
 
 return M

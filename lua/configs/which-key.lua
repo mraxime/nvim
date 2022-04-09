@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  local default_setup = {
+  which_key.setup({
     plugins = {
       marks = true,
       registers = true,
@@ -55,9 +55,7 @@ function M.config()
       i = { "j", "k" },
       v = { "j", "k" },
     },
-  }
-
-  which_key.setup(require("core.utils").user_plugin_opts("plugins.which-key", default_setup))
+  })
 end
 
 return M

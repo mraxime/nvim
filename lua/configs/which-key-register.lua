@@ -1,6 +1,6 @@
 local M = {}
 
-local utils = require "core.utils"
+local utils = require("core.utils")
 
 local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
@@ -56,32 +56,32 @@ local function init_table(idx)
   end
 end
 
-if utils.is_available "neo-tree.nvim" then
+if utils.is_available("neo-tree.nvim") then
   mappings.e = { "Toggle Explorer" }
   mappings.o = { "Focus Explorer" }
 end
 
-if utils.is_available "dashboard-nvim" then
+if utils.is_available("dashboard-nvim") then
   mappings.d = { "Dashboard" }
 
-  init_table "f"
+  init_table("f")
   mappings.f.n = { "New File" }
 
-  init_table "S"
+  init_table("S")
   mappings.S.s = { "Save Session" }
   mappings.S.l = { "Load Session" }
 end
 
-if utils.is_available "Comment.nvim" then
+if utils.is_available("Comment.nvim") then
   mappings["/"] = { "Comment" }
 end
 
-if utils.is_available "vim-bbye" then
+if utils.is_available("vim-bbye") then
   mappings.c = { "Close Buffer" }
 end
 
-if utils.is_available "gitsigns.nvim" then
-  init_table "g"
+if utils.is_available("gitsigns.nvim") then
+  init_table("g")
   mappings.g.j = { "Next Hunk" }
   mappings.g.k = { "Prev Hunk" }
   mappings.g.l = { "Blame" }
@@ -93,18 +93,18 @@ if utils.is_available "gitsigns.nvim" then
   mappings.g.d = { "Diff" }
 end
 
-if utils.is_available "gitsigns.nvim" then
-  init_table "g"
+if utils.is_available("gitsigns.nvim") then
+  init_table("g")
   mappings.g.t = { "Open changed file" }
   mappings.g.b = { "Checkout branch" }
   mappings.g.c = { "Checkout commit" }
 end
 
-if utils.is_available "nvim-toggleterm.lua" then
-  init_table "g"
+if utils.is_available("nvim-toggleterm.lua") then
+  init_table("g")
   mappings.g.g = { "Lazygit" }
 
-  init_table "t"
+  init_table("t")
   mappings.t.n = { "Node" }
   mappings.t.u = { "NCDU" }
   mappings.t.t = { "Htop" }
@@ -114,13 +114,13 @@ if utils.is_available "nvim-toggleterm.lua" then
   mappings.t.v = { "Vertical" }
 end
 
-if utils.is_available "symbols-outline.nvim" then
-  init_table "l"
+if utils.is_available("symbols-outline.nvim") then
+  init_table("l")
   mappings.l.S = { "Symbols Outline" }
 end
 
-if utils.is_available "nvim-telescope/telescope.nvim" then
-  init_table "s"
+if utils.is_available("nvim-telescope/telescope.nvim") then
+  init_table("s")
   mappings.s.b = { "Checkout branch" }
   mappings.s.h = { "Find Help" }
   mappings.s.m = { "Man Pages" }
@@ -129,12 +129,12 @@ if utils.is_available "nvim-telescope/telescope.nvim" then
   mappings.s.k = { "Keymaps" }
   mappings.s.c = { "Commands" }
 
-  init_table "g"
+  init_table("g")
   mappings.g.t = { "Open changed file" }
   mappings.g.b = { "Checkout branch" }
   mappings.g.c = { "Checkout commit" }
 
-  init_table "f"
+  init_table("f")
   mappings.f.b = { "Find Buffers" }
   mappings.f.f = { "Find Files" }
   mappings.f.h = { "Find Help" }
@@ -142,12 +142,12 @@ if utils.is_available "nvim-telescope/telescope.nvim" then
   mappings.f.o = { "Find Old Files" }
   mappings.f.w = { "Find Words" }
 
-  init_table "l"
+  init_table("l")
   mappings.l.s = { "Document Symbols" }
   mappings.l.R = { "References" }
   mappings.l.D = { "All Diagnostics" }
 end
 
-which_key.register(require("core.utils").user_plugin_opts("which-key.register_n_leader", mappings), opts)
+which_key.register(mappings, opts)
 
 return M

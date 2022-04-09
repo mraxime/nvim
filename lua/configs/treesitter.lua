@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  local default_opts = {
+  treesitter.setup({
     ensure_installed = {},
     sync_install = false,
     ignore_install = {},
@@ -36,9 +36,7 @@ function M.config()
     autotag = {
       enable = true,
     },
-  }
-
-  treesitter.setup(require("core.utils").user_plugin_opts("plugins.treesitter", default_opts))
+  })
 end
 
 return M

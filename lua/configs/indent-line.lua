@@ -51,10 +51,10 @@ function M.config()
     "operation_type",
   }
 
-  indent_blankline.setup(require("core.utils").user_plugin_opts("plugins.indent_blankline", {
+  indent_blankline.setup({
     show_current_context = true,
     show_current_context_start = false,
-  }))
+  })
 end
 
 return M
