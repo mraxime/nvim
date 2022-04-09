@@ -3,7 +3,7 @@ if impatient_ok then
   impatient.enable_profile()
 end
 
-local utils = require "core.utils"
+local utils = require("core.utils")
 
 utils.disabled_builtins()
 
@@ -26,16 +26,8 @@ for _, source in ipairs(sources) do
   end
 end
 
-local status_ok, ui = pcall(require, "core.ui")
-if status_ok then
-  for ui_addition, enabled in pairs(utils.user_settings().ui) do
-    if enabled and type(ui[ui_addition]) == "function" then
-      ui[ui_addition]()
-    end
-  end
-end
-
-local polish = utils.user_plugin_opts "polish"
-if type(polish) == "function" then
-  polish()
+-- Custom UIs
+local ui = require("core.ui")
+for _, ui_addition in ipairs(ui) do
+  ui[ui_addition]()
 end
