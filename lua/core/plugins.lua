@@ -5,9 +5,6 @@ if not packer_status_ok then
   return
 end
 
-local utils = require "core.utils"
-local config = utils.user_settings()
-
 local astro_plugins = {
   -- Plugin manager
   {
@@ -86,7 +83,6 @@ local astro_plugins = {
     config = function()
       require("configs.bufferline").config()
     end,
-    disable = not config.enabled.bufferline,
   },
 
   -- Better buffer closing
@@ -103,7 +99,6 @@ local astro_plugins = {
     config = function()
       require("configs.neo-tree").config()
     end,
-    disable = not config.enabled.neo_tree,
   },
 
   -- Statusline
@@ -112,21 +107,18 @@ local astro_plugins = {
     config = function()
       require("configs.lualine").config()
     end,
-    disable = not config.enabled.lualine,
   },
 
   -- Parenthesis highlighting
   {
     "p00f/nvim-ts-rainbow",
     after = "nvim-treesitter",
-    disable = not config.enabled.ts_rainbow,
   },
 
   -- Autoclose tags
   {
     "windwp/nvim-ts-autotag",
     after = "nvim-treesitter",
-    disable = not config.enabled.ts_autotag,
   },
 
   -- Context based commenting
@@ -224,7 +216,7 @@ local astro_plugins = {
     "neovim/nvim-lspconfig",
     event = "BufWinEnter",
     config = function()
-      require "configs.lsp"
+      require("configs.lsp")
     end,
   },
 
@@ -235,19 +227,12 @@ local astro_plugins = {
     setup = function()
       require("configs.symbols-outline").setup()
     end,
-    disable = not config.enabled.symbols_outline,
   },
 
   -- Formatting and linting
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufRead", "BufNewFile" },
-    config = function()
-      local null_ls = require("core.utils").user_plugin_opts "null-ls"
-      if type(null_ls) == "function" then
-        null_ls()
-      end
-    end,
   },
 
   -- Fuzzy finder
@@ -266,7 +251,7 @@ local astro_plugins = {
     after = "telescope.nvim",
     run = "make",
     config = function()
-      require("telescope").load_extension "fzf"
+      require("telescope").load_extension("fzf")
     end,
   },
 
@@ -277,7 +262,6 @@ local astro_plugins = {
     config = function()
       require("configs.gitsigns").config()
     end,
-    disable = not config.enabled.gitsigns,
   },
 
   -- Start screen
@@ -286,7 +270,6 @@ local astro_plugins = {
     config = function()
       require("configs.dashboard").config()
     end,
-    disable = not config.enabled.dashboard,
   },
 
   -- Color highlighting
@@ -296,7 +279,6 @@ local astro_plugins = {
     config = function()
       require("configs.colorizer").config()
     end,
-    disable = not config.enabled.colorizer,
   },
 
   -- Autopairs
@@ -316,7 +298,6 @@ local astro_plugins = {
     config = function()
       require("configs.toggleterm").config()
     end,
-    disable = not config.enabled.toggle_term,
   },
 
   -- Commenting
@@ -326,7 +307,6 @@ local astro_plugins = {
     config = function()
       require("configs.comment").config()
     end,
-    disable = not config.enabled.comment,
   },
 
   -- Indentation
@@ -335,7 +315,6 @@ local astro_plugins = {
     config = function()
       require("configs.indent-line").config()
     end,
-    disable = not config.enabled.indent_blankline,
   },
 
   -- Keymaps popup
@@ -344,7 +323,6 @@ local astro_plugins = {
     config = function()
       require("configs.which-key").config()
     end,
-    disable = not config.enabled.which_key,
   },
 
   -- Smooth scrolling
@@ -354,7 +332,6 @@ local astro_plugins = {
     config = function()
       require("configs.neoscroll").config()
     end,
-    disable = not config.enabled.neoscroll,
   },
 
   -- Smooth escaping
@@ -370,20 +347,18 @@ local astro_plugins = {
   { "b0o/SchemaStore.nvim" },
 }
 
-packer.startup {
+packer.startup({
   function(use)
     -- Load plugins!
-    for _, plugin in
-      pairs(require("core.utils").user_plugin_opts("plugins.init", require("core.utils").label_plugins(astro_plugins)))
-    do
+    for _, plugin in pairs(require("core.utils").label_plugins(astro_plugins)) do
       use(plugin)
     end
   end,
-  config = require("core.utils").user_plugin_opts("plugins.packer", {
-    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+  config = {
+    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     display = {
       open_fn = function()
-        return require("packer.util").float { border = "rounded" }
+        return require("packer.util").float({ border = "rounded" })
       end,
     },
     profile = {
@@ -398,7 +373,7 @@ packer.startup {
     },
     auto_clean = true,
     compile_on_sync = true,
-  }),
-}
+  },
+})
 
 return M
