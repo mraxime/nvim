@@ -1,5 +1,4 @@
-local others = {
-
+local other = {
   -- Bufferline
   BufferLineFill = { fg = C.grey_9, bg = C.grey_4 },
   BufferLineBackground = { fg = C.grey_9, bg = C.grey_4 },
@@ -202,4 +201,4 @@ local others = {
   Beacon = { bg = C.blue },
 }
 
-return others
+return other
