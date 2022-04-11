@@ -1,379 +1,68 @@
-local M = {}
+local packer = require("utils.packerInit")
 
-local packer_status_ok, packer = pcall(require, "packer")
-if not packer_status_ok then
-  return
-end
+packer.startup(function(use)
+  use({
+    "wbthomason/packer.nvim", -- Plugin manager
+    "nvim-lua/plenary.nvim", -- Lua functions
+    "lewis6991/impatient.nvim", -- Optimiser
+  })
 
-local astro_plugins = {
-  -- Plugin manager
-  {
-    "wbthomason/packer.nvim",
-  },
+  -- use({ -- Boost startup time
+  --   "nathom/filetype.nvim",
+  --   config = function()
+  --     require("filetype").setup()
+  --   end,
+  -- })
 
-  -- Optimiser
-  { "lewis6991/impatient.nvim" },
+  local enabled_plugins = {
+    "popup", -- Popup API
+    "indent-o-matic", -- Indent detection
+    "nvim-notify", -- Notification Enhancer
+    "nui", -- Neovim UI Enhancer
+    "fix-cursor-hold", -- Cursorhold fix
+    "smart-splits", -- Smarter Splits
+    "nvim-web-devicons", -- Icons
+    "bufferline", -- Bufferline
+    "vim-bbye", -- Better buffer closing
+    -- "neo-tree", -- File explorer
+    "nvim-tree", -- File explorer
+    "lualine", -- Statusline
+    -- "nvim-ts-rainbow", -- Parenthesis highlighting
+    "nvim-ts-autotag", -- Autoclose tags
+    "nvim-ts-context-commentstring", -- Context based commenting
+    "nvim-treesitter", -- Syntax highlighting
+    "luasnip", -- Snippet engine
+    "nvim-cmp", -- Completion engine
+    "nvim-lsp-installer", -- LSP manager
+    "nvim-lspconfig", -- Built-in LSP
+    -- "symbols-outline", -- LSP symbols
+    "null-ls", -- Formatting and linting
+    "telescope", -- Fuzzy finder
+    "telescope-fzf-native", -- Fuzzy finder syntax support
+    "gitsigns", -- Git integration
+    -- "dashboard-nvim", -- Start screen
+    "nvim-colorizer", -- Color highlighting
+    "nvim-autopairs", -- Autopairs
+    "nvim-toggleterm", -- Terminal
+    "comment", -- Commenting
+    "indent-blankline", -- Indentation
+    "which-key", -- Keymaps popup
+    -- "neoscroll", -- Smooth scrolling
+    "better-escape", -- Smooth escaping
+    "schema-store", -- Get extra JSON schemas
+  }
+  -- Load main plugins
+  for _, path in ipairs(enabled_plugins) do
+    use(require("plugins." .. path).init)
+  end
 
-  -- Lua functions
-  { "nvim-lua/plenary.nvim" },
-
-  -- Popup API
-  { "nvim-lua/popup.nvim" },
-
-  -- Boost startup time
-  {
-    "nathom/filetype.nvim",
+  use({ -- color scheme
+    "folke/tokyonight.nvim",
+    as = "tokyonight",
     config = function()
-      require("configs.filetype").config()
+      vim.g.tokyonight_style = "night"
+      vim.g.tokyonight_sidebars = { "qf" }
+      vim.cmd("color tokyonight")
     end,
-  },
-  -- Indent detection
-  {
-    "Darazaki/indent-o-matic",
-    event = "BufRead",
-    config = function()
-      require("configs.indent-o-matic").config()
-    end,
-  },
-
-  -- Notification Enhancer
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      require("configs.notify").config()
-    end,
-  },
-
-  -- Neovim UI Enhancer
-  {
-    "MunifTanjim/nui.nvim",
-    module = "nui",
-  },
-
-  -- Cursorhold fix
-  {
-    "antoinemadec/FixCursorHold.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      vim.g.cursorhold_updatetime = 100
-    end,
-  },
-
-  -- Smarter Splits
-  {
-    "mrjones2014/smart-splits.nvim",
-    module = "smart-splits",
-    config = function()
-      require("configs.smart-splits").config()
-    end,
-  },
-
-  -- Icons
-  {
-    "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("configs.icons").config()
-    end,
-  },
-
-  -- Bufferline
-  {
-    "akinsho/bufferline.nvim",
-    after = "nvim-web-devicons",
-    config = function()
-      require("configs.bufferline").config()
-    end,
-  },
-
-  -- Better buffer closing
-  {
-    "moll/vim-bbye",
-  },
-
-  -- File explorer
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    module = "neo-tree",
-    cmd = "Neotree",
-    requires = "MunifTanjim/nui.nvim",
-    config = function()
-      require("configs.neo-tree").config()
-    end,
-  },
-
-  -- Statusline
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("configs.lualine").config()
-    end,
-  },
-
-  -- Parenthesis highlighting
-  {
-    "p00f/nvim-ts-rainbow",
-    after = "nvim-treesitter",
-  },
-
-  -- Autoclose tags
-  {
-    "windwp/nvim-ts-autotag",
-    after = "nvim-treesitter",
-  },
-
-  -- Context based commenting
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    after = "nvim-treesitter",
-  },
-
-  -- Syntax highlighting
-  {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    event = { "BufRead", "BufNewFile" },
-    cmd = {
-      "TSInstall",
-      "TSInstallInfo",
-      "TSInstallSync",
-      "TSUninstall",
-      "TSUpdate",
-      "TSUpdateSync",
-      "TSDisableAll",
-      "TSEnableAll",
-    },
-    config = function()
-      require("configs.treesitter").config()
-    end,
-  },
-
-  -- Snippet collection
-  {
-    "rafamadriz/friendly-snippets",
-    after = "nvim-cmp",
-  },
-
-  -- Snippet engine
-  {
-    "L3MON4D3/LuaSnip",
-    after = "friendly-snippets",
-    config = function()
-      require("configs.luasnip").config()
-    end,
-  },
-
-  -- Completion engine
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    config = function()
-      require("configs.cmp").config()
-    end,
-  },
-
-  -- Snippet completion source
-  {
-    "saadparwaiz1/cmp_luasnip",
-    after = "nvim-cmp",
-  },
-
-  -- Buffer completion source
-  {
-    "hrsh7th/cmp-buffer",
-    after = "nvim-cmp",
-  },
-
-  -- Path completion source
-  {
-    "hrsh7th/cmp-path",
-    after = "nvim-cmp",
-  },
-
-  -- LSP completion source
-  {
-    "hrsh7th/cmp-nvim-lsp",
-    after = "nvim-cmp",
-  },
-
-  -- LSP manager
-  {
-    "williamboman/nvim-lsp-installer",
-    event = { "BufRead", "BufNewFile" },
-    cmd = {
-      "LspInstall",
-      "LspInstallInfo",
-      "LspPrintInstalled",
-      "LspRestart",
-      "LspStart",
-      "LspStop",
-      "LspUninstall",
-      "LspUninstallAll",
-    },
-  },
-
-  -- Built-in LSP
-  {
-    "neovim/nvim-lspconfig",
-    event = "BufWinEnter",
-    config = function()
-      require("configs.lsp")
-    end,
-  },
-
-  -- LSP symbols
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    setup = function()
-      require("configs.symbols-outline").setup()
-    end,
-  },
-
-  -- Formatting and linting
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufRead", "BufNewFile" },
-  },
-
-  -- Fuzzy finder
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    module = "telescope",
-    config = function()
-      require("configs.telescope").config()
-    end,
-  },
-
-  -- Fuzzy finder syntax support
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    after = "telescope.nvim",
-    run = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
-
-  -- Git integration
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require("configs.gitsigns").config()
-    end,
-  },
-
-  -- Start screen
-  {
-    "glepnir/dashboard-nvim",
-    config = function()
-      require("configs.dashboard").config()
-    end,
-  },
-
-  -- Color highlighting
-  {
-    "norcalli/nvim-colorizer.lua",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require("configs.colorizer").config()
-    end,
-  },
-
-  -- Autopairs
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = function()
-      require("configs.autopairs").config()
-    end,
-  },
-
-  -- Terminal
-  {
-    "akinsho/nvim-toggleterm.lua",
-    cmd = "ToggleTerm",
-    module = { "toggleterm", "toggleterm.terminal" },
-    config = function()
-      require("configs.toggleterm").config()
-    end,
-  },
-
-  -- Commenting
-  {
-    "numToStr/Comment.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require("configs.comment").config()
-    end,
-  },
-
-  -- Indentation
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("configs.indent-line").config()
-    end,
-  },
-
-  -- Keymaps popup
-  {
-    "folke/which-key.nvim",
-    config = function()
-      require("configs.which-key").config()
-    end,
-  },
-
-  -- Smooth scrolling
-  {
-    "karb94/neoscroll.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require("configs.neoscroll").config()
-    end,
-  },
-
-  -- Smooth escaping
-  {
-    "max397574/better-escape.nvim",
-    event = { "InsertEnter" },
-    config = function()
-      require("configs.better_escape").config()
-    end,
-  },
-
-  -- Get extra JSON schemas
-  { "b0o/SchemaStore.nvim" },
-}
-
-packer.startup({
-  function(use)
-    -- Load plugins!
-    for _, plugin in pairs(require("core.utils").label_plugins(astro_plugins)) do
-      use(plugin)
-    end
-  end,
-  config = {
-    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
-    display = {
-      open_fn = function()
-        return require("packer.util").float({ border = "rounded" })
-      end,
-    },
-    profile = {
-      enable = true,
-      threshold = 0.0001,
-    },
-    git = {
-      clone_timeout = 300,
-      subcommands = {
-        update = "pull --ff-only --progress --rebase=true",
-      },
-    },
-    auto_clean = true,
-    compile_on_sync = true,
-  },
-})
-
-return M
+  })
+end)
