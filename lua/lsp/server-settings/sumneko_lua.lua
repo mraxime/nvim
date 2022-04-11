@@ -1,4 +1,4 @@
-return {
+local opts = {
   settings = {
     Lua = {
       diagnostics = {
@@ -6,10 +6,12 @@ return {
       },
       workspace = {
         library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.stdpath "config" .. "/lua"] = true,
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.stdpath("config") .. "/lua"] = true,
         },
       },
     },
   },
 }
+
+return opts

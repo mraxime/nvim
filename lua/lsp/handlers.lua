@@ -13,7 +13,7 @@ function M.setup()
   end
 
   vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = false,
     signs = {
       active = signs,
     },
@@ -21,12 +21,12 @@ function M.setup()
     underline = true,
     severity_sort = true,
     float = {
-      focusable = false,
+      focusable = true,
       style = "minimal",
       border = "rounded",
       source = "always",
       header = "",
-      prefix = "",
+      -- prefix = "",
     },
   })
 
@@ -69,13 +69,22 @@ M.on_attach = function(client)
   lsp_highlight_document(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
-end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+M.capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities.textDocument.completion.completionItem.preselectSupport = true
+M.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+M.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+M.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+M.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+M.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+M.capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
 
 return M
