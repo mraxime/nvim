@@ -4,32 +4,6 @@ local _user_terminals = {}
 
 M.base_notification = { title = "AstroVim" }
 
-function M.bootstrap()
-  local fn = vim.fn
-  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-  if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system({
-      "git",
-      "clone",
-      "--depth",
-      "1",
-      "https://github.com/wbthomason/packer.nvim",
-      install_path,
-    })
-    print("Cloning packer...\nSetup AstroVim")
-    vim.cmd([[packadd packer.nvim]])
-  end
-end
-
-function M.compiled()
-  local run_me, _ = loadfile(vim.fn.stdpath("config") .. "/lua/packer_compiled.lua")
-  if run_me then
-    run_me()
-  else
-    print("Please run :PackerSync")
-  end
-end
-
 function M.list_registered_providers_names(filetype)
   local s = require("null-ls.sources")
   local available_sources = s.get_available(filetype)

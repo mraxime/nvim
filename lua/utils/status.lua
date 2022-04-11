@@ -42,12 +42,10 @@ function M.lsp_name(msg)
     end
   end
 
-  local formatters = require "core.utils"
-  local supported_formatters = formatters.list_registered_formatters(buf_ft)
+  local supported_formatters = require("utils").list_registered_formatters(buf_ft)
   vim.list_extend(buf_client_names, supported_formatters)
 
-  local linters = require "core.utils"
-  local supported_linters = linters.list_registered_linters(buf_ft)
+  local supported_linters = require("utils").list_registered_linters(buf_ft)
   vim.list_extend(buf_client_names, supported_linters)
 
   return table.concat(buf_client_names, ", ")
@@ -62,8 +60,8 @@ function M.treesitter_status()
 end
 
 function M.progress_bar()
-  local current_line = vim.fn.line "."
-  local total_lines = vim.fn.line "$"
+  local current_line = vim.fn.line(".")
+  local total_lines = vim.fn.line("$")
   local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
   local line_ratio = current_line / total_lines
   local index = math.ceil(line_ratio * #chars)
