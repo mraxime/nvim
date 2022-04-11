@@ -1,18 +1,16 @@
 local M = {}
 
-local utils = require "core.utils"
+local utils = require("utils")
 
 local map = vim.keymap.set
 local cmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
--- Remap space as leader key
-map("", "<Space>", "<Nop>")
+-- leader key
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Normal --
-if utils.is_available "smart-splits.nvim" then
+if utils.is_available("smart-splits.nvim") then
   -- Better window navigation
   map("n", "<C-h>", function()
     require("smart-splits").move_cursor_left()
@@ -43,11 +41,11 @@ if utils.is_available "smart-splits.nvim" then
 end
 
 -- Navigate buffers
-if utils.is_available "bufferline.nvim" then
-  map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>")
-  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>")
-  map("n", "}", "<cmd>BufferLineMoveNext<cr>")
-  map("n", "{", "<cmd>BufferLineMovePrev<cr>")
+if utils.is_available("bufferline.nvim") then
+  map("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
+  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
+  map("n", "}", "<cmd>BufferLineMoveNext<CR>")
+  map("n", "{", "<cmd>BufferLineMovePrev<CR>")
 else
   map("n", "<S-l>", "<cmd>bnext<CR>")
   map("n", "<S-h>", "<cmd>bprevious<CR>")
@@ -62,30 +60,29 @@ map("n", "<leader>w", "<cmd>w<CR>")
 map("n", "<leader>q", "<cmd>q<CR>")
 map("n", "<leader>h", "<cmd>nohlsearch<CR>")
 
-if utils.is_available "vim-bbye" then
+if utils.is_available("vim-bbye") then
   map("n", "<leader>c", "<cmd>Bdelete!<CR>")
 end
 
 -- Packer
-map("n", "<leader>pc", "<cmd>PackerCompile<cr>")
-map("n", "<leader>pi", "<cmd>PackerInstall<cr>")
-map("n", "<leader>ps", "<cmd>PackerSync<cr>")
-map("n", "<leader>pS", "<cmd>PackerStatus<cr>")
-map("n", "<leader>pu", "<cmd>PackerUpdate<cr>")
-
--- LSP
-map("n", "<leader>lf", vim.lsp.buf.formatting_sync)
-map("n", "<leader>li", "<cmd>LspInfo<cr>")
-map("n", "<leader>lI", "<cmd>LspInstallInfo<cr>")
+map("n", "<leader>pc", "<cmd>PackerCompile<CR>")
+map("n", "<leader>pi", "<cmd>PackerInstall<CR>")
+map("n", "<leader>ps", "<cmd>PackerSync<CR>")
+map("n", "<leader>pS", "<cmd>PackerStatus<CR>")
+map("n", "<leader>pu", "<cmd>PackerUpdate<CR>")
 
 -- NeoTree
-if utils.is_available "neo-tree.nvim" then
+if utils.is_available("neo-tree.nvim") then
   map("n", "<leader>e", "<cmd>Neotree toggle<CR>")
-  map("n", "<leader>o", "<cmd>Neotree focus<CR>")
+end
+
+if utils.is_available("nvim-tree.lua") then
+  map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
+  map("n", ";", "<cmd>NvimTreeCollapse<CR>")
 end
 
 -- Dashboard
-if utils.is_available "dashboard-nvim" then
+if utils.is_available("dashboard-nvim") then
   map("n", "<leader>d", "<cmd>Dashboard<CR>")
   map("n", "<leader>fn", "<cmd>DashboardNewFile<CR>")
   map("n", "<leader>Sl", "<cmd>SessionLoad<CR>")
@@ -93,67 +90,46 @@ if utils.is_available "dashboard-nvim" then
 end
 
 -- GitSigns
-if utils.is_available "gitsigns.nvim" then
-  map("n", "<leader>gj", function()
+if utils.is_available("gitsigns.nvim") then
+  map("n", "<leader>gn", function()
     require("gitsigns").next_hunk()
   end)
-  map("n", "<leader>gk", function()
+  map("n", "<leader>gp", function()
     require("gitsigns").prev_hunk()
   end)
   map("n", "<leader>gl", function()
     require("gitsigns").blame_line()
   end)
-  map("n", "<leader>gp", function()
-    require("gitsigns").preview_hunk()
-  end)
-  map("n", "<leader>gh", function()
-    require("gitsigns").reset_hunk()
-  end)
-  map("n", "<leader>gr", function()
-    require("gitsigns").reset_buffer()
-  end)
-  map("n", "<leader>gs", function()
-    require("gitsigns").stage_hunk()
-  end)
-  map("n", "<leader>gu", function()
-    require("gitsigns").undo_stage_hunk()
-  end)
   map("n", "<leader>gd", function()
-    require("gitsigns").diffthis "HEAD"
+    require("gitsigns").diffthis("HEAD")
   end)
 end
 
 -- Telescope
-if utils.is_available "telescope.nvim" then
-  map("n", "<leader>fw", function()
+if utils.is_available("telescope.nvim") then
+  map("n", "<leader>st", function()
     require("telescope.builtin").live_grep()
   end)
-  map("n", "<leader>gt", function()
+  map("n", "<leader>sgs", function()
     require("telescope.builtin").git_status()
   end)
-  map("n", "<leader>gb", function()
+  map("n", "<leader>sgb", function()
     require("telescope.builtin").git_branches()
   end)
-  map("n", "<leader>gc", function()
+  map("n", "<leader>sgc", function()
     require("telescope.builtin").git_commits()
   end)
-  map("n", "<leader>ff", function()
+  map("n", "<leader>sf", function()
     require("telescope.builtin").find_files()
   end)
-  map("n", "<leader>fb", function()
+  map("n", "<leader>sb", function()
     require("telescope.builtin").buffers()
   end)
-  map("n", "<leader>fh", function()
+  map("n", "<leader>sh", function()
     require("telescope.builtin").help_tags()
   end)
-  map("n", "<leader>fm", function()
+  map("n", "<leader>sm", function()
     require("telescope.builtin").marks()
-  end)
-  map("n", "<leader>fo", function()
-    require("telescope.builtin").oldfiles()
-  end)
-  map("n", "<leader>sb", function()
-    require("telescope.builtin").git_branches()
   end)
   map("n", "<leader>sh", function()
     require("telescope.builtin").help_tags()
@@ -173,15 +149,6 @@ if utils.is_available "telescope.nvim" then
   map("n", "<leader>sc", function()
     require("telescope.builtin").commands()
   end)
-  map("n", "<leader>ls", function()
-    require("telescope.builtin").lsp_document_symbols()
-  end)
-  map("n", "<leader>lR", function()
-    require("telescope.builtin").lsp_references()
-  end)
-  map("n", "<leader>lD", function()
-    require("telescope.builtin").diagnostics()
-  end)
 end
 
 -- LSP
@@ -189,57 +156,49 @@ map("n", "gD", vim.lsp.buf.declaration)
 map("n", "gd", vim.lsp.buf.definition, { desc = "Show the definition of current function" })
 map("n", "gI", vim.lsp.buf.implementation)
 map("n", "gr", vim.lsp.buf.references)
-map("n", "go", vim.diagnostic.open_float)
 map("n", "gl", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "gk", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_next)
-map("n", "gj", vim.diagnostic.goto_next)
 map("n", "K", vim.lsp.buf.hover)
-map("n", "<leader>rn", vim.lsp.buf.rename)
 map("n", "<leader>la", vim.lsp.buf.code_action)
 map("n", "<leader>lr", vim.lsp.buf.rename)
-map("n", "<leader>ld", vim.diagnostic.open_float)
+map("n", "<leader>lf", vim.lsp.buf.formatting_sync)
+map("n", "<leader>ln", vim.diagnostic.goto_next)
+map("n", "<leader>lp", vim.diagnostic.goto_prev)
 
 -- Comment
-if utils.is_available "Comment.nvim" then
+if utils.is_available("Comment.nvim") then
   map("n", "<leader>/", function()
     require("Comment.api").toggle_current_linewise()
   end)
   map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>")
 end
 
--- ForceWrite
-map("n", "<C-s>", "<cmd>w!<CR>")
-
--- ForceQuit
-map("n", "<C-q>", "<cmd>q!<CR>")
-
 -- Terminal
-if utils.is_available "nvim-toggleterm.lua" then
+if utils.is_available("nvim-toggleterm.lua") then
   map("n", "<C-\\>", "<cmd>ToggleTerm<CR>")
   map("n", "<leader>gg", function()
-    utils.toggle_term_cmd "lazygit"
+    utils.toggle_term_cmd("lazygit")
   end)
   map("n", "<leader>tn", function()
-    utils.toggle_term_cmd "node"
+    utils.toggle_term_cmd("node")
   end)
   map("n", "<leader>tu", function()
-    utils.toggle_term_cmd "ncdu"
+    utils.toggle_term_cmd("ncdu")
   end)
   map("n", "<leader>tt", function()
-    utils.toggle_term_cmd "htop"
+    utils.toggle_term_cmd("htop")
   end)
   map("n", "<leader>tp", function()
-    utils.toggle_term_cmd "python"
+    utils.toggle_term_cmd("python")
   end)
-  map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>")
-  map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>")
-  map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>")
+  map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>")
+  map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>")
+  map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<CR>")
 end
 
 -- SymbolsOutline
-if utils.is_available "symbols-outline.nvim" then
+if utils.is_available("symbols-outline.nvim") then
   map("n", "<leader>lS", "<cmd>SymbolsOutline<CR>")
 end
 

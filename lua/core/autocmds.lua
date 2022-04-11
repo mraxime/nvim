@@ -1,6 +1,6 @@
 local M = {}
 
-local utils = require "core.utils"
+local utils = require("utils")
 
 local cmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
@@ -14,19 +14,7 @@ cmd("BufWritePost", {
   pattern = "plugins.lua",
 })
 
-augroup("cursor_off", {})
-cmd("WinLeave", {
-  desc = "No cursorline",
-  group = "cursor_off",
-  command = "set nocursorline",
-})
-cmd("WinEnter", {
-  desc = "No cursorline",
-  group = "cursor_off",
-  command = "set cursorline",
-})
-
-if utils.is_available "dashboard-nvim" and utils.is_available "bufferline.nvim" then
+if utils.is_available("dashboard-nvim") and utils.is_available("bufferline.nvim") then
   augroup("dashboard_settings", {})
   cmd("FileType", {
     desc = "Disable tabline for dashboard",
@@ -48,6 +36,6 @@ if utils.is_available "dashboard-nvim" and utils.is_available "bufferline.nvim" 
   })
 end
 
-add_command("AstroUpdate", require("core.utils").update, {})
+add_command("AstroUpdate", require("utils").update, {})
 
 return M

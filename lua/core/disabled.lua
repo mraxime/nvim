@@ -11,11 +11,10 @@ local function disabled_builtins()
   g.loaded_remote_plugins = false
   g.loaded_tar = false
   g.loaded_tarPlugin = false
-  g.loaded_zip = false
-  g.loaded_zipPlugin = false
   g.loaded_vimball = false
   g.loaded_vimballPlugin = false
-  g.zipPlugin = false
+  g.loaded_zip = false
+  g.loaded_zipPlugin = false
 end
 
 disabled_builtins()
