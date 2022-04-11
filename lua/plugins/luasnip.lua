@@ -4,7 +4,7 @@ M.init = {
   "L3MON4D3/LuaSnip",
   requires = {
     {
-      "friendly-snippets", -- Snippet collection
+      "rafamadriz/friendly-snippets", -- Snippet collection
       after = "nvim-cmp",
     },
   },

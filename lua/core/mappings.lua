@@ -174,7 +174,7 @@ end
 
 -- Terminal
 if utils.is_available("nvim-toggleterm.lua") then
-  map({ "n", "t" }, "<leader>tn", function()
+  map({ "n" }, "<leader>tn", function()
     utils.toggle_term_cmd("node")
   end)
   map({ "n", "t" }, "<A-l>", function()
