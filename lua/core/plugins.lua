@@ -18,7 +18,8 @@ packer.startup(function(use)
     "popup", -- Popup API
     "indent-o-matic", -- Indent detection
     "nvim-notify", -- Notification Enhancer
-    "nui", -- Neovim UI Enhancer
+    -- "nui", -- Neovim UI Enhancer
+    "cosmic-ui", -- Neovim UI Enhancer
     "fix-cursor-hold", -- Cursorhold fix
     "smart-splits", -- Smarter Splits
     "nvim-web-devicons", -- Icons
