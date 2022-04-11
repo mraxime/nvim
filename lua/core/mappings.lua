@@ -3,8 +3,6 @@ local M = {}
 local utils = require("utils")
 
 local map = vim.keymap.set
-local cmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
 
 -- leader key
 vim.g.mapleader = " "
@@ -176,25 +174,25 @@ end
 
 -- Terminal
 if utils.is_available("nvim-toggleterm.lua") then
-  map("n", "<C-\\>", "<cmd>ToggleTerm<CR>")
-  map("n", "<leader>gg", function()
-    utils.toggle_term_cmd("lazygit")
-  end)
-  map("n", "<leader>tn", function()
+  map({ "n", "t" }, "<leader>tn", function()
     utils.toggle_term_cmd("node")
   end)
-  map("n", "<leader>tu", function()
-    utils.toggle_term_cmd("ncdu")
+  map({ "n", "t" }, "<A-l>", function()
+    utils.toggle_term_cmd("lazygit", {
+      direction = "float",
+      float_opts = {
+        border = "single", -- 'single' | 'double' | 'shadow' | 'curved'
+        width = 150,
+        height = 150,
+        winblend = 0,
+      },
+    })
   end)
-  map("n", "<leader>tt", function()
-    utils.toggle_term_cmd("htop")
-  end)
-  map("n", "<leader>tp", function()
-    utils.toggle_term_cmd("python")
+  map({ "n", "t" }, "<A-o>", function()
+    utils.toggle_term_cmd("zsh")
   end)
   map("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>")
   map("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>")
-  map("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<CR>")
 end
 
 -- SymbolsOutline
@@ -220,21 +218,5 @@ map("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv")
 
 -- disable Ex mode:
 map("n", "Q", "<Nop>")
-
-function _G.set_terminal_keymaps()
-  vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], {})
-  vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], {})
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], {})
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], {})
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], {})
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], {})
-end
-
-augroup("TermMappings", {})
-cmd("TermOpen", {
-  desc = "Set terminal keymaps",
-  group = "TermMappings",
-  callback = _G.set_terminal_keymaps,
-})
 
 return M
