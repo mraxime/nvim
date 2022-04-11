@@ -1,7 +1,5 @@
 local M = {}
 
-local _user_terminals = {}
-
 M.base_notification = { title = "AstroVim" }
 
 function M.list_registered_providers_names(filetype)
@@ -31,11 +29,17 @@ function M.list_registered_linters(filetype)
   return registered_providers[formatter_method] or {}
 end
 
-function M.toggle_term_cmd(cmd)
-  if _user_terminals[cmd] == nil then
-    _user_terminals[cmd] = require("toggleterm.terminal").Terminal:new({ cmd = cmd, hidden = true })
+local user_terminals = {}
+
+function M.toggle_term_cmd(cmd, opts)
+  if user_terminals[cmd] == nil then
+    local options = { cmd = cmd, hidden = true }
+    if opts then
+      options = vim.tbl_deep_extend("force", options, opts)
+    end
+    user_terminals[cmd] = require("toggleterm.terminal").Terminal:new(options)
   end
-  _user_terminals[cmd]:toggle()
+  user_terminals[cmd]:toggle()
 end
 
 function M.label_plugins(plugins)
