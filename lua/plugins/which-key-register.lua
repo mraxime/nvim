@@ -2,11 +2,6 @@ local M = {}
 
 local utils = require("utils")
 
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-  return
-end
-
 local opts = {
   mode = "n",
   prefix = "<leader>",
@@ -148,6 +143,6 @@ if utils.is_available("telescope.nvim") then
   mappings.l.D = { "All Diagnostics" }
 end
 
-which_key.register(mappings, opts)
+require("which-key").register(mappings, opts)
 
 return M

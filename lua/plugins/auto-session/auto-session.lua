@@ -10,6 +10,7 @@ local init = {
     }
 
     require("auto-session").setup(defaults)
+    require("plugins.auto-session.mappings")
   end,
 }
 

@@ -1,11 +1,7 @@
 local init = {
   "rcarriga/nvim-notify",
   config = function()
-    local present, notify = pcall(require, "notify")
-    if not present then
-      return
-    end
-
+    local notify = require("notify")
     notify.setup({
       stages = "fade",
       on_open = nil,

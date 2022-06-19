@@ -3,7 +3,7 @@ local init = {
   event = { "BufRead", "BufNewFile" },
   config = function()
     local null_ls = require("null-ls")
-    require("null-ls").setup({
+    null_ls.setup({
       sources = {
         null_ls.builtins.code_actions.eslint_d.with({
           prefer_local = "node_modules/.bin",
@@ -21,15 +21,17 @@ local init = {
         null_ls.builtins.code_actions.gitsigns,
       },
       on_attach = function(client)
-        if client.resolved_capabilities.document_formatting then
+        if client.server_capabilities.documentFormattingProvider then
           vim.api.nvim_create_augroup("LspFormatting", { clear = true })
           vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "<buffer>",
             callback = function()
+              -- vim.lsp.buf.format({ timeout_ms = 3000 })
               vim.lsp.buf.formatting_sync(nil, 3000)
             end,
             group = "LspFormatting",
             -- buffer = true,
-            nested = true,
+            -- nested = true,
           })
         end
       end,

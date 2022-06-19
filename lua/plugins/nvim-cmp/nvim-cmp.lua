@@ -2,17 +2,13 @@ local init = {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   requires = {
-    { "hrsh7th/cmp-buffer" }, -- Buffer completion source
-    { "hrsh7th/cmp-nvim-lsp" }, -- LSP completion source
-    { "hrsh7th/cmp-path" }, -- Path completion source
-    { "saadparwaiz1/cmp_luasnip" }, -- Snippet completion source
+    { "hrsh7th/cmp-buffer", after = 'nvim-cmp' }, -- Buffer completion source
+    { "hrsh7th/cmp-nvim-lsp", after = 'nvim-cmp' }, -- LSP completion source
+    { "hrsh7th/cmp-path", after = 'nvim-cmp' }, -- Path completion source
+    { "saadparwaiz1/cmp_luasnip", after = 'nvim-cmp' }, -- Snippet completion source
   },
   config = function()
-    local cmp_status_ok, cmp = pcall(require, "cmp")
-    if not cmp_status_ok then
-      return
-    end
-
+    local cmp = require("cmp")
     local snip_status_ok, luasnip = pcall(require, "luasnip")
     if not snip_status_ok then
       return
@@ -81,8 +77,10 @@ local init = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
       },
-      documentation = {
-        border = "rounded",
+      window = {
+        documentation = {
+          border = "rounded",
+        },
       },
       experimental = {
         ghost_text = false,
@@ -97,7 +95,11 @@ local init = {
         { name = "buffer" },
         { name = "path" },
       },
-      mapping = {
+      mapping = cmp.mapping.preset.insert({
+        ["<Up>"] = cmp.mapping.select_prev_item(),
+        ["<Down>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -135,7 +137,7 @@ local init = {
           "i",
           "s",
         }),
-      },
+      }),
     })
   end,
 }

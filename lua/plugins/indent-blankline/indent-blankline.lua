@@ -1,11 +1,6 @@
 local init = {
   "lukas-reineke/indent-blankline.nvim",
   config = function()
-    local status_ok, indent_blankline = pcall(require, "indent_blankline")
-    if not status_ok then
-      return
-    end
-
     vim.g.indentLine_enabled = 1
     vim.g.indent_blankline_show_trailing_blankline_indent = false
     vim.g.indent_blankline_show_first_indent_level = true
@@ -51,7 +46,7 @@ local init = {
       "operation_type",
     }
 
-    indent_blankline.setup({
+    require("indent_blankline").setup({
       show_current_context = true,
       show_current_context_start = false,
     })

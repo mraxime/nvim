@@ -2,12 +2,7 @@ local init = {
   "akinsho/bufferline.nvim",
   after = "nvim-web-devicons",
   config = function()
-    local status_ok, bufferline = pcall(require, "bufferline")
-    if not status_ok then
-      return
-    end
-
-    bufferline.setup({
+    require("bufferline").setup({
       options = {
         offsets = {
           { filetype = "NvimTree", text = "", padding = 1 },
@@ -32,6 +27,8 @@ local init = {
         view = "multiwindow",
       },
     })
+
+    require("plugins.bufferline.mappings")
   end,
 }
 

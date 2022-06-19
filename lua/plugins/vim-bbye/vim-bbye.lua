@@ -1,3 +1,5 @@
-local init = { "moll/vim-bbye" }
+local init = {
+  "moll/vim-bbye",
+}
 
 return init

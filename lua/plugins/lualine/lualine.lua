@@ -1,7 +1,6 @@
 local init = {
   "nvim-lualine/lualine.nvim",
   config = function()
-    local lualine = require("lualine")
     local status = require("utils.status")
     local colors = require("themes.onedark.colors")
 
@@ -115,7 +114,7 @@ local init = {
       },
     }
 
-    lualine.setup(config)
+    require("lualine").setup(config)
   end,
 }
 

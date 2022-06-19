@@ -2,11 +2,6 @@ local init = {
   "norcalli/nvim-colorizer.lua",
   event = { "BufRead", "BufNewFile" },
   config = function()
-    local present, colorizer = pcall(require, "colorizer")
-    if not present then
-      return
-    end
-
     local colorizer_opts = {
       { "*" },
       {
@@ -21,7 +16,7 @@ local init = {
         mode = "background", -- Set the display mode
       },
     }
-    colorizer.setup(colorizer_opts[1], colorizer_opts[2])
+    require("colorizer").setup(colorizer_opts[1], colorizer_opts[2])
   end,
 }
 

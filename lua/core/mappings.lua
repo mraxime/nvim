@@ -38,17 +38,6 @@ if utils.is_available("smart-splits.nvim") then
   end)
 end
 
--- Navigate buffers
-if utils.is_available("bufferline.nvim") then
-  map("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
-  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
-  map("n", "}", "<cmd>BufferLineMoveNext<CR>")
-  map("n", "{", "<cmd>BufferLineMovePrev<CR>")
-else
-  map("n", "<S-l>", "<cmd>bnext<CR>")
-  map("n", "<S-h>", "<cmd>bprevious<CR>")
-end
-
 -- Move text up and down
 map("n", "<A-j>", "<Esc><cmd>m .+1<CR>==gi")
 map("n", "<A-k>", "<Esc><cmd>m .-2<CR>==gi")
@@ -76,7 +65,7 @@ end
 
 if utils.is_available("nvim-tree.lua") then
   map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>")
-  map("n", ";", "<cmd>NvimTreeCollapse<CR>")
+  map("n", ";", "<cmd>NvimTreeCollapse<CR><C-h><C-l>")
 end
 
 -- Dashboard

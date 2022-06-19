@@ -4,19 +4,17 @@ local init = {
   cmd = "Neotree",
   requires = "MunifTanjim/nui.nvim",
   config = function()
-    local status_ok, neotree = pcall(require, "neo-tree")
-    if not status_ok then
-      return
-    end
-
     vim.g.neo_tree_remove_legacy_commands = true
 
-    neotree.setup({
+    require("neo-tree").setup({
       close_if_last_window = true,
       popup_border_style = "rounded",
-      enable_git_status = true,
+      enable_git_status = false,
       enable_diagnostics = false,
       default_component_configs = {
+        container = {
+          enable_character_fade = false,
+        },
         indent = {
           indent_size = 2,
           padding = 0,
@@ -60,9 +58,10 @@ local init = {
           ["<2-LeftMouse>"] = "open",
           ["<cr>"] = "open",
           ["o"] = "open",
+          ["l"] = "open",
           ["S"] = "open_split",
           ["s"] = "open_vsplit",
-          ["C"] = "close_node",
+          ["h"] = "close_node",
           ["<bs>"] = "navigate_up",
           ["."] = "set_root",
           ["H"] = "toggle_hidden",

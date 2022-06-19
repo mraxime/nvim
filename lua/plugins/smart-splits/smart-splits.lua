@@ -2,12 +2,7 @@ local init = {
   "mrjones2014/smart-splits.nvim",
   module = "smart-splits",
   config = function()
-    local present, smart_splits = pcall(require, "smart-splits")
-    if not present then
-      return
-    end
-
-    smart_splits.setup({
+    require("smart-splits").setup({
       -- Ignored filetypes (only while resizing)
       ignored_filetypes = {
         "nofile",

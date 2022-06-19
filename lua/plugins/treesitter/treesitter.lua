@@ -2,9 +2,7 @@ local init = {
   "nvim-treesitter/nvim-treesitter",
   run = ":TSUpdate",
   config = function()
-    local treesitter = require("nvim-treesitter.configs")
-
-    treesitter.setup({
+    require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "css",
         "html",
@@ -14,6 +12,7 @@ local init = {
         "lua",
         "markdown",
         "php",
+        "prisma",
         "python",
         "scss",
         "svelte",

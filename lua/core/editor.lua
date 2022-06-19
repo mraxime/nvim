@@ -1,6 +1,10 @@
 local opt = vim.opt
--- local colorscheme = "onedark"
+local g = vim.g
 
+g.do_filetype_lua = 1 -- use builtin filetype.lua
+g.did_load_filetypes = 0 -- disable filetype.vim
+
+-- local colorscheme = "onedark"
 -- vim.api.nvim_command(("colorscheme %s"):format(colorscheme))
 
 opt.backup = false -- Disable making a backup file

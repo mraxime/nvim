@@ -29,17 +29,17 @@ function M.list_registered_linters(filetype)
   return registered_providers[formatter_method] or {}
 end
 
-local user_terminals = {}
+M.user_terminals = {}
 
 function M.toggle_term_cmd(cmd, opts)
-  if user_terminals[cmd] == nil then
+  if M.user_terminals[cmd] == nil then
     local options = { cmd = cmd, hidden = true }
     if opts then
       options = vim.tbl_deep_extend("force", options, opts)
     end
-    user_terminals[cmd] = require("toggleterm.terminal").Terminal:new(options)
+    M.user_terminals[cmd] = require("toggleterm.terminal").Terminal:new(options)
   end
-  user_terminals[cmd]:toggle()
+  M.user_terminals[cmd]:toggle()
 end
 
 function M.label_plugins(plugins)
@@ -52,25 +52,6 @@ end
 
 function M.is_available(plugin)
   return packer_plugins ~= nil and packer_plugins[plugin] ~= nil
-end
-
-function M.update()
-  local Job = require("plenary.job")
-
-  Job
-    :new({
-      command = "git",
-      args = { "pull", "--ff-only" },
-      cwd = vim.fn.stdpath("config"),
-      on_exit = function(_, return_val)
-        if return_val == 0 then
-          vim.notify("Updated!", "info", M.base_notification)
-        else
-          vim.notify("Update failed! Please try pulling manually.", "error", M.base_notification)
-        end
-      end,
-    })
-    :sync()
 end
 
 return M
