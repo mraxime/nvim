@@ -1,18 +1,16 @@
 local opt = vim.opt
-local g = vim.g
-
-g.do_filetype_lua = 1 -- use builtin filetype.lua
-g.did_load_filetypes = 0 -- disable filetype.vim
+-- local g = vim.g
 
 -- local colorscheme = "onedark"
 -- vim.api.nvim_command(("colorscheme %s"):format(colorscheme))
 
 opt.backup = false -- Disable making a backup file
 opt.clipboard = "unnamedplus" -- Connection to the system clipboard
-opt.cmdheight = 1 -- Number of screen lines to use for the command line
-opt.colorcolumn = "99999" -- Fix for the indentline problem
+opt.cmdheight = 0 -- Number of screen lines to use for the command line
+-- opt.colorcolumn = "99999" -- Fix for the indentline problem
 opt.completeopt = { "menuone", "noselect" } -- Options for insert mode completion
-opt.conceallevel = 0 -- Show text normally
+-- opt.conceallevel = 0 -- Show text normally
+opt.copyindent = true -- Copy the previous indentation on autoindenting
 opt.cursorline = true -- Highlight the text line of the cursor
 opt.expandtab = true -- Enable the use of space in tab
 opt.fileencoding = "utf-8" -- File content encoding for the buffer
@@ -22,8 +20,11 @@ opt.hidden = true -- Ignore unsaved buffers
 opt.history = 100 -- Number of commands to remember in a history table
 opt.hlsearch = false -- Highlight all the matches of search pattern
 opt.ignorecase = true -- Case insensitive searching
+opt.laststatus = 3 -- globalstatus
+opt.lazyredraw = true -- lazily redraw screen
 opt.mouse = "a" -- Enable mouse support
 opt.number = true -- Show numberline
+opt.preserveindent = true -- Preserve indent structure as much as possible
 opt.pumheight = 10 -- Height of the pop up menu
 opt.relativenumber = false -- Show relative numberline
 opt.scrolloff = 6 -- Number of lines to keep above and below the cursor
@@ -32,7 +33,7 @@ opt.showmode = false -- Disable showing modes in command line
 opt.sidescrolloff = 8 -- Number of columns to keep at the sides of the cursor
 opt.signcolumn = "yes" -- Always show the sign column
 opt.smartcase = true -- Case sensitivie searching
-opt.smartindent = true -- Do auto indenting when starting a new line
+-- opt.smartindent = true -- Do auto indenting when starting a new line
 opt.spell = false -- Disable spelling checking and highlighting
 opt.spelllang = "en" -- Support US english
 opt.splitbelow = true -- Splitting a new window below the current one

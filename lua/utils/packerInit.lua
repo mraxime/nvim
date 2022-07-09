@@ -1,7 +1,7 @@
-local status_ok, packer = pcall(require, "packer")
+local packer_avail, packer = pcall(require, "packer")
 
 -- Clone packer if not already installed
-if not status_ok then
+if not packer_avail then
   local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
   print("Cloning packer...")
@@ -15,10 +15,12 @@ if not status_ok then
     "https://github.com/wbthomason/packer.nvim",
     packer_path,
   })
-  vim.cmd("packadd packer.nvim")
-  status_ok, packer = pcall(require, "packer")
+  print("Initializing Packer...\n\n")
+  vim.cmd({ cmd = "packadd", args = { "packer.nvim" } })
 
-  if status_ok then
+  packer_avail, packer = pcall(require, "packer")
+
+  if packer_avail then
     print("Packer cloned successfully.")
   else
     error("Couldn't clone packer !\nPacker path: " .. packer_path .. "\n" .. packer)

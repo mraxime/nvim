@@ -17,20 +17,16 @@ packer.startup(function(use)
   local enabled_plugins = {
     "popup", -- Popup API
     "indent-o-matic", -- Indent detection
-    "notify", -- Notification Enhancer
-    -- "auto-session", -- Auto session management
+    -- "notify", -- Notification Enhancer
     "project", -- project manangement
-    -- "nui", -- Neovim UI Enhancer
     "cosmic-ui", -- Neovim UI Enhancer
     "fix-cursor-hold", -- Cursorhold fix
     "smart-splits", -- Smarter Splits
     "nvim-web-devicons", -- Icons
     "bufferline", -- Bufferline
     "vim-bbye", -- Better buffer closing
-    -- "neo-tree", -- File explorer
     "nvim-tree", -- File explorer
     "lualine", -- Statusline
-    -- "nvim-ts-rainbow", -- Parenthesis highlighting
     "ts-autotag", -- Autoclose tags
     "ts-context-commentstring", -- Context based commenting
     "treesitter", -- Syntax highlighting
@@ -38,21 +34,26 @@ packer.startup(function(use)
     "nvim-cmp", -- Completion engine
     "lsp-installer", -- LSP manager
     "lspconfig", -- Built-in LSP
-    -- "symbols-outline", -- LSP symbols
     "null-ls", -- Formatting and linting
     "telescope", -- Fuzzy finder
     "telescope-fzf-native", -- Fuzzy finder syntax support
     "gitsigns", -- Git integration
-    -- "dashboard-nvim", -- Start screen
     "colorizer", -- Color highlighting
     "autopairs", -- Autopairs
     "toggleterm", -- Terminal
     "comment", -- Commenting
     "indent-blankline", -- Indentation
     "which-key", -- Keymaps popup
-    -- "neoscroll", -- Smooth scrolling
     "better-escape", -- Smooth escaping
     "schema-store", -- Get extra JSON schemas
+
+    -- "auto-session", -- Auto session management
+    -- "nui", -- Neovim UI Enhancer
+    -- "neo-tree", -- File explorer
+    -- "nvim-ts-rainbow", -- Parenthesis highlighting
+    -- "neoscroll", -- Smooth scrolling
+    -- "dashboard-nvim", -- Start screen
+    -- "symbols-outline", -- LSP symbols
   }
   -- Load main plugins
   for _, path in ipairs(enabled_plugins) do
@@ -70,8 +71,8 @@ packer.startup(function(use)
     as = "tokyonight",
     config = function()
       vim.g.tokyonight_style = "night"
+      vim.cmd({ cmd = "color", args = { "tokyonight" } })
       vim.g.tokyonight_sidebars = { "qf" }
-      vim.cmd("color tokyonight")
     end,
   })
 end)

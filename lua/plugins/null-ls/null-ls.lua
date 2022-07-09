@@ -5,12 +5,11 @@ local init = {
     local null_ls = require("null-ls")
     null_ls.setup({
       sources = {
-        null_ls.builtins.code_actions.eslint_d.with({
-          prefer_local = "node_modules/.bin",
-        }),
-        null_ls.builtins.diagnostics.eslint_d.with({
-          prefer_local = "node_modules/.bin",
-        }),
+        -- null_ls.builtins.code_actions.eslint_d.with({
+        --   prefer_local = "node_modules/.bin",
+        -- }),
+        null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.diagnostics.markdownlint,
         null_ls.builtins.formatting.prettierd.with({
           env = {
@@ -22,16 +21,10 @@ local init = {
       },
       on_attach = function(client)
         if client.server_capabilities.documentFormattingProvider then
-          vim.api.nvim_create_augroup("LspFormatting", { clear = true })
           vim.api.nvim_create_autocmd("BufWritePre", {
+            desc = "Auto format before save",
             pattern = "<buffer>",
-            callback = function()
-              -- vim.lsp.buf.format({ timeout_ms = 3000 })
-              vim.lsp.buf.formatting_sync(nil, 3000)
-            end,
-            group = "LspFormatting",
-            -- buffer = true,
-            -- nested = true,
+            callback = function() vim.lsp.buf.format() end,
           })
         end
       end,

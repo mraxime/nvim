@@ -150,7 +150,7 @@ map("n", "K", vim.lsp.buf.hover)
 map("n", "<leader>la", require("cosmic-ui").code_actions)
 map("v", "<leader>la", require("cosmic-ui").range_code_actions)
 map("n", "<leader>lr", require("cosmic-ui").rename)
-map("n", "<leader>lf", vim.lsp.buf.formatting_sync)
+map("n", "<leader>lf", function() vim.lsp.buf.format() end)
 map("n", "<leader>ln", vim.diagnostic.goto_next)
 map("n", "<leader>lp", vim.diagnostic.goto_prev)
 

@@ -1,38 +1,14 @@
 local M = {}
 
-local utils = require("utils")
-
 local cmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-augroup("packer_user_config", {})
+augroup("packer_conf", { clear = true })
 cmd("BufWritePost", {
-  desc = "Auto Compile plugins.lua file",
-  group = "packer_user_config",
-  command = "source <afile> | PackerCompile",
+  desc = "Sync packer after modifying plugins.lua",
+  group = "packer_conf",
   pattern = "plugins.lua",
+  command = "source <afile> | PackerSync",
 })
-
-if utils.is_available("dashboard-nvim") and utils.is_available("bufferline.nvim") then
-  augroup("dashboard_settings", {})
-  cmd("FileType", {
-    desc = "Disable tabline for dashboard",
-    group = "dashboard_settings",
-    pattern = "dashboard",
-    command = "set showtabline=0",
-  })
-  cmd("BufWinLeave", {
-    desc = "Reenable tabline when leaving dashboard",
-    group = "dashboard_settings",
-    pattern = "<buffer>",
-    command = "set showtabline=2",
-  })
-  cmd("BufEnter", {
-    desc = "No cursorline on dashboard",
-    group = "dashboard_settings",
-    pattern = "*",
-    command = "if &ft is 'dashboard' | set nocursorline | endif",
-  })
-end
 
 return M
