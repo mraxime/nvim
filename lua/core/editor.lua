@@ -6,7 +6,7 @@ local opt = vim.opt
 
 opt.backup = false -- Disable making a backup file
 opt.clipboard = "unnamedplus" -- Connection to the system clipboard
-opt.cmdheight = 0 -- Number of screen lines to use for the command line
+opt.cmdheight = 1 -- Number of screen lines to use for the command line
 -- opt.colorcolumn = "99999" -- Fix for the indentline problem
 opt.completeopt = { "menuone", "noselect" } -- Options for insert mode completion
 -- opt.conceallevel = 0 -- Show text normally

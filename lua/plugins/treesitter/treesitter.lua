@@ -18,6 +18,7 @@ local init = {
         "svelte",
         "tsx",
         "typescript",
+        "vue",
         "yaml",
       },
       sync_install = false,
