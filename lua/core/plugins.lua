@@ -71,7 +71,7 @@ packer.startup(function(use)
     as = "tokyonight",
     config = function()
       vim.g.tokyonight_style = "night"
-      vim.cmd({ cmd = "color", args = { "tokyonight" } })
+      vim.cmd({ cmd = "color", args = { "tokyonight-night" } })
       vim.g.tokyonight_sidebars = { "qf" }
     end,
   })

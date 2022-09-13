@@ -2,7 +2,6 @@ local init = {
   "kyazdani42/nvim-tree.lua",
   module = "nvim-tree",
   config = function()
-
     -- set up args
     local args = {
       respect_buf_cwd = true, -- will change cwd of nvim-tree to that of new buffer's
@@ -33,6 +32,7 @@ local init = {
         },
         open_file = {
           resize_window = true,
+          -- quit_on_open = true,
         },
       },
       view = {
@@ -49,7 +49,7 @@ local init = {
         highlight_git = true,
         special_files = {},
         icons = {
-          show  = {
+          show = {
             git = false,
             folder = true,
             file = true,
@@ -77,9 +77,9 @@ local init = {
               symlink = "",
               symlink_open = "",
             },
-          }
-        }
-      }
+          },
+        },
+      },
     }
 
     require("nvim-tree").setup(args)

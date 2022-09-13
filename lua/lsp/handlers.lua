@@ -64,10 +64,13 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
   elseif client.name == "sumneko_lua" then
     client.server_capabilities.documentFormattingProvider = false
+  elseif client.name == "volar" then
+    client.server_capabilities.documentFormattingProvider = false
   end
 
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function() vim.lsp.buf.format({ async = true }) end,
-    { desc = "Format file with LSP" })
+  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+    vim.lsp.buf.format({ async = true })
+  end, { desc = "Format file with LSP" })
 
   lsp_highlight_document(client)
 end

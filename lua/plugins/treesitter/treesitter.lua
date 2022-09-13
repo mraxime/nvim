@@ -20,6 +20,7 @@ local init = {
         "typescript",
         "vue",
         "yaml",
+        "astro",
       },
       sync_install = false,
       ignore_install = {},
