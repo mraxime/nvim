@@ -23,10 +23,11 @@ if not packer_avail then
   if packer_avail then
     print("Packer cloned successfully.")
   else
-    error("Couldn't clone packer !\nPacker path: " .. packer_path .. "\n" .. packer)
+    error("Failed to load packer at:" .. packer_path)
   end
 end
 
+-- Custom config
 packer.init({
   compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
   display = {
@@ -34,18 +35,10 @@ packer.init({
       return require("packer.util").float({ border = "rounded" })
     end,
   },
-  profile = {
-    enable = true,
-    threshold = 0.0001,
-  },
-  git = {
-    clone_timeout = 300, -- seconds
-    subcommands = {
-      update = "pull --rebase",
-    },
-  },
-  auto_clean = true,
-  compile_on_sync = true,
+  --[[ profile = { ]]
+  --[[   enable = true, ]]
+  --[[   threshold = 0.0001, ]]
+  --[[ }, ]]
 })
 
 return packer

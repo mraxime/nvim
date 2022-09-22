@@ -7,6 +7,8 @@ local map = vim.keymap.set
 -- leader key
 vim.g.mapleader = " "
 
+map("n", "te", "<cmd>tabedit<CR>")
+
 -- Normal --
 if utils.is_available("smart-splits.nvim") then
   -- Better window navigation
@@ -83,6 +85,19 @@ if utils.is_available("nvim-tree.lua") then
   map("n", ";", "<cmd>NvimTreeCollapse<CR><C-h><C-l>")
 end
 
+if utils.is_available("bufferline.nvim") then
+  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>")
+  map("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>")
+  map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
+  map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
+  --[[ map("n", "sp", "<cmd>BufferLineCyclePrev<CR>") ]]
+  --[[ map("n", "sn", "<cmd>BufferLineCycleNext<CR>") ]]
+  map("n", "}", "<cmd>BufferLineMoveNext<CR>")
+  map("n", "{", "<cmd>BufferLineMovePrev<CR>")
+  map("n", "<space>bh", "<cmd>BufferLineCloseLeft<CR>")
+  map("n", "<space>bl", "<cmd>BufferLineCloseRight<CR>")
+end
+
 -- Dashboard
 if utils.is_available("dashboard-nvim") then
   map("n", "<leader>d", "<cmd>Dashboard<CR>")
@@ -109,7 +124,7 @@ end
 
 -- Telescope
 if utils.is_available("telescope.nvim") then
-  map("n", "<leader>st", function()
+  map("n", "st", function()
     require("telescope.builtin").live_grep()
   end)
   map("n", "<leader>sgs", function()
@@ -121,7 +136,7 @@ if utils.is_available("telescope.nvim") then
   map("n", "<leader>sgc", function()
     require("telescope.builtin").git_commits()
   end)
-  map("n", "<leader>sf", function()
+  map("n", "sf", function()
     require("telescope.builtin").find_files()
   end)
   map("n", "<leader>sb", function()
@@ -168,27 +183,47 @@ map("n", "gl", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_next)
 map("n", "K", vim.lsp.buf.hover)
-map("n", "<leader>la", require("cosmic-ui").code_actions)
-map("v", "<leader>la", require("cosmic-ui").range_code_actions)
-map("n", "<leader>lr", require("cosmic-ui").rename)
-map("n", "<leader>lf", function()
-  vim.lsp.buf.format()
-end)
-map("n", "<leader>ln", vim.diagnostic.goto_next)
-map("n", "<leader>lp", vim.diagnostic.goto_prev)
+
+map("n", "<leader>la", vim.lsp.buf.code_action)
+map("v", "<leader>la", vim.lsp.buf.range_code_action)
+map("n", "<leader>lr", vim.lsp.buf.rename)
+map("n", "<leader>lf", vim.lsp.buf.format)
+
+if utils.is_available("lspsaga.nvim") then
+  local opts = { noremap = true, silent = true }
+  vim.keymap.set("n", "<C-j>", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+  vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+  vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", opts)
+  vim.keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+  vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
+  vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<CR>", opts)
+  vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+  vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+end
 
 -- Comment
 if utils.is_available("Comment.nvim") then
   map("n", "<leader>/", function()
-    require("Comment.api").toggle_current_linewise()
+    require("Comment.api").toggle.linewise.current()
   end)
-  map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>")
+  map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
 end
 
 -- Terminal
-if utils.is_available("nvim-toggleterm.lua") then
+if utils.is_available("toggleterm.nvim") then
   map({ "n" }, "<leader>tn", function()
     utils.toggle_term_cmd("node")
+  end)
+  map({ "n", "t" }, "<A-p>", function()
+    utils.toggle_term_cmd("lfub", {
+      direction = "float",
+      float_opts = {
+        border = "single", -- 'single' | 'double' | 'shadow' | 'curved'
+        width = 150,
+        height = 150,
+        winblend = 0,
+      },
+    })
   end)
   map({ "n", "t" }, "<A-l>", function()
     utils.toggle_term_cmd("lazygit", {
@@ -231,5 +266,24 @@ map("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv")
 
 -- disable Ex mode:
 map("n", "Q", "<Nop>")
+
+if utils.is_available("telescope-file-browser.nvim") then
+  local thing = function()
+    require("telescope").extensions.file_browser.file_browser({
+      path = "%:p:h",
+      cwd = vim.fn.expand("%:p:h"),
+      respect_gitignore = false,
+      hidden = false,
+      grouped = true,
+      previewer = false,
+      initial_mode = "normal",
+      layout_config = { height = 40 },
+    })
+  end
+
+  -- map("n", "<leader>e", thing)
+  -- map("n", "sf", thing)
+  map("n", "so", thing)
+end
 
 return M

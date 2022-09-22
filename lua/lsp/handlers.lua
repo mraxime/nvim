@@ -1,6 +1,7 @@
 local M = {}
 
-function M.setup()
+M.setup = function()
+  -- Signs
   local signs = {
     { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
@@ -12,6 +13,8 @@ function M.setup()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
+  -- Diagnostics
+  vim.g.diagnostics_enabled = true
   vim.diagnostic.config({
     virtual_text = false,
     signs = {
@@ -30,16 +33,34 @@ function M.setup()
     },
   })
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
-local function lsp_highlight_document(client)
+M.on_attach = function(client, bufnr)
+  -- Format
+  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(client)
+        return client.name ~= ("tsserver" or "jsonls" or "html" or "sumneko_lua" or "volar")
+      end,
+    })
+  end, { desc = "Format file with LSP" })
+
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Auto format before save",
+    pattern = "<buffer>",
+    callback = function()
+      vim.lsp.buf.format({
+        filter = function(client)
+          return client.name ~= ("tsserver" or "jsonls" or "html" or "sumneko_lua" or "volar")
+        end,
+      })
+    end,
+  })
+
+  -- Highlight
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
@@ -55,28 +76,7 @@ local function lsp_highlight_document(client)
   end
 end
 
-M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.server_capabilities.documentFormattingProvider = false
-  elseif client.name == "jsonls" then
-    client.server_capabilities.documentFormattingProvider = false
-  elseif client.name == "html" then
-    client.server_capabilities.documentFormattingProvider = false
-  elseif client.name == "sumneko_lua" then
-    client.server_capabilities.documentFormattingProvider = false
-  elseif client.name == "volar" then
-    client.server_capabilities.documentFormattingProvider = false
-  end
-
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-    vim.lsp.buf.format({ async = true })
-  end, { desc = "Format file with LSP" })
-
-  lsp_highlight_document(client)
-end
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
-
 M.capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities.textDocument.completion.completionItem.preselectSupport = true

@@ -10,7 +10,7 @@ local init = {
           suggestions = 20,
         },
         presets = {
-          operators = false,
+          operators = true,
           motions = true,
           text_objects = true,
           windows = true,

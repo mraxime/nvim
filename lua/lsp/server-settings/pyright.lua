@@ -1,4 +1,4 @@
-local opts = {
+return {
   settings = {
     python = {
       analysis = {
@@ -7,5 +7,3 @@ local opts = {
     },
   },
 }
-
-return opts

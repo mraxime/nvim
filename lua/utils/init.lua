@@ -1,7 +1,5 @@
 local M = {}
 
-M.base_notification = { title = "AstroVim" }
-
 function M.list_registered_providers_names(filetype)
   local s = require("null-ls.sources")
   local available_sources = s.get_available(filetype)
