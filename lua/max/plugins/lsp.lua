@@ -1,30 +1,30 @@
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v2.x",
-	dependencies = {
-		-- LSP Support
-		{ "neovim/nvim-lspconfig" }, -- Required
-		{ -- Optional
-			"williamboman/mason.nvim",
-			build = ":MasonUpdate",
-		},
-		{ "williamboman/mason-lspconfig.nvim" }, -- Optional
+  "VonHeikemen/lsp-zero.nvim",
+  branch = "v2.x",
+  dependencies = {
+    -- LSP Support
+    { "neovim/nvim-lspconfig" }, -- Required
+    {                          -- Optional
+      "williamboman/mason.nvim",
+      build = ":MasonUpdate",
+    },
+    { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
-		-- Autocompletion
-		{ "hrsh7th/nvim-cmp" }, -- Required
-		{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-		{ "L3MON4D3/LuaSnip" }, -- Required
-		{ "hrsh7th/cmp-buffer" }, -- Optional
-		{ "hrsh7th/cmp-path" }, -- Optional
-		{ "hrsh7th/cmp-nvim-lua" }, -- Optional
-		{ "saadparwaiz1/cmp_luasnip" }, -- Optional
+    -- Autocompletion
+    { "hrsh7th/nvim-cmp" },       -- Required
+    { "hrsh7th/cmp-nvim-lsp" },   -- Required
+    { "L3MON4D3/LuaSnip" },       -- Required
+    { "hrsh7th/cmp-buffer" },     -- Optional
+    { "hrsh7th/cmp-path" },       -- Optional
+    { "hrsh7th/cmp-nvim-lua" },   -- Optional
+    { "saadparwaiz1/cmp_luasnip" }, -- Optional
 
-		-- Snippets
-		{'L3MON4D3/LuaSnip'},
-		{'rafamadriz/friendly-snippets'},
-	},
-	config = function()
-	  local lsp = require("lsp-zero")
+    -- Snippets
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
+  },
+  config = function()
+    local lsp = require("lsp-zero")
 
     lsp.preset("recommended")
 
@@ -47,25 +47,25 @@ return {
       ["<C-Space>"] = cmp.mapping.complete(),
     })
 
-    -- cmp_mappings['<Tab>'] = nil
-    -- cmp_mappings['<S-Tab>'] = nil
+    cmp_mappings['<Tab>'] = nil
+    cmp_mappings['<S-Tab>'] = nil
 
     lsp.setup_nvim_cmp({
       mapping = cmp_mappings
     })
 
     lsp.set_preferences({
-        suggest_lsp_servers = false,
-        sign_icons = {
-            error = 'E',
-            warn = 'W',
-            hint = 'H',
-            info = 'I'
-        }
+      suggest_lsp_servers = false,
+      sign_icons = {
+        error = 'E',
+        warn = 'W',
+        hint = 'H',
+        info = 'I'
+      }
     })
 
     lsp.on_attach(function(client, bufnr)
-      local opts = {buffer = bufnr, remap = false}
+      local opts = { buffer = bufnr, remap = false }
 
       vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
       vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -82,7 +82,7 @@ return {
     lsp.setup()
 
     vim.diagnostic.config({
-        virtual_text = false
+      virtual_text = false
     })
-	end,
+  end,
 }
