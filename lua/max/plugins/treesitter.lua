@@ -1,0 +1,60 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  version = false, -- last release is way too old
+  dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = {
+    "TSBufDisable",
+    "TSBufEnable",
+    "TSBufToggle",
+    "TSDisable",
+    "TSEnable",
+    "TSToggle",
+    "TSInstall",
+    "TSInstallInfo",
+    "TSInstallSync",
+    "TSModuleInfo",
+    "TSUninstall",
+    "TSUpdate",
+    "TSUpdateSync",
+  },
+  ---@type TSConfig
+  opts = {
+    highlight = {
+      enable = true,
+      disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
+    },
+    incremental_selection = { enable = true },
+    indent = { enable = true },
+    autotag = { enable = true },
+    context_commentstring = { enable = true, enable_autocmd = false },
+    ensure_installed = {
+      "bash",
+      "c",
+      "css",
+      "html",
+      "javascript",
+      "json",
+      "lua",
+      "luadoc",
+      "luap",
+      "markdown",
+      "markdown_inline",
+      "query",
+      "regex",
+      "rust",
+      "scss",
+      "svelte",
+      "tsx",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "yaml",
+    },
+  },
+  ---@param opts TSConfig
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+  end,
+}
