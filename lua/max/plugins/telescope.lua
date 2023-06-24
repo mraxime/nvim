@@ -76,7 +76,7 @@ return {
         file_browser = {
           theme = "dropdown",
           -- disables netrw and use telescope-file-browser in its place
-          hijack_netrw = false,
+          hijack_netrw = true,
           select_buffer = false, -- auto focus file from current buffer
           mappings = {
             -- your custom insert mode mappings
