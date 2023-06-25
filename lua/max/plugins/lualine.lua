@@ -1,8 +1,8 @@
 -- Fancier statusline
 return {
+  "tamighi/lualine.nvim", -- fork with harpoon_files plugin
   -- "nvim-lualine/lualine.nvim",
-  "tamighi/lualine.nvim",
-  enabled = false,
+  enabled = true,
   branch = "feat/harpoon_files",
   config = function()
     require('lualine').setup({

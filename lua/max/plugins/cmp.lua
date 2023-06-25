@@ -1,13 +1,17 @@
 -- Autocompletion
 return {
   "hrsh7th/nvim-cmp",
+  enabled = true,
+  event = "InsertEnter",
   dependencies = {
-    { "hrsh7th/cmp-path" },         -- Optional
-    { "hrsh7th/cmp-buffer" },       -- Optional
-    { "hrsh7th/cmp-nvim-lsp" },     -- Required
-    { "hrsh7th/cmp-nvim-lua" },     -- Optional
-    { "L3MON4D3/LuaSnip" },         -- Optional
-    { "saadparwaiz1/cmp_luasnip" }, -- Optional
+    { "hrsh7th/cmp-path" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-nvim-lua" },
+    -- Snippets
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
+    { "saadparwaiz1/cmp_luasnip" },
   },
   config = function()
     local cmp = require('cmp')

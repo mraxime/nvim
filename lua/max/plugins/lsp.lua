@@ -11,10 +11,6 @@ return {
     },
     { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
-    -- Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
-
     -- Formatter
     -- { 'jose-elias-alvarez/null-ls' },
     -- { 'jay-babu/mason-null-ls' },

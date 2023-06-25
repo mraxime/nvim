@@ -1,22 +1,47 @@
 return {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { 'nvim-lua/plenary.nvim' },
+    'nvim-lua/plenary.nvim',
+    "nvim-tree/nvim-web-devicons",
+    "nvim-telescope/telescope-file-browser.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    {
-      "nvim-telescope/telescope-file-browser.nvim",
-    },
   },
   keys = {
+    {
+      "<leader>f",
+      function() require("telescope.builtin").find_files() end,
+      desc = "Search Files",
+    },
+    {
+      "<leader>t",
+      function() require("telescope.builtin").live_grep() end,
+      desc = "Search Text",
+    },
+    {
+      "<leader>o",
+      function()
+        require("telescope").extensions.file_browser.file_browser({
+          path = "%:p:h",
+          cwd = vim.fn.expand("%:p:h"),
+          respect_gitignore = false,
+          hidden = false,
+          grouped = true,
+          initial_mode = "normal",
+          previewer = false,
+          layout_config = { height = 40 },
+        })
+      end,
+    },
+    -- old muscle memories
     {
       "sf",
       function() require("telescope.builtin").find_files() end,
       desc = "Search Files",
     },
     {
-      "sp",
-      function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
-      desc = "Search Plugin Files",
+      "st",
+      function() require("telescope.builtin").live_grep() end,
+      desc = "Search Text",
     },
     {
       "so",
@@ -32,11 +57,6 @@ return {
           layout_config = { height = 40 },
         })
       end,
-    },
-    {
-      "st",
-      function() require("telescope.builtin").live_grep() end,
-      desc = "Search Text",
     },
   },
   config = function()
@@ -65,10 +85,6 @@ return {
         },
 
         mappings = {
-          i = {
-            ["<C-j>"] = actions.cycle_history_next,
-            ["<C-k>"] = actions.cycle_history_prev,
-          },
           n = { ["q"] = actions.close },
         },
       },
@@ -85,7 +101,7 @@ return {
             },
             ["n"] = {
               -- your custom normal mode mappings
-              ["n"] = fb_actions.create,
+              ["a"] = fb_actions.create,
               ["h"] = fb_actions.goto_parent_dir,
               ["l"] = actions.select_default,
               ["gh"] = fb_actions.goto_home_dir,

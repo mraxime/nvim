@@ -1,4 +1,5 @@
 local g = vim.g
+-- vim.go.loadplugins = false
 g.zipPlugin = false               -- disable zip
 g.load_black = false              -- disable black
 

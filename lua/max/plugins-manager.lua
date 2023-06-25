@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("max.plugins",
   {
     defaults = {
-      lazy = false,
+      lazy = true,
       version = false
     },
     change_detection = {
