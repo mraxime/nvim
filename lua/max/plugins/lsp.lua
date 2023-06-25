@@ -1,6 +1,7 @@
 return {
   "VonHeikemen/lsp-zero.nvim",
   branch = "v2.x",
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     -- LSP Support
     { "neovim/nvim-lspconfig" }, -- Required
@@ -9,15 +10,6 @@ return {
       build = ":MasonUpdate",
     },
     { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-    -- Autocompletion
-    { "hrsh7th/nvim-cmp" },         -- Required
-    { "hrsh7th/cmp-nvim-lsp" },     -- Required
-    { "L3MON4D3/LuaSnip" },         -- Required
-    { "hrsh7th/cmp-buffer" },       -- Optional
-    { "hrsh7th/cmp-path" },         -- Optional
-    { "hrsh7th/cmp-nvim-lua" },     -- Optional
-    { "saadparwaiz1/cmp_luasnip" }, -- Optional
 
     -- Snippets
     { 'L3MON4D3/LuaSnip' },
@@ -85,41 +77,6 @@ return {
     })
 
     lsp.setup()
-
-    local cmp = require('cmp')
-    local cmp_select = { behavior = cmp.SelectBehavior.Replace } -- or cmp.SelectBehavior.Select
-    local cmp_mappings = lsp.defaults.cmp_mappings({
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-d>'] = cmp.mapping.scroll_docs(4),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    })
-
-    -- luasnip
-    require("luasnip.loaders.from_vscode").lazy_load()
-    local cmp_action = require('lsp-zero').cmp_action()
-    cmp_mappings['<Tab>'] = cmp_action.luasnip_jump_forward()
-    cmp_mappings['<S-Tab>'] = cmp_action.luasnip_jump_backward()
-
-    -- cmp_mappings['<Tab>'] = nil
-    -- cmp_mappings['<S-Tab>'] = nil
-
-
-    -- or lsp.setup_nvim_cmp
-    cmp.setup({
-      sources = {
-        { name = "path" },
-        { name = "nvim_lsp" },
-        { name = "nvim_lua" },
-        { name = "buffer",  keyword_length = 3 },
-        { name = "luasnip", keyword_length = 2 },
-      },
-      mapping = cmp_mappings
-    })
-
     --    local null_ls = require('null-ls')
 
     -- null_ls.setup({

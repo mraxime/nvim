@@ -8,7 +8,7 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     opts = { style = "night" },
@@ -20,7 +20,7 @@ return {
   },
   {
     "ellisonleao/gruvbox.nvim",
-    enabled = false,
+    enabled = true,
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme gruvbox]])

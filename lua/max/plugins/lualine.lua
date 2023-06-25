@@ -1,10 +1,9 @@
 -- Fancier statusline
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = {
-    -- LSP Support
-    { "folke/noice.nvim" }, -- Required
-  },
+  -- "nvim-lualine/lualine.nvim",
+  "tamighi/lualine.nvim",
+  enabled = false,
+  branch = "feat/harpoon_files",
   config = function()
     require('lualine').setup({
       options = {
@@ -21,7 +20,7 @@ return {
         },
         lualine_a = {
           {
-            'buffers',
+            'harpoon_files'
           }
         }
       }

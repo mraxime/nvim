@@ -13,4 +13,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Start plugins manager
-require("lazy").setup("max.plugins", { defaults = { lazy = false, version = false } })
+require("lazy").setup("max.plugins",
+  {
+    defaults = {
+      lazy = false,
+      version = false
+    },
+    change_detection = {
+      notify = false
+    }
+  })
