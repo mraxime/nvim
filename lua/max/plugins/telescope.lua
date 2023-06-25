@@ -32,7 +32,7 @@ return {
         })
       end,
     },
-    -- old muscle memories
+    -- old muscle memory
     {
       "sf",
       function() require("telescope.builtin").find_files() end,
@@ -85,7 +85,10 @@ return {
         },
 
         mappings = {
-          n = { ["q"] = actions.close },
+          n = {
+            ["q"] = actions.close,
+            ["<Space>"] = actions.toggle_selection
+          },
         },
       },
       extensions = {
@@ -109,6 +112,7 @@ return {
               ["v"] = fb_actions.toggle_all,
               ["p"] = fb_actions.copy,
               ["m"] = fb_actions.move,
+              ["x"] = fb_actions.move,
               ["q"] = actions.close,
               ["/"] = function() vim.cmd("startinsert") end,
             },

@@ -4,6 +4,7 @@ return {
   -- "nvim-lualine/lualine.nvim",
   enabled = true,
   branch = "feat/harpoon_files",
+  event = "VeryLazy",
   config = function()
     require('lualine').setup({
       options = {
