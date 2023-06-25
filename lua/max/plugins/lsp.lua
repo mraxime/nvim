@@ -11,6 +11,9 @@ return {
     },
     { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
+    -- load cmp before
+    { "hrsh7th/nvim-cmp" }
+
     -- Formatter
     -- { 'jose-elias-alvarez/null-ls' },
     -- { 'jay-babu/mason-null-ls' },

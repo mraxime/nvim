@@ -1,5 +1,5 @@
 -- Fancy plugins
-local enabled = true
+local enabled = false
 
 return {
   -- better vim.ui
@@ -21,6 +21,7 @@ return {
   -- ui improvements
   {
     "folke/noice.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {

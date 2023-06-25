@@ -19,8 +19,9 @@ return {
 
   -- search/replace in multiple files
   {
-    "windwp/nvim-spectre",
+    "nvim-pack/nvim-spectre",
     enabled = enabled,
+    cmd = "Spectre",
     keys = {
       { "<leader>lR", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
@@ -53,15 +54,21 @@ return {
       "nvim-telescope/telescope.nvim"
     },
     cmd = { "ChatGPTActAs", "ChatGPT" },
-    config = function()
-      require("chatgpt").setup()
+    keys = {
+      { "<leader>H", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" }
+    },
+    opts = {
+      api_key_cmd = "echo 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"
+    },
+    config = function(_, opts)
+      require("chatgpt").setup(opts)
     end,
   },
 
   -- highlight references
   {
     "RRethy/vim-illuminate",
-    enabled = false,
+    enabled = enabled,
     event = { "BufReadPost", "BufNewFile" },
     opts = { delay = 200 },
     config = function(_, opts) require('illuminate').configure(opts) end
