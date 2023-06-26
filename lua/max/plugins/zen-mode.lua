@@ -5,7 +5,7 @@ return {
     cmd = "ZenMode",
     opts = {
       plugins = {
-        gitsigns = true,
+        gitsigns = false,
         tmux = true,
         kitty = { enabled = false, font = "+2" },
       },

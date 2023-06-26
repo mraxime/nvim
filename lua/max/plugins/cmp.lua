@@ -40,7 +40,30 @@ return {
         { name = "buffer",  keyword_length = 3 },
         { name = "luasnip", keyword_length = 2 },
       },
-      mapping = cmp_mappings
+      mapping = cmp_mappings,
+      snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end,
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      formatting = {
+        fields = { 'abbr', 'menu', 'kind' },
+        format = function(entry, item)
+          local short_name = {
+            nvim_lsp = 'LSP',
+            nvim_lua = 'nvim'
+          }
+
+          local menu_name = short_name[entry.source.name] or entry.source.name
+
+          item.menu = string.format('[%s]', menu_name)
+          return item
+        end,
+      },
     })
   end
 }

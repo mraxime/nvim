@@ -14,7 +14,7 @@ return {
     },
     {
       "<leader>/",
-      function() require("telescope.builtin").find_files() end,
+      function() require("telescope.builtin").live_grep() end,
       desc = "Search Files",
     },
     {
