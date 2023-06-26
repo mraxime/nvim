@@ -32,5 +32,25 @@ return {
       function() require("harpoon.ui").nav_file(4) end,
       desc = "Go to harpoon file 4",
     },
+    {
+      "m1",
+      function() require("harpoon.mark").set_current_at(1) end,
+      desc = "Set current harpoon to file 1",
+    },
+    {
+      "m2",
+      function() require("harpoon.mark").set_current_at(2) end,
+      desc = "Set current harpoon to file 2",
+    },
+    {
+      "m3",
+      function() require("harpoon.mark").set_current_at(3) end,
+      desc = "Set current harpoon to file 3",
+    },
+    {
+      "m4",
+      function() require("harpoon.mark").set_current_at(4) end,
+      desc = "Set current harpoon to file 4",
+    },
   },
 }

@@ -13,6 +13,11 @@ return {
       desc = "Search Files",
     },
     {
+      "<leader>/",
+      function() require("telescope.builtin").find_files() end,
+      desc = "Search Files",
+    },
+    {
       "<leader>t",
       function() require("telescope.builtin").live_grep() end,
       desc = "Search Text",

@@ -2,6 +2,14 @@
 local enabled = true
 
 return {
+  -- Autopairs
+  {
+    'windwp/nvim-autopairs',
+    enabled = enabled,
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
+
   -- better yank/paste
   {
     "gbprod/yanky.nvim",
@@ -53,23 +61,36 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim"
     },
-    cmd = { "ChatGPTActAs", "ChatGPT" },
+    cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTRun" },
     keys = {
-      { "<leader>H", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" }
+      { "<leader>h", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" }
     },
     opts = {
       api_key_cmd = "echo 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",
+      chat = {
+        keymaps = {
+          close = { "<C-c>" },
+          yank_last = "<C-y>",
+          scroll_up = "<C-u>",
+          scroll_down = "<C-d>",
+          new_session = "<C-n>",
+          cycle_windows = "<Tab>",
+          cycle_modes = "<C-f>",
+          select_session = { "<CR>", "l" },
+          rename_session = "r",
+          delete_session = "d",
+          toggle_settings = "<C-o>",
+          toggle_message_role = "<C-r>",
+          toggle_system_role_open = "<C-s>",
+        },
+      },
       popup_input = {
-        submit = "<CR>"
+        submit = "<CR>",
+        submit_n = "<C-CR>"
       },
       openai_params = {
-        model = "gpt-3.5-turbo",
-        frequency_penalty = 0,
-        presence_penalty = 0,
+        model = "gpt-4", -- gpt-3.5-turbo
         max_tokens = 300,
-        temperature = 0,
-        top_p = 1,
-        n = 1,
       },
     },
     config = function(_, opts)

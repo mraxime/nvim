@@ -1,8 +1,7 @@
 return {
   {
     "folke/tokyonight.nvim",
-    enabled = false,
-    lazy = false,
+    enabled = true,
     priority = 1000,
     opts = function()
       return {
@@ -36,20 +35,14 @@ return {
         end,
       }
     end,
-    config = function(_, opts)
-      require('tokyonight').setup(opts)
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
-    end,
   },
   {
     "ellisonleao/gruvbox.nvim",
     enabled = true,
-    lazy = false,
     priority = 1000,
     opts = {
       contrast = "hard",
-      -- transparent_mode = true,
+      transparent_mode = true,
       overrides = {
         CursorLineNr = { bg = "" },
         DiffDelete = { reverse = false },
@@ -71,11 +64,6 @@ return {
         ["@lsp.type.struct"] = { link = "@type" },
       },
     },
-    config = function(_, opts)
-      require('gruvbox').setup(opts)
-      -- load the colorscheme here
-      vim.cmd([[colorscheme gruvbox]])
-    end,
   },
 
   -- { "shaunsingh/oxocarbon.nvim" },

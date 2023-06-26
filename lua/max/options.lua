@@ -33,3 +33,4 @@ vim.opt.timeoutlen = 300 -- time allowed for key combos
 
 -- vim.opt.colorcolumn = "80" -- vertical ruler
 vim.opt.pumheight = 10
+vim.opt.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
