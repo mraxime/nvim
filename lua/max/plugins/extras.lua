@@ -98,15 +98,6 @@ return {
     end,
   },
 
-  -- highlight references
-  {
-    "RRethy/vim-illuminate",
-    enabled = enabled,
-    event = { "BufReadPost", "BufNewFile" },
-    opts = { delay = 200 },
-    config = function(_, opts) require('illuminate').configure(opts) end
-  },
-
   -- buffer remove
   {
     "echasnovski/mini.bufremove",

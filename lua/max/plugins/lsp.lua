@@ -63,6 +63,24 @@ return {
 			vim.keymap.set({ "n", "x" }, "<F3>", function()
 				vim.lsp.buf.format({ async = true })
 			end, opts)
+
+			-- better than vim-illuminate
+			if client.supports_method("textDocument/documentHighlight") then
+				vim.opt.updatetime = 300
+				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+
+				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+					group = group,
+					buffer = bufnr,
+					callback = vim.lsp.buf.document_highlight,
+				})
+
+				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+					group = group,
+					buffer = bufnr,
+					callback = vim.lsp.buf.clear_references,
+				})
+			end
 		end
 
 		-- LSP keymaps when attach
@@ -108,9 +126,33 @@ return {
 			["rust_analyzer"] = function()
 				require("rust-tools").setup({})
 			end,
-			-- Fix Undefined global 'vim' in lua_ls
 			["lua_ls"] = function()
-				lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+				lspconfig.lua_ls.setup({
+					settings = {
+						Lua = {
+							-- Disable telemetry
+							telemetry = { enable = false },
+							runtime = {
+								-- Tell the language server which version of Lua you're using
+								-- (most likely LuaJIT in the case of Neovim)
+								version = "LuaJIT",
+								path = vim.split(package.path, ";"),
+							},
+							diagnostics = {
+								-- Get the language server to recognize the `vim` global
+								globals = { "vim" },
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									-- Make the server aware of Neovim runtime files
+									vim.fn.expand("$VIMRUNTIME/lua"),
+									vim.fn.stdpath("config") .. "/lua",
+								},
+							},
+						},
+					},
+				})
 			end,
 		})
 	end,
