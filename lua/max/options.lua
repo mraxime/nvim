@@ -28,9 +28,13 @@ vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
-vim.opt.timeoutlen = 300 -- time allowed for key combos
+vim.opt.updatetime = 300 --used for the CursorHold autocommand event
+vim.opt.timeoutlen = 300 -- time alowed between key combinaisons
 
 -- vim.opt.colorcolumn = "80" -- vertical ruler
 vim.opt.pumheight = 10
 vim.opt.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
+
+vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
+vim.opt.cmdheight = 0
+vim.opt.laststatus = 3 -- globalstatus

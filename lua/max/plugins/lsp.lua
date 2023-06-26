@@ -6,11 +6,11 @@ return {
 		-- LSP Support
 		{ "neovim/nvim-lspconfig" },
 
-		-- load mason before
-		{ "williamboman/mason.nvim" },
+		-- Mason
 		{ "williamboman/mason-lspconfig.nvim" },
 
-		-- load cmp before
+		-- load cmp first
+		{ "hrsh7th/nvim-cmp" },
 
 		-- Formatter/Linter
 		{
@@ -38,10 +38,26 @@ return {
 		vim.fn.sign_define("DiagnosticSignWarn", { text = "▲", texthl = "DiagnosticSignWarn", numhl = "" })
 		vim.fn.sign_define("DiagnosticSignError", { text = "✘", texthl = "DiagnosticSignError", numhl = "" })
 
-		-- config
+		-- Diagnostics
 		vim.diagnostic.config({
 			virtual_text = false,
+			update_in_insert = true,
+			-- signs = { active = signs },
+			underline = true,
+			severity_sort = true,
+			float = {
+				focusable = true,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				-- prefix = "",
+			},
 		})
+
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+		vim.lsp.handlers["textDocument/signatureHelp"] =
+			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 		-- Callback for any lsp
 		local on_attach = function(client, bufnr)
@@ -123,9 +139,9 @@ return {
 				lspconfig[server_name].setup({ capabilities = lsp_capabilities })
 			end,
 			-- Next, you can provide a dedicated handler for specific servers.
-			["rust_analyzer"] = function()
-				require("rust-tools").setup({})
-			end,
+			-- ["rust_analyzer"] = function()
+			--	require("rust-tools").setup({})
+			-- end,
 			["lua_ls"] = function()
 				lspconfig.lua_ls.setup({
 					settings = {
