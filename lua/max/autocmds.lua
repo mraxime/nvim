@@ -44,8 +44,6 @@ autocmd("FileType", {
 	end,
 })
 
--- Show record if cmdheight = 0
-if vim.opt.cmdheight == 0 then
-	vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
-	vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
-end
+-- Show record for `cmdheight = 0`
+vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
+vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
