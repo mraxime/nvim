@@ -77,7 +77,7 @@ return {
 				vim.lsp.buf.format({ async = true })
 			end, opts)
 
-			-- Highlight better than vim-illuminate
+			-- Highlight on CursorHold (better than vim-illuminate)
 			if client.supports_method("textDocument/documentHighlight") then
 				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
 				-- vim.opt.updatetime = 300

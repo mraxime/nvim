@@ -16,7 +16,7 @@ return {
 		enabled = enabled,
 		event = "VeryLazy",
 		opts = {
-			highlight = { timer = 150 },
+			highlight = { timer = 300 },
 		},
 		keys = {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },

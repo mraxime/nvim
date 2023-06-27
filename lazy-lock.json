@@ -11,8 +11,8 @@
   "gruvbox.nvim": { "branch": "main", "commit": "df149bccb19a02c5c2b9fa6ec0716f0c0487feb0" },
   "harpoon": { "branch": "master", "commit": "21f4c47c6803d64ddb934a5b314dcb1b8e7365dc" },
   "lazy.nvim": { "branch": "main", "commit": "4c8b625bc873ca76b76eee0c28c98f1f7148f17f" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "d381fcb78d7a562c3244e1c8f76406954649db36" },
-  "mason.nvim": { "branch": "main", "commit": "664c987c3b14d2262a4e580f993a3e5045baded0" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "c993ca55e3991535bc74cd2d6ef273810d066c84" },
+  "mason.nvim": { "branch": "main", "commit": "db58ec7bc9248fb1878172f90cadc825b77564a6" },
   "neodev.nvim": { "branch": "main", "commit": "2e53151d1a0895f7c642feb5ed6dc7f7d205238c" },
   "neogen": { "branch": "main", "commit": "1dd0319ccf41b2498f45a3c7607f2ee325ffc6a0" },
   "nui.nvim": { "branch": "main", "commit": "d146966a423e60699b084eeb28489fe3b6427599" },
@@ -30,6 +30,5 @@
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "9bc8237565ded606e6c366a71c64c0af25cd7a50" },
   "telescope.nvim": { "branch": "master", "commit": "6074847b6ee4b725747c8fc540d9b6b128ac8a12" },
   "tokyonight.nvim": { "branch": "main", "commit": "fd0a005fd8986ec0d98a1938dc570303e8d8444b" },
-  "yanky.nvim": { "branch": "main", "commit": "b12561386a25645adb7504e0e6a8c5dc8b31e6da" },
   "zen-mode.nvim": { "branch": "main", "commit": "68f554702de63f4b7b6b6d4bcb10178f41a0acc7" }
 }
