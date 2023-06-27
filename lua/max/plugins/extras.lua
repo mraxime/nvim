@@ -7,7 +7,29 @@ return {
 		"windwp/nvim-autopairs",
 		enabled = enabled,
 		event = "InsertEnter",
-		opts = {}, -- this is equalent to setup({}) function
+		config = function(_, opts)
+			require("nvim-autopairs").setup(opts)
+
+			-- setup cmp for autopairs
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		end,
+	},
+
+	-- Comments
+	{
+		"numToStr/Comment.nvim",
+		keys = {
+			{ "gcc", mode = "n", desc = "Comment toggle current line" },
+			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
+			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
+			{ "gbc", mode = "n", desc = "Comment toggle current block" },
+			{ "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
+			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
+		},
+		config = function(_, opts)
+			require("Comment").setup(opts)
+		end,
 	},
 
 	-- better yank/paste

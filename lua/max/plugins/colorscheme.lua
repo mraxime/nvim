@@ -40,7 +40,7 @@ return {
 		priority = 1000,
 		opts = {
 			contrast = "hard",
-			transparent_mode = true,
+			-- transparent_mode = true,
 			overrides = {
 				CursorLineNr = { bg = "" },
 				DiffDelete = { reverse = false },

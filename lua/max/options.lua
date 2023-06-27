@@ -3,7 +3,7 @@ vim.opt.clipboard = "unnamedplus" -- yank sync with system clipboard
 vim.opt.cursorline = true
 vim.opt.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 vim.opt.laststatus = 3 -- globalstatus
-vim.opt.timeoutlen = 250 -- time alowed between key combinaisons
+vim.opt.timeoutlen = 275 -- time alowed between key combinaisons
 vim.opt.updatetime = 300 -- interval for writing swap file to disk, also used by CursorHold autocommand event
 
 -- Numbers
@@ -28,10 +28,10 @@ vim.opt.isfname:append("@-@")
 vim.opt.shortmess:append("sI") -- disable nvim intro
 
 -- Disk
-vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.swapfile = false
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- UI
 vim.opt.scrolloff = 5
