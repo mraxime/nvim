@@ -1,11 +1,7 @@
 return {
-	"VonHeikemen/lsp-zero.nvim",
-	branch = "v2.x",
+	"neovim/nvim-lspconfig",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
-		-- LSP Support
-		{ "neovim/nvim-lspconfig" },
-
 		-- Mason
 		{ "williamboman/mason-lspconfig.nvim" },
 
@@ -50,16 +46,17 @@ return {
 				style = "minimal",
 				border = "rounded",
 				source = "always",
-				header = "",
+				-- header = "",
 				-- prefix = "",
 			},
 		})
 
+		-- Rounded borders
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 		vim.lsp.handlers["textDocument/signatureHelp"] =
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-		-- Callback for any lsp
+		-- Common on_attach callback for any lsp
 		local on_attach = function(client, bufnr)
 			local opts = { buffer = bufnr, remap = false }
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -80,10 +77,10 @@ return {
 				vim.lsp.buf.format({ async = true })
 			end, opts)
 
-			-- better than vim-illuminate
+			-- Highlight better than vim-illuminate
 			if client.supports_method("textDocument/documentHighlight") then
-				vim.opt.updatetime = 300
 				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+				-- vim.opt.updatetime = 300
 
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 					group = group,
@@ -99,20 +96,18 @@ return {
 			end
 		end
 
-		-- LSP keymaps when attach
+		-- All LSP attach setup
 		vim.api.nvim_create_autocmd("LspAttach", {
-			desc = "LSP keybinds",
+			desc = "LSP common attach",
 			callback = function(event)
-				local bufnr = event.buf
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
-
+				local bufnr = event.buf
 				on_attach(client, bufnr)
 			end,
 		})
 
-		-- Remove this
-		local lsp = require("lsp-zero")
-		lsp.format_on_save({
+		-- Auto format
+		require("max.utils").format_on_save({
 			format_opts = {
 				async = false,
 				timeout_ms = 10000,
@@ -125,10 +120,8 @@ return {
 				["null-ls"] = { "javascript", "typescript", "lua" },
 			},
 		})
-		--lsp.preset({})
-		--lsp.setup()
 
-		-- Configure LSP
+		-- LSP configurations
 		local lspconfig = require("lspconfig")
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 		require("mason-lspconfig").setup_handlers({
