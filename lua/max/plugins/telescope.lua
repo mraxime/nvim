@@ -121,7 +121,7 @@ return {
 					theme = "dropdown",
 					-- disables netrw and use telescope-file-browser in its place
 					hijack_netrw = true,
-					select_buffer = false, -- auto focus file from current buffer
+					select_buffer = true, -- auto focus file from current buffer
 					mappings = {
 						-- your custom insert mode mappings
 						["i"] = {
