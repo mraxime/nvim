@@ -10,6 +10,13 @@ return {
 			desc = "Toggle harpoon menu",
 		},
 		{
+			"sm",
+			function()
+				require("harpoon.ui").toggle_quick_menu()
+			end,
+			desc = "Toggle harpoon menu",
+		},
+		{
 			"mm",
 			function()
 				require("harpoon.mark").add_file()
@@ -45,28 +52,28 @@ return {
 			desc = "Go to harpoon file 4",
 		},
 		{
-			"m1",
+			"mj",
 			function()
 				require("harpoon.mark").set_current_at(1)
 			end,
 			desc = "Set current harpoon to file 1",
 		},
 		{
-			"m2",
+			"mk",
 			function()
 				require("harpoon.mark").set_current_at(2)
 			end,
 			desc = "Set current harpoon to file 2",
 		},
 		{
-			"m3",
+			"ml",
 			function()
 				require("harpoon.mark").set_current_at(3)
 			end,
 			desc = "Set current harpoon to file 3",
 		},
 		{
-			"m4",
+			"m;",
 			function()
 				require("harpoon.mark").set_current_at(4)
 			end,

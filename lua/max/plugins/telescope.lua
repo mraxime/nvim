@@ -8,28 +8,57 @@ return {
 	},
 	keys = {
 		{
-			"<leader>f",
+			";f",
 			function()
-				require("telescope.builtin").find_files()
+				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 			end,
-			desc = "Search Files",
+			desc = "Find Files",
 		},
 		{
-			"<leader>/",
+			";r",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
+			desc = "Grep Files",
+		},
+		{
+			";g",
+			function()
+				require("telescope.builtin").live_grep()
+			end,
+			desc = "Grep Files",
+		},
+		{
+			";;",
+			function()
+				require("telescope.builtin").resume()
+			end,
+			desc = "Telescope Resume",
+		},
+		-- old muscle memory
+		{
+			"<leader>f",
+			function()
+				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
+			end,
+			desc = "Find Files",
+		},
+		{
+			"sf",
+			function()
+				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
+			end,
 			desc = "Search Files",
 		},
 		{
-			"<leader>t",
+			"st",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
 			desc = "Search Text",
 		},
 		{
-			"<leader>o",
+			"so",
 			function()
 				require("telescope").extensions.file_browser.file_browser({
 					path = "%:p:h",
@@ -43,23 +72,8 @@ return {
 				})
 			end,
 		},
-		-- old muscle memory
 		{
-			"sf",
-			function()
-				require("telescope.builtin").find_files()
-			end,
-			desc = "Search Files",
-		},
-		{
-			"st",
-			function()
-				require("telescope.builtin").live_grep()
-			end,
-			desc = "Search Text",
-		},
-		{
-			"so",
+			"<leader>o",
 			function()
 				require("telescope").extensions.file_browser.file_browser({
 					path = "%:p:h",
@@ -114,6 +128,12 @@ return {
 						["q"] = actions.close,
 						["<Space>"] = actions.toggle_selection,
 					},
+				},
+			},
+			pickers = {
+				find_files = {
+					-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 				},
 			},
 			extensions = {

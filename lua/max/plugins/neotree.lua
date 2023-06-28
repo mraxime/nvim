@@ -14,7 +14,7 @@ return {
 			{
 				"<leader>e",
 				function()
-					require("neo-tree.command").execute({ toggle = true })
+					require("neo-tree.command").execute({ toggle = true, position = "current" })
 				end,
 				desc = "Explorer NeoTree (root dir)",
 				remap = true,
