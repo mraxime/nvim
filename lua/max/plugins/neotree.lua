@@ -12,6 +12,15 @@ return {
 		},
 		keys = {
 			{
+				"so",
+				function()
+					require("neo-tree.command").execute({ toggle = true, position = "current" })
+				end,
+				desc = "Explorer NeoTree (root dir)",
+				remap = true,
+			},
+			-- old muscle memory
+			{
 				"<leader>e",
 				function()
 					require("neo-tree.command").execute({ toggle = true, position = "current" })
@@ -31,6 +40,7 @@ return {
 				bind_to_cwd = false,
 				follow_current_file = true,
 				use_libuv_file_watcher = true,
+				hijack_netrw_behavior = "disabled",
 			},
 			window = {
 				width = 32,
@@ -40,6 +50,7 @@ return {
 					O = "system_open",
 					l = "open",
 					h = "close_node",
+					["<esc>"] = "close_window",
 					s = false,
 				},
 			},

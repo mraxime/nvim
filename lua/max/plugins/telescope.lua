@@ -8,32 +8,11 @@ return {
 	},
 	keys = {
 		{
-			";f",
+			"sd",
 			function()
 				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 			end,
 			desc = "Find Files",
-		},
-		{
-			";r",
-			function()
-				require("telescope.builtin").live_grep()
-			end,
-			desc = "Grep Files",
-		},
-		{
-			";g",
-			function()
-				require("telescope.builtin").live_grep()
-			end,
-			desc = "Grep Files",
-		},
-		{
-			";;",
-			function()
-				require("telescope.builtin").resume()
-			end,
-			desc = "Telescope Resume",
 		},
 		-- old muscle memory
 		{
@@ -58,22 +37,7 @@ return {
 			desc = "Search Text",
 		},
 		{
-			"so",
-			function()
-				require("telescope").extensions.file_browser.file_browser({
-					path = "%:p:h",
-					cwd = vim.fn.expand("%:p:h"),
-					respect_gitignore = false,
-					hidden = false,
-					grouped = true,
-					initial_mode = "normal",
-					previewer = false,
-					layout_config = { height = 40 },
-				})
-			end,
-		},
-		{
-			"<leader>o",
+			"sp",
 			function()
 				require("telescope").extensions.file_browser.file_browser({
 					path = "%:p:h",
