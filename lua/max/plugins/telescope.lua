@@ -103,9 +103,10 @@ return {
 			extensions = {
 				file_browser = {
 					theme = "dropdown",
-					-- disables netrw and use telescope-file-browser in its place
-					hijack_netrw = true,
+					hijack_netrw = false,
 					select_buffer = true, -- auto focus file from current buffer
+					prompt_path = true,
+					cwd_to_path = true,
 					mappings = {
 						-- your custom insert mode mappings
 						["i"] = {
