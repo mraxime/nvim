@@ -37,6 +37,9 @@ vim.keymap.set("n", "gp", "<cmd>bprev<CR>", { noremap = true })
 -- Plugin Manager
 vim.keymap.set("n", "<leader>p", "<cmd>Lazy<cr>")
 
+-- Easily edit config file
+vim.keymap.set("n", "s.", "<cmd>edit ~/.config/nvim/init.lua")
+
 -- old muscle memory
 vim.keymap.set("n", "<C-h>", "<c-w>h")
 vim.keymap.set("n", "<C-l>", "<c-w>l")

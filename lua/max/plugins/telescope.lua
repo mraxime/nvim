@@ -37,7 +37,7 @@ return {
 			desc = "Search Text",
 		},
 		{
-			"sp",
+			"so",
 			function()
 				require("telescope").extensions.file_browser.file_browser({
 					path = "%:p:h",

@@ -12,7 +12,7 @@ return {
 		},
 		keys = {
 			{
-				"so",
+				"s/",
 				function()
 					require("neo-tree.command").execute({ toggle = true, position = "current" })
 				end,
