@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	enabled = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -13,6 +14,13 @@ return {
 				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 			end,
 			desc = "Find Files",
+		},
+		{
+			"s/",
+			function()
+				require("telescope.builtin").live_grep()
+			end,
+			desc = "Search Text",
 		},
 		-- old muscle memory
 		{
@@ -39,16 +47,7 @@ return {
 		{
 			"so",
 			function()
-				require("telescope").extensions.file_browser.file_browser({
-					path = "%:p:h",
-					cwd = vim.fn.expand("%:p:h"),
-					respect_gitignore = false,
-					hidden = false,
-					grouped = true,
-					initial_mode = "normal",
-					previewer = false,
-					layout_config = { height = 40 },
-				})
+				require("telescope").extensions.file_browser.file_browser()
 			end,
 		},
 	},
@@ -105,8 +104,20 @@ return {
 					theme = "dropdown",
 					hijack_netrw = false,
 					select_buffer = true, -- auto focus file from current buffer
-					prompt_path = true,
-					cwd_to_path = true,
+					initial_browser = "tree",
+					auto_depth = true,
+					depth = 1,
+					-- Default options
+					path = "%:p:h",
+					cwd = vim.fn.expand("%:p:h"),
+					respect_gitignore = false,
+					hidden = false,
+					grouped = true,
+					initial_mode = "normal",
+					previewer = false,
+					layout_config = { height = 0.8, width = 0.4 },
+					display_stat = false,
+					-- Mappings
 					mappings = {
 						-- your custom insert mode mappings
 						["i"] = {
@@ -136,22 +147,5 @@ return {
 		})
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
-
-		-- vim.keymap.set("n", "st", function() require("telescope.builtin").live_grep() end)
-		-- vim.keymap.set("n", "<leader>sgs", function() require("telescope.builtin").git_status() end)
-		-- vim.keymap.set("n", "<leader>sgb", function() require("telescope.builtin").git_branches() end)
-		-- vim.keymap.set("n", "<leader>sgc", function() require("telescope.builtin").git_commits() end)
-		-- vim.keymap.set("n", "sf", function() require("telescope.builtin").find_files() end)
-		-- vim.keymap.set("n", "<leader>sb", function() require("telescope.builtin").buffers() end)
-		-- vim.keymap.set("n", "<leader>sh", function() require("telescope.builtin").help_tags() end)
-		-- vim.keymap.set("n", "<leader>sm", function() require("telescope.builtin").marks() end)
-		-- vim.keymap.set("n", "<leader>sh", function() require("telescope.builtin").help_tags() end)
-		-- vim.keymap.set("n", "<leader>sm", function() require("telescope.builtin").man_pages() end)
-		-- vim.keymap.set("n", "<leader>sn", function() require("telescope").extensions.notify.notify() end)
-		-- vim.keymap.set("n", "<leader>sr", function() require("telescope.builtin").registers() end)
-		-- vim.keymap.set("n", "<leader>sk", function() require("telescope.builtin").keymaps() end)
-		-- vim.keymap.set("n", "<leader>sc", function() require("telescope.builtin").commands() end)
-		-- vim.keymap.set("n", "<leader>ss", function() require("telescope.builtin").resume() end)
-		-- vim.keymap.set("n", "<leader>sl", function() require("telescope.builtin").resume() end)
 	end,
 }
