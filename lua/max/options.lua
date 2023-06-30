@@ -10,7 +10,7 @@ vim.opt.updatetime = 300 -- interval for writing swap file to disk, also used by
 vim.opt.number = true
 vim.opt.numberwidth = 2
 vim.opt.relativenumber = false
---vim.opt.ruler = false
+vim.opt.ruler = false
 
 -- Indenting
 vim.opt.expandtab = true

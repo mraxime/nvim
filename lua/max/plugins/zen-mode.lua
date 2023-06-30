@@ -6,7 +6,7 @@ return {
 		opts = {
 			plugins = {
 				gitsigns = false,
-				tmux = true,
+				tmux = false,
 				kitty = { enabled = false, font = "+2" },
 			},
 		},

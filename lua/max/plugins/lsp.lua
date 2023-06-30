@@ -117,7 +117,17 @@ return {
 				["svelte"] = { "svelte" },
 				-- if you have a working setup with null-ls
 				-- you can specify filetypes it can format.
-				["null-ls"] = { "javascript", "typescript", "javascriptreact", "typescriptreact", "lua", "html", "css", "scss" },
+				["null-ls"] = {
+					"javascript",
+					"typescript",
+					"javascriptreact",
+					"typescriptreact",
+					"lua",
+					"html",
+					"css",
+					"scss",
+					"sh",
+				},
 			},
 		})
 
