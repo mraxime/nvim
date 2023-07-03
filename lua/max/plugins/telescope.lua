@@ -45,6 +45,12 @@ return {
 			desc = "Search Text",
 		},
 		{
+			"si",
+			function()
+				require("telescope").extensions.file_browser.file_browser()
+			end,
+		},
+		{
 			"so",
 			function()
 				require("telescope").extensions.file_browser.file_browser()

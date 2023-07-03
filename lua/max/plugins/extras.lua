@@ -36,7 +36,6 @@ return {
 	{
 		"gbprod/yanky.nvim",
 		enabled = enabled,
-		event = "VeryLazy",
 		opts = {
 			highlight = { timer = 300 },
 		},
