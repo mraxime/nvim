@@ -5,11 +5,11 @@ return {
 		priority = 1000,
 		opts = {
 			style = "night",
-			-- transparent = true,
-			-- styles = {
-			--	sidebars = "transparent",
-			--	floats = "transparent",
-			-- },
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
 			sidebars = {
 				"qf",
 				"vista_kind",
@@ -40,7 +40,7 @@ return {
 		priority = 1000,
 		opts = {
 			contrast = "hard",
-			-- transparent_mode = true,
+			transparent_mode = true,
 			overrides = {
 				CursorLineNr = { bg = "" },
 				DiffDelete = { reverse = false },

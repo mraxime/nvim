@@ -91,7 +91,9 @@ return {
 				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 					group = group,
 					buffer = bufnr,
-					callback = vim.lsp.buf.clear_references,
+					callback = function()
+						vim.lsp.buf.clear_references(bufnr)
+					end,
 				})
 			end
 		end

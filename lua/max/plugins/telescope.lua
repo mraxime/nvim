@@ -121,7 +121,7 @@ return {
 					grouped = true,
 					initial_mode = "normal",
 					previewer = false,
-					layout_config = { height = 0.8, width = 0.4 },
+					layout_config = { height = 0.8, width = 52 },
 					display_stat = false,
 					-- Mappings
 					mappings = {
