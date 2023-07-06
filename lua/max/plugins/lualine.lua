@@ -2,23 +2,20 @@
 return {
 	"tamighi/lualine.nvim", -- fork with harpoon_files plugin
 	-- "nvim-lualine/lualine.nvim",
-	enabled = false,
+	enabled = true,
 	branch = "feat/harpoon_files",
 	event = "VeryLazy",
 	config = function()
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "onedark",
-				component_separators = "|",
-				section_separators = "",
+				theme = "auto",
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 			},
-			sections = {
-				lualine_x = {
-					{
-						color = { fg = "#ff9e64" },
-					},
-				},
+			sections = {},
+			inactive_sections = {},
+			tabline = {
 				lualine_a = {
 					{
 						"harpoon_files",

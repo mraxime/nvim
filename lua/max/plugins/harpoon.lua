@@ -17,6 +17,13 @@ return {
 			desc = "Toggle harpoon menu",
 		},
 		{
+			"ms",
+			function()
+				require("harpoon.ui").toggle_quick_menu()
+			end,
+			desc = "Toggle harpoon menu",
+		},
+		{
 			"mm",
 			function()
 				require("harpoon.mark").add_file()

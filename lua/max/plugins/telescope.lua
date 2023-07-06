@@ -22,6 +22,13 @@ return {
 			end,
 			desc = "Search Text",
 		},
+		{
+			"ss",
+			function()
+				require("telescope.builtin").resume()
+			end,
+			desc = "Resume Telescope",
+		},
 		-- old muscle memory
 		{
 			"<leader>f",
