@@ -79,12 +79,13 @@ return {
 
 			-- Highlight on CursorHold (better than vim-illuminate)
 			if client.supports_method("textDocument/documentHighlight") then
-				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
 				-- vim.opt.updatetime = 300
 
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 					group = group,
 					buffer = bufnr,
+					desc = "highlight references when cursor holds",
 					callback = function()
 						vim.lsp.buf.document_highlight()
 					end,
@@ -93,8 +94,9 @@ return {
 				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 					group = group,
 					buffer = bufnr,
+					desc = "clear references when cursor moves",
 					callback = function()
-						vim.lsp.buf.clear_references(bufnr)
+						vim.lsp.buf.clear_references()
 					end,
 				})
 			end
