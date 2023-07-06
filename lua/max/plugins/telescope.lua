@@ -29,6 +29,13 @@ return {
 			end,
 			desc = "Resume Telescope",
 		},
+		{
+			"so",
+			function()
+				require("telescope").extensions.file_browser.file_browser()
+			end,
+			desc = "Search File Browser",
+		},
 		-- old muscle memory
 		{
 			"<leader>f",
@@ -38,30 +45,11 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"sf",
-			function()
-				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
-			end,
-			desc = "Search Files",
-		},
-		{
 			"st",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
 			desc = "Search Text",
-		},
-		{
-			"si",
-			function()
-				require("telescope").extensions.file_browser.file_browser()
-			end,
-		},
-		{
-			"so",
-			function()
-				require("telescope").extensions.file_browser.file_browser()
-			end,
 		},
 	},
 	config = function()
