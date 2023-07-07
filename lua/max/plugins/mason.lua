@@ -2,6 +2,10 @@ return {
 	"williamboman/mason.nvim",
 	enabled = true,
 	build = ":MasonUpdate",
+	cmd = {
+		"Mason",
+		"MasonUpdate",
+	},
 	opts = {
 		ensure_installed = {
 			"css-lsp",

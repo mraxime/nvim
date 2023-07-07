@@ -19,6 +19,14 @@ return {
 				desc = "Explorer NeoTree (root dir)",
 				remap = true,
 			},
+			{
+				"se",
+				function()
+					require("neo-tree.command").execute({ toggle = true, position = "left" })
+				end,
+				desc = "Explorer NeoTree (root dir)",
+				remap = true,
+			},
 			-- old muscle memory
 			{
 				"<leader>e",
