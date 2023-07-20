@@ -67,11 +67,26 @@ return {
 		"danymat/neogen",
 		enabled = enabled,
 		dependencies = { "L3MON4D3/LuaSnip" },
+		cmd = { "Neogen" },
 		keys = {
 			{
 				"<leader>cc",
 				function()
-					require("neogen").generate({})
+					require("neogen").generate()
+				end,
+				desc = "Neogen annotation comment",
+			},
+			{
+				"<leader>cf",
+				function()
+					require("neogen").generate({ type = "func" })
+				end,
+				desc = "Neogen annotation comment",
+			},
+			{
+				"<leader>ct",
+				function()
+					require("neogen").generate({ type = "type" })
 				end,
 				desc = "Neogen annotation comment",
 			},
@@ -130,6 +145,13 @@ return {
 		"folke/neodev.nvim",
 		enabled = enabled,
 		ft = "lua",
+	},
+
+	-- better quickfix
+	{
+		"kevinhwang91/nvim-bqf",
+		enabled = enabled,
+		ft = "qf",
 	},
 
 	-- buffer remove

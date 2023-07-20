@@ -3,7 +3,7 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		enabled = true,
-		branch = "v2.x",
+		branch = "v3.x",
 		cmd = "Neotree",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -46,7 +46,9 @@ return {
 		opts = {
 			filesystem = {
 				bind_to_cwd = false,
-				follow_current_file = true,
+				follow_current_file = {
+					enabled = true,
+				},
 				use_libuv_file_watcher = true,
 				hijack_netrw_behavior = "disabled",
 			},

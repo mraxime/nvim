@@ -1,3 +1,4 @@
+local transparent_active = false
 return {
 	{
 		"folke/tokyonight.nvim",
@@ -5,7 +6,7 @@ return {
 		priority = 1000,
 		opts = {
 			style = "night",
-			transparent = true,
+			transparent = transparent_active,
 			styles = {
 				sidebars = "transparent",
 				floats = "transparent",
@@ -40,7 +41,7 @@ return {
 		priority = 1000,
 		opts = {
 			contrast = "hard",
-			transparent_mode = true,
+			transparent_mode = transparent_active,
 			overrides = {
 				CursorLineNr = { bg = "" },
 				DiffDelete = { reverse = false },
