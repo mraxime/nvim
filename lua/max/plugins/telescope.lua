@@ -16,6 +16,13 @@ return {
 			desc = "Find Files",
 		},
 		{
+			"sa",
+			function()
+				require("telescope.builtin").live_grep()
+			end,
+			desc = "Search Text",
+		},
+		{
 			"s/",
 			function()
 				require("telescope.builtin").live_grep()
@@ -46,6 +53,13 @@ return {
 		},
 		{
 			"st",
+			function()
+				require("telescope.builtin").live_grep()
+			end,
+			desc = "Search Text",
+		},
+		{
+			"sf",
 			function()
 				require("telescope.builtin").live_grep()
 			end,
@@ -91,6 +105,9 @@ return {
 					n = {
 						["q"] = actions.close,
 						["<Space>"] = actions.toggle_selection,
+					},
+					i = {
+						["<esc>"] = actions.close,
 					},
 				},
 			},

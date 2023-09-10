@@ -24,6 +24,13 @@ return {
 			desc = "Toggle harpoon menu",
 		},
 		{
+			"ma",
+			function()
+				require("harpoon.mark").add_file()
+			end,
+			desc = "Add buffer to harpoon",
+		},
+		{
 			"mm",
 			function()
 				require("harpoon.mark").add_file()
@@ -85,6 +92,20 @@ return {
 				require("harpoon.mark").set_current_at(4)
 			end,
 			desc = "Set current harpoon to file 4",
+		},
+		{
+			"mc",
+			function()
+				require("harpoon.mark").clear_all()
+			end,
+			desc = "Reset harpoon",
+		},
+		{
+			"mr",
+			function()
+				require("harpoon.mark").clear_all()
+			end,
+			desc = "Reset harpoon",
 		},
 	},
 }
