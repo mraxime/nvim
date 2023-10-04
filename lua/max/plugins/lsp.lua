@@ -10,7 +10,7 @@ return {
 
 		-- Formatter/Linter
 		{
-			"jose-elias-alvarez/null-ls.nvim",
+			"nvimtools/none-ls.nvim",
 			config = function()
 				local null_ls = require("null-ls")
 				null_ls.setup({
@@ -69,7 +69,7 @@ return {
 			vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-			vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+			-- vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
 			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
 			vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
