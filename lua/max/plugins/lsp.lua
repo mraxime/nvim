@@ -152,6 +152,14 @@ return {
 			-- ["rust_analyzer"] = function()
 			--	require("rust-tools").setup({})
 			-- end,
+			["tsserver"] = function()
+				lspconfig.tsserver.setup({
+					capabilities = lsp_capabilities,
+					init_options = { preferences = {
+						disableSuggestions = true,
+					} },
+				})
+			end,
 			["lua_ls"] = function()
 				lspconfig.lua_ls.setup({
 					settings = {
