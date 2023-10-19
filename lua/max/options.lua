@@ -1,10 +1,11 @@
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus" -- yank sync with system clipboard
-vim.opt.cursorline = true
+vim.opt.cursorline = false -- disable cursor line
 vim.opt.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 vim.opt.laststatus = 3 -- globalstatus
 vim.opt.timeoutlen = 275 -- time alowed between key combinaisons
 vim.opt.updatetime = 300 -- interval for writing swap file to disk, also used by CursorHold autocommand event
+-- vim.opt.guicursor = "" -- keep cursor block on insert mode
 
 -- Numbers
 vim.opt.number = true
