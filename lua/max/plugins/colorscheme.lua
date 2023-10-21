@@ -63,7 +63,7 @@ return {
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
-		enabled = true,
+		enabled = false,
 		priority = 1000,
 		opts = {
 			contrast = "hard",

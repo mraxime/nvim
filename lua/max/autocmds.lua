@@ -1,9 +1,11 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
--- Highlight on yank
+local group = augroup("custom_autocommands", {})
+
 autocmd("TextYankPost", {
-	group = augroup("HighlightYank", {}),
+	desc = "Highlight on yank",
+	group = group,
 	pattern = "*",
 	callback = function()
 		vim.highlight.on_yank({
@@ -13,16 +15,16 @@ autocmd("TextYankPost", {
 	end,
 })
 
--- Remove trailing white spaces on save
 autocmd({ "BufWritePre" }, {
-	group = augroup("remove_trailing_on_save", {}),
+	desc = "Remove trailing white spaces on save",
+	group = group,
 	pattern = "*",
 	command = [[%s/\s\+$//e]],
 })
 
--- Close some filetypes with <q>
 autocmd("FileType", {
-	group = augroup("close_with_q", {}),
+	desc = "Close some filetypes with <q>",
+	group = group,
 	pattern = {
 		"PlenaryTestPopup",
 		"help",
@@ -44,6 +46,20 @@ autocmd("FileType", {
 	end,
 })
 
--- Show record for `cmdheight = 0`
-vim.cmd([[ autocmd RecordingEnter * set cmdheight=1 ]])
-vim.cmd([[ autocmd RecordingLeave * set cmdheight=0 ]])
+autocmd("RecordingEnter", {
+	desc = "Fix hidden macro recording when `cmdheight = 0`",
+	group = group,
+	pattern = "*",
+	callback = function()
+		vim.opt.cmdheight = 1
+	end,
+})
+
+autocmd("RecordingLeave", {
+	desc = "Fix hidden macro recording when `cmdheight = 0`",
+	group = group,
+	pattern = "*",
+	callback = function()
+		vim.opt.cmdheight = 0
+	end,
+})
