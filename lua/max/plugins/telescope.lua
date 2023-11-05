@@ -16,6 +16,13 @@ return {
 			desc = "Find Files",
 		},
 		{
+			"sf",
+			function()
+				require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
+			end,
+			desc = "Find Files",
+		},
+		{
 			"sa",
 			function()
 				require("telescope.builtin").live_grep()
@@ -53,13 +60,6 @@ return {
 		},
 		{
 			"st",
-			function()
-				require("telescope.builtin").live_grep()
-			end,
-			desc = "Search Text",
-		},
-		{
-			"sf",
 			function()
 				require("telescope.builtin").live_grep()
 			end,

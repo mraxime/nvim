@@ -80,28 +80,28 @@ return {
 			desc = "Go to harpoon file 4",
 		},
 		{
-			"mj",
+			"sJ",
 			function()
 				require("harpoon.mark").set_current_at(1)
 			end,
 			desc = "Set current harpoon to file 1",
 		},
 		{
-			"mk",
+			"sK",
 			function()
 				require("harpoon.mark").set_current_at(2)
 			end,
 			desc = "Set current harpoon to file 2",
 		},
 		{
-			"ml",
+			"sL",
 			function()
 				require("harpoon.mark").set_current_at(3)
 			end,
 			desc = "Set current harpoon to file 3",
 		},
 		{
-			"m;",
+			"s:",
 			function()
 				require("harpoon.mark").set_current_at(4)
 			end,

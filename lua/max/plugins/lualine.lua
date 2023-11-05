@@ -50,7 +50,9 @@ return {
 			},
 			sections = {},
 			inactive_sections = {},
-			tabline = { lualine_a = { { Harpoon_files } } },
+			tabline = {
+				lualine_a = { Harpoon_files },
+			},
 		})
 	end,
 }
