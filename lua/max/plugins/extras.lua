@@ -19,6 +19,15 @@ return {
 	-- Comments
 	{
 		"numToStr/Comment.nvim",
+		dependencies = {
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				init = function() -- Performance
+					vim.g.skip_ts_context_commentstring_module = true
+				end,
+				opts = { enable_autocmd = false },
+			},
+		},
 		keys = {
 			{ "gcc", mode = "n", desc = "Comment toggle current line" },
 			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
@@ -36,7 +45,7 @@ return {
 	{
 		"NvChad/nvim-colorizer.lua",
 		event = "BufReadPre",
-		config = {
+		opts = {
 			filetypes = { "*", "!lazy" },
 			buftype = { "*", "!prompt", "!nofile" },
 			user_default_options = {
@@ -58,7 +67,7 @@ return {
 	-- better yank/paste
 	{
 		"gbprod/yanky.nvim",
-		enabled = enabled,
+		enabled = false,
 		opts = {
 			highlight = { timer = 300 },
 		},

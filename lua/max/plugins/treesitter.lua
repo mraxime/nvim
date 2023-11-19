@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	enabled = true,
 	version = false, -- last release is way too old
-	dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
+	dependencies = { "windwp/nvim-ts-autotag" },
 	build = ":TSUpdate",
 	event = { "BufReadPost", "BufNewFile" },
 	cmd = {
@@ -31,7 +31,6 @@ return {
 		incremental_selection = { enable = true },
 		indent = { enable = true },
 		autotag = { enable = true },
-		context_commentstring = { enable = true, enable_autocmd = false },
 		ensure_installed = {
 			"bash",
 			"c",
