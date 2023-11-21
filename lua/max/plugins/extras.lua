@@ -16,6 +16,55 @@ return {
 		end,
 	},
 
+	{
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{
+				"-",
+				function()
+					vim.cmd("vsplit | wincmd l | vertical resize -10")
+					require("oil").open()
+				end,
+				desc = "Open Oil",
+			},
+			{
+				"so",
+				function()
+					if vim.bo.filetype == "oil" then
+						require("oil").close()
+					else
+						require("oil").open()
+					end
+				end,
+				desc = "Toggle Oil",
+			},
+		},
+		opts = {
+			keymaps = {
+				["g?"] = "actions.show_help",
+				["l"] = "actions.select",
+				["<C-s>"] = "actions.select_vsplit",
+				["<C-h>"] = "actions.select_split",
+				["<C-t>"] = "actions.select_tab",
+				["<C-p>"] = "actions.preview",
+				["<C-c>"] = "actions.close",
+				["<C-l>"] = "actions.refresh",
+				["h"] = "actions.parent",
+				["<BS>"] = "actions.parent",
+				["_"] = "actions.open_cwd",
+				["`"] = "actions.cd",
+				["~"] = "actions.tcd",
+				["gs"] = "actions.change_sort",
+				["gx"] = "actions.open_external",
+				["g."] = "actions.toggle_hidden",
+				["g\\"] = "actions.toggle_trash",
+			},
+		},
+	},
+
+	-- { "echasnovski/mini.nvim", event = "VeryLazy", version = false },
+
 	-- Comments
 	{
 		"numToStr/Comment.nvim",
