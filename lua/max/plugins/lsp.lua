@@ -5,6 +5,13 @@ return {
 		-- Mason
 		{ "williamboman/mason-lspconfig.nvim" },
 
+		-- better typescript server
+		{
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			opts = {},
+		},
+
 		-- load cmp first
 		{ "hrsh7th/nvim-cmp" },
 
@@ -146,20 +153,25 @@ return {
 			-- and will be called for each installed server that doesn't have
 			-- a dedicated handler.
 			function(server_name) -- default handler (optional)
+				if server_name == "tsserver" then
+					return
+				end
 				lspconfig[server_name].setup({ capabilities = lsp_capabilities })
 			end,
 			-- Next, you can provide a dedicated handler for specific servers.
 			-- ["rust_analyzer"] = function()
 			--	require("rust-tools").setup({})
 			-- end,
-			["tsserver"] = function()
-				lspconfig.tsserver.setup({
-					capabilities = lsp_capabilities,
-					init_options = { preferences = {
-						disableSuggestions = true,
-					} },
-				})
-			end,
+			-- ["tsserver"] = function()
+			-- 	lspconfig.tsserver.setup({
+			-- 		capabilities = lsp_capabilities,
+			-- 		init_options = {
+			-- 			preferences = {
+			-- 				disableSuggestions = true,
+			-- 			},
+			-- 		},
+			-- 	})
+			-- end,
 			["lua_ls"] = function()
 				lspconfig.lua_ls.setup({
 					settings = {

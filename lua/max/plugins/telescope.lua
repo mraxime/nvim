@@ -43,13 +43,13 @@ return {
 			end,
 			desc = "Resume Telescope",
 		},
-		-- {
-		-- 	"so",
-		-- 	function()
-		-- 		require("telescope").extensions.file_browser.file_browser()
-		-- 	end,
-		-- 	desc = "Search File Browser",
-		-- },
+		{
+			"so",
+			function()
+				require("telescope").extensions.file_browser.file_browser()
+			end,
+			desc = "Search File Browser",
+		},
 		-- old muscle memory
 		{
 			"<leader>f",
