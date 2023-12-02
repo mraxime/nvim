@@ -29,13 +29,20 @@ return {
 				desc = "Open Oil",
 			},
 			{
-				"si",
+				";",
 				function()
 					if vim.bo.filetype == "oil" then
 						require("oil").close()
 					else
 						require("oil").open()
 					end
+				end,
+				desc = "Toggle Oil",
+			},
+			{
+				"so",
+				function()
+					require("oil").toggle_float()
 				end,
 				desc = "Toggle Oil",
 			},
@@ -46,12 +53,14 @@ return {
 				-- ["l"] = "actions.select",
 				-- ["h"] = "actions.parent",
 				["<C-s>"] = "actions.select_vsplit",
-				["<C-h>"] = "actions.select_split",
+				["<C-v>"] = "actions.select_split",
 				["<C-t>"] = "actions.select_tab",
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = "actions.close",
-				["<C-l>"] = "actions.refresh",
+				["<C-r>"] = "actions.refresh",
 				["<BS>"] = "actions.parent",
+				["<C-h>"] = "actions.parent",
+				["<C-l>"] = "actions.select",
 				["_"] = "actions.open_cwd",
 				["`"] = "actions.cd",
 				["~"] = "actions.tcd",
@@ -59,6 +68,10 @@ return {
 				["gx"] = "actions.open_external",
 				["g."] = "actions.toggle_hidden",
 				["g\\"] = "actions.toggle_trash",
+			},
+			float = {
+				max_width = 52,
+				max_height = 20,
 			},
 		},
 	},

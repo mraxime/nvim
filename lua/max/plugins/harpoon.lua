@@ -24,13 +24,6 @@ return {
 			desc = "Toggle harpoon menu",
 		},
 		{
-			"si",
-			function()
-				require("harpoon.ui").toggle_quick_menu()
-			end,
-			desc = "Toggle harpoon menu",
-		},
-		{
 			"ms",
 			function()
 				require("harpoon.ui").toggle_quick_menu()
