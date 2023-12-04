@@ -1,8 +1,8 @@
 -- Autocompletion
 return {
 	"hrsh7th/nvim-cmp",
-	enabled = true,
 	dependencies = {
+		{ "neovim/nvim-lspconfig" },
 		{ "hrsh7th/cmp-path" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-nvim-lsp" },
@@ -11,6 +11,8 @@ return {
 		{ "L3MON4D3/LuaSnip" },
 		{ "rafamadriz/friendly-snippets" },
 		{ "saadparwaiz1/cmp_luasnip" },
+		-- lspkind
+		-- { "onsails/lspkind.nvim" },
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -21,8 +23,8 @@ return {
 			["<C-p>"] = cmp.mapping.select_prev_item(cmp_select_options),
 			["<C-u>"] = cmp.mapping.scroll_docs(-4),
 			["<C-d>"] = cmp.mapping.scroll_docs(4),
-			["<CR>"] = cmp.mapping.confirm({ select = true }),
-			["<C-y>"] = cmp.mapping.confirm({ select = true }),
+			["<C-e>"] = cmp.mapping.abort(), -- close completion window
+			["<CR>"] = cmp.mapping.confirm({ select = false }),
 		}
 
 		-- luasnip
@@ -67,6 +69,14 @@ return {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
+			-- formatting = {
+			-- 	fields = { "kind", "abbr", "menu" },
+			-- 	format = require("lspkind").cmp_format({
+			-- 		mode = "symbol",
+			-- 		maxwidth = 50,
+			-- 		ellipsis_char = "...",
+			-- 	}),
+			-- },
 			formatting = {
 				fields = { "abbr", "menu", "kind" },
 				format = function(entry, item)

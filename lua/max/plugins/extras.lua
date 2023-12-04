@@ -29,17 +29,6 @@ return {
 				desc = "Open Oil",
 			},
 			{
-				";",
-				function()
-					if vim.bo.filetype == "oil" then
-						require("oil").close()
-					else
-						require("oil").open()
-					end
-				end,
-				desc = "Toggle Oil",
-			},
-			{
 				"so",
 				function()
 					require("oil").toggle_float()
@@ -49,28 +38,43 @@ return {
 		},
 		opts = {
 			keymaps = {
-				["g?"] = "actions.show_help",
-				-- ["l"] = "actions.select",
-				-- ["h"] = "actions.parent",
-				["<C-s>"] = "actions.select_vsplit",
-				["<C-v>"] = "actions.select_split",
-				["<C-t>"] = "actions.select_tab",
-				["<C-p>"] = "actions.preview",
-				["<C-c>"] = "actions.close",
-				["<C-r>"] = "actions.refresh",
+				-- navigation
+				["<CR>"] = "actions.select",
+				["<C-l>"] = "actions.select",
+
 				["<BS>"] = "actions.parent",
 				["<C-h>"] = "actions.parent",
-				["<C-l>"] = "actions.select",
-				["_"] = "actions.open_cwd",
+
 				["`"] = "actions.cd",
 				["~"] = "actions.tcd",
-				["gs"] = "actions.change_sort",
-				["gx"] = "actions.open_external",
+				["_"] = "actions.open_cwd",
+				["gh"] = "actions.open_cwd",
+
+				-- split
+				["<C-s>"] = "actions.select_vsplit",
+				["<C-v>"] = "actions.select_split",
+
+				-- close
+				["<C-c>"] = "actions.close",
+				["<Esc>"] = "actions.close",
+				["q"] = "actions.close",
+
+				-- others
+				["g?"] = "actions.show_help",
+				["R"] = "actions.refresh",
+				["<C-p>"] = "actions.preview",
+				["<C-t>"] = "actions.select_tab",
 				["g."] = "actions.toggle_hidden",
 				["g\\"] = "actions.toggle_trash",
+				["gs"] = "actions.change_sort",
+				["gx"] = "actions.open_external",
 			},
+			-- columns = {},
+			-- view_options = {
+			-- 	show_hidden = true,
+			-- },
 			float = {
-				max_width = 52,
+				max_width = 48,
 				max_height = 20,
 			},
 		},
