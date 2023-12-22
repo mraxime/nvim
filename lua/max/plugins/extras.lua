@@ -209,14 +209,14 @@ return {
 			api_key_cmd = "echo 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",
 			chat = {
 				keymaps = {
-					close = { "<C-c>" },
+					close = "<C-c>",
 					yank_last = "<C-y>",
 					scroll_up = "<C-u>",
 					scroll_down = "<C-d>",
 					new_session = "<C-n>",
 					cycle_windows = "<Tab>",
 					cycle_modes = "<C-f>",
-					select_session = { "<CR>", "l" },
+					select_session = "<CR>",
 					rename_session = "r",
 					delete_session = "d",
 					toggle_settings = "<C-o>",
