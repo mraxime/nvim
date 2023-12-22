@@ -49,3 +49,46 @@ vim.keymap.set("n", "sp", "<C-^>")
 
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
+
+local function goto_or_create_tab(tab_index)
+	local tab_count = vim.fn.tabpagenr("$")
+	if tab_count < tab_index then
+		vim.cmd("tablast") -- create new tabs from the last one
+		for _ = tab_count, tab_index - 1 do
+			vim.cmd("tabnew")
+		end
+	end
+	vim.cmd("tabnext " .. tab_index)
+end
+
+vim.keymap.set("n", "sj", function()
+	goto_or_create_tab(1)
+end)
+
+vim.keymap.set("n", "sk", function()
+	goto_or_create_tab(2)
+end)
+
+vim.keymap.set("n", "sl", function()
+	goto_or_create_tab(3)
+end)
+
+vim.keymap.set("n", "s;", function()
+	goto_or_create_tab(4)
+end)
+
+-- vim.keymap.set("n", "<c-w>j", function()
+-- 	goto_or_create_tab(1)
+-- end)
+--
+-- vim.keymap.set("n", "<c-w>k", function()
+-- 	goto_or_create_tab(2)
+-- end)
+--
+-- vim.keymap.set("n", "<c-w>l", function()
+-- 	goto_or_create_tab(3)
+-- end)
+--
+-- vim.keymap.set("n", "<c-w>;", function()
+-- 	goto_or_create_tab(4)
+-- end)

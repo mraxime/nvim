@@ -44,34 +44,34 @@ return {
 			end,
 			desc = "Add buffer to harpoon",
 		},
-		{
-			"sj",
-			function()
-				require("harpoon.ui").nav_file(1)
-			end,
-			desc = "Go to harpoon file 1",
-		},
-		{
-			"sk",
-			function()
-				require("harpoon.ui").nav_file(2)
-			end,
-			desc = "Go to harpoon file 2",
-		},
-		{
-			"sl",
-			function()
-				require("harpoon.ui").nav_file(3)
-			end,
-			desc = "Go to harpoon file 3",
-		},
-		{
-			"s;",
-			function()
-				require("harpoon.ui").nav_file(4)
-			end,
-			desc = "Go to harpoon file 4",
-		},
+		-- {
+		-- 	"sj",
+		-- 	function()
+		-- 		require("harpoon.ui").nav_file(1)
+		-- 	end,
+		-- 	desc = "Go to harpoon file 1",
+		-- },
+		-- {
+		-- 	"sk",
+		-- 	function()
+		-- 		require("harpoon.ui").nav_file(2)
+		-- 	end,
+		-- 	desc = "Go to harpoon file 2",
+		-- },
+		-- {
+		-- 	"sl",
+		-- 	function()
+		-- 		require("harpoon.ui").nav_file(3)
+		-- 	end,
+		-- 	desc = "Go to harpoon file 3",
+		-- },
+		-- {
+		-- 	"s;",
+		-- 	function()
+		-- 		require("harpoon.ui").nav_file(4)
+		-- 	end,
+		-- 	desc = "Go to harpoon file 4",
+		-- },
 		{
 			"sJ",
 			function()
