@@ -1,11 +1,12 @@
 return {
 	"akinsho/bufferline.nvim",
-	enabled = false,
+	enabled = true,
 	event = "VeryLazy",
 	opts = {
 		options = {
-			always_show_bufferline = false,
+			always_show_bufferline = true,
 			diagnostics = "nvim_lsp",
+			mode = "tabs",
 			-- diagnostics_indicator = function(_, _, diag)
 			-- 	local icons = require("lazyvim.config").icons.diagnostics
 			-- 	local ret = (diag.error and icons.Error .. diag.error .. " " or "")

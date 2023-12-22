@@ -2,7 +2,7 @@
 return {
 	-- "tamighi/lualine.nvim", -- fork with harpoon_files plugin
 	"nvim-lualine/lualine.nvim",
-	enabled = true,
+	enabled = false,
 	event = "VeryLazy",
 	config = function()
 		local hp_marks = require("harpoon.mark")

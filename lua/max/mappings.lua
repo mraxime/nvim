@@ -50,6 +50,10 @@ vim.keymap.set("n", "sp", "<C-^>")
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
 
+-- other
+vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })
+vim.keymap.set("n", "<c-w>x", "<cmd>tabclose<cr>", { noremap = true })
+
 local function goto_or_create_tab(tab_index)
 	local tab_count = vim.fn.tabpagenr("$")
 	if tab_count < tab_index then
