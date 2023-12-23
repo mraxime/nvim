@@ -1,32 +1,5 @@
 return {
 	{
-		"robitx/gp.nvim",
-		enabled = false,
-		lazy = false,
-		opts = {
-			openai_api_key = "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",
-			agents = {
-				{
-					name = "ChatGPT4",
-					chat = true,
-					command = false,
-					-- string with model name or table with model name and parameters
-					model = { model = "gpt-4-1106-preview", temperature = 1.1, top_p = 1 },
-					-- system prompt (use this to specify the persona/role of the AI)
-					system_prompt = "You are a general AI assistant.\n\n"
-						.. "The user provided the additional info about how they would like you to respond:\n\n"
-						.. "- If you're unsure don't guess and say you don't know instead.\n"
-						.. "- Ask question if you need clarification to provide better answer.\n"
-						.. "- Think deeply and carefully from first principles step by step.\n"
-						.. "- Zoom out first to see the big picture and then zoom in to details.\n"
-						.. "- Use Socratic method to improve your thinking and coding skills.\n"
-						.. "- Don't elide any code from your output if the answer requires coding.\n"
-						.. "- Take a deep breath; You've got this!\n",
-				},
-			},
-		},
-	},
-	{
 		"nvim-telescope/telescope.nvim",
 		enabled = true,
 		dependencies = {
@@ -37,6 +10,13 @@ return {
 		keys = {
 			{
 				"sd",
+				function()
+					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
+				end,
+				desc = "Find Files",
+			},
+			{
+				"<c-p>",
 				function()
 					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 				end,
@@ -131,22 +111,22 @@ return {
 						},
 					},
 				},
-				-- pickers = {
-				-- 	find_files = {
-				-- 		`hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-				-- 		find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-				-- 	},
-				-- },
+				pickers = {
+					find_files = {
+						hidden = true, -- will still show the inside of `.git/` as it's not `.gitignore`d.
+						find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+					},
+				},
 			})
+
 			telescope.load_extension("fzf")
 		end,
 	},
 
 	{
 		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		enabled = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{
 				"sf",
@@ -154,20 +134,6 @@ return {
 					require("fzf-lua").files()
 				end,
 				desc = "Find Files",
-			},
-			{
-				"st",
-				function()
-					require("fzf-lua").live_grep()
-				end,
-				desc = "Find Text (grep)",
-			},
-			{
-				"ss",
-				function()
-					require("fzf-lua").resume()
-				end,
-				desc = "Resume Fzf",
 			},
 		},
 		init = function()
