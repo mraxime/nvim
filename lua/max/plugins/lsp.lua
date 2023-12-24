@@ -44,7 +44,7 @@ return {
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+				-- vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 				vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
 				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
@@ -57,6 +57,49 @@ return {
 				vim.keymap.set({ "n", "x" }, "<F3>", function()
 					vim.lsp.buf.format({ async = true })
 				end, opts)
+
+				-- experimental
+				local function tab_definition()
+					local current_win = vim.api.nvim_get_current_win()
+					local current_buf = vim.api.nvim_win_get_buf(current_win)
+					local current_pos = vim.api.nvim_win_get_cursor(current_win)
+					vim.lsp.buf.definition()
+					vim.schedule(function()
+						local new_win = vim.api.nvim_get_current_win()
+						local new_buf = vim.api.nvim_win_get_buf(new_win)
+						if new_buf ~= current_buf then
+							vim.api.nvim_set_current_win(current_win)
+							vim.cmd("tabedit")
+							vim.api.nvim_set_current_win(new_win)
+						end
+						vim.api.nvim_win_set_cursor(current_win, current_pos)
+					end)
+				end
+
+				local function old_tab_definition()
+					local org_path = vim.api.nvim_buf_get_name(0)
+
+					-- Go to definition:
+					vim.api.nvim_command("normal gd")
+
+					-- Wait LSP server response
+					vim.wait(100, function() end)
+
+					local new_path = vim.api.nvim_buf_get_name(0)
+					if not (org_path == new_path) then
+						-- Create a new tab for the original file
+						vim.api.nvim_command("0tabnew %")
+
+						-- Restore the cursor position
+						vim.api.nvim_command("b " .. org_path)
+						vim.api.nvim_command('normal! `"')
+
+						-- Switch to the original tab
+						vim.api.nvim_command("normal! gt")
+					end
+				end
+
+				vim.keymap.set("n", "gt", old_tab_definition, opts)
 
 				-- Highlight on CursorHold (better than vim-illuminate)
 				if client.supports_method("textDocument/documentHighlight") then

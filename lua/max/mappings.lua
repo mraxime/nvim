@@ -44,15 +44,18 @@ vim.keymap.set("n", "<leader>.", "<cmd>edit ~/.config/nvim/init.lua<cr>")
 vim.keymap.set("n", "<C-h>", "<c-w>h")
 vim.keymap.set("n", "<C-l>", "<c-w>l")
 
--- easier mapping
-vim.keymap.set("n", "sp", "<C-^>")
-
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
+
+-- easier mapping
+vim.keymap.set("n", "sp", "<C-^>")
 
 -- other
 vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })
 vim.keymap.set("n", "<c-w>x", "<cmd>tabclose<cr>", { noremap = true })
+vim.keymap.set("n", "sv", "<cmd>vsplit<cr>", { noremap = true })
+vim.keymap.set("n", "ss", "<cmd>split<cr>", { noremap = true })
+vim.keymap.set("n", "sq", "<cmd>close<cr>", { noremap = true })
 
 local function goto_or_create_tab(tab_index)
 	local tab_count = vim.fn.tabpagenr("$")

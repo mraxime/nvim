@@ -44,7 +44,14 @@ return {
 				desc = "Search Text",
 			},
 			{
-				"ss",
+				"s'",
+				function()
+					require("telescope.builtin").resume()
+				end,
+				desc = "Resume Telescope",
+			},
+			{
+				"<leader>'",
 				function()
 					require("telescope.builtin").resume()
 				end,
@@ -85,11 +92,11 @@ return {
 					prompt_prefix = "   ",
 					selection_caret = " ",
 					-- path_display = { "truncate" },
-					sorting_strategy = "descending",
+					sorting_strategy = "ascending",
 					layout_strategy = "horizontal",
 					layout_config = {
 						horizontal = {
-							prompt_position = "bottom",
+							prompt_position = "top",
 							preview_width = 0.55,
 							results_width = 0.8,
 						},
