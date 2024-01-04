@@ -5,6 +5,7 @@ return {
 	opts = {
 		options = {
 			always_show_bufferline = true,
+			separator_style = "slant",
 			diagnostics = "nvim_lsp",
 			mode = "tabs",
 			-- diagnostics_indicator = function(_, _, diag)
