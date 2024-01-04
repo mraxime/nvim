@@ -7,6 +7,9 @@ return {
 		"windwp/nvim-autopairs",
 		enabled = enabled,
 		event = "InsertEnter",
+		opts = {
+			map_c_w = true,
+		},
 		config = function(_, opts)
 			require("nvim-autopairs").setup(opts)
 
@@ -69,9 +72,11 @@ return {
 	-- better yank/paste
 	{
 		"gbprod/yanky.nvim",
-		enabled = false,
+		enabled = enabled,
 		opts = {
-			highlight = { timer = 300 },
+			highlight = {
+				timer = 60,
+			},
 		},
 		keys = {
 			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },

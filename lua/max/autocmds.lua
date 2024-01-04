@@ -3,17 +3,18 @@ local augroup = vim.api.nvim_create_augroup
 
 local group = augroup("custom_autocommands", {})
 
-autocmd("TextYankPost", {
-	desc = "Highlight on yank",
-	group = group,
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = "IncSearch",
-			timeout = 60,
-		})
-	end,
-})
+-- Not needed when using 'yanky' plugin
+-- autocmd("TextYankPost", {
+-- 	desc = "Highlight on yank",
+-- 	group = group,
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		vim.highlight.on_yank({
+-- 			higroup = "IncSearch",
+-- 			timeout = 60,
+-- 		})
+-- 	end,
+-- })
 
 autocmd({ "BufWritePre" }, {
 	desc = "Remove trailing white spaces on save",

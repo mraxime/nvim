@@ -33,6 +33,7 @@ vim.keymap.set("n", "<leader><leader>", "<nop>")
 -- buffers
 vim.keymap.set("n", "gn", "<cmd>bnext<CR>", { noremap = true })
 vim.keymap.set("n", "gp", "<cmd>bprev<CR>", { noremap = true })
+vim.keymap.set("n", "<C-l>", "<C-^>", { noremap = true })
 
 -- Plugin Manager
 vim.keymap.set("n", "<leader>p", "<cmd>Lazy<cr>")
@@ -41,20 +42,17 @@ vim.keymap.set("n", "<leader>p", "<cmd>Lazy<cr>")
 vim.keymap.set("n", "<leader>.", "<cmd>edit ~/.config/nvim/init.lua<cr>")
 
 -- old muscle memory
-vim.keymap.set("n", "<C-h>", "<c-w>h")
-vim.keymap.set("n", "<C-l>", "<c-w>l")
+-- vim.keymap.set("n", "<C-h>", "<c-w>h")
+-- vim.keymap.set("n", "<C-l>", "<c-w>l")
 
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
 
--- easier mapping
-vim.keymap.set("n", "sp", "<C-^>")
-
--- other
+-- experiments
 vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })
 vim.keymap.set("n", "<c-w>x", "<cmd>tabclose<cr>", { noremap = true })
 vim.keymap.set("n", "sv", "<cmd>vsplit<cr>", { noremap = true })
-vim.keymap.set("n", "ss", "<cmd>split<cr>", { noremap = true })
+-- vim.keymap.set("n", "ss", "<cmd>split<cr>", { noremap = true })
 vim.keymap.set("n", "sq", "<cmd>close<cr>", { noremap = true })
 
 local function goto_or_create_tab(tab_index)
