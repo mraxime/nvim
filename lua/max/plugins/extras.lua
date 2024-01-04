@@ -9,6 +9,7 @@ return {
 		event = "InsertEnter",
 		opts = {
 			map_c_w = true,
+			map_c_h = true,
 		},
 		config = function(_, opts)
 			require("nvim-autopairs").setup(opts)
