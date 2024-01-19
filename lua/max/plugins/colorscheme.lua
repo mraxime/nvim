@@ -115,18 +115,73 @@ local kanagawa = {
 local catppuccin = {
 	"catppuccin/nvim",
 	name = "catppuccin",
+	lazy = false,
 	priority = 1000,
+	build = ":CatppuccinCompile",
+	enabled = true,
 	opts = {
-		flavour = "macchiato",
+		flavour = "mocha",
+		background = { light = "latte", dark = "mocha" },
+		transparent_background = true,
+		term_colors = true,
+		integrations = {
+			bufferline = false,
+			cmp = true,
+			dap = { enabled = true, enable_ui = true },
+			fidget = true,
+			gitsigns = true,
+			illuminate = true,
+			indent_blankline = { enabled = true },
+			lsp_trouble = true,
+			markdown = true,
+			mason = true,
+			native_lsp = {
+				enabled = true,
+				underlines = {
+					errors = { "undercurl" },
+					hints = { "undercurl" },
+					warnings = { "undercurl" },
+					information = { "undercurl" },
+				},
+			},
+			neotree = true,
+			noice = true,
+			notify = true,
+			rainbow_delimiters = true,
+			telescope = true,
+			treesitter = true,
+			treesitter_context = true,
+		},
 	},
+	config = function(_, opts)
+		require("catppuccin").setup(opts)
+		vim.cmd.colorscheme("catppuccin")
+	end,
+}
+
+local night_owl = {
+	"oxfist/night-owl.nvim",
+	lazy = false, -- make sure we load this during startup if it is your main colorscheme
+	priority = 1000, -- make sure to load this before all the other start plugins
+	-- config = function()
+	-- 	-- load the colorscheme here
+	-- 	vim.cmd.colorscheme("night-owl")
+	-- end,
+}
+
+local better_gruvbox = {
+	"arturgoms/moonbow.nvim",
+	lazy = false,
 }
 
 -- { "shaunsingh/oxocarbon.nvim" },
 
 return {
 	tokyonight,
+	night_owl,
+	better_gruvbox,
+	-- catppuccin,
 	-- gruvbox,
 	-- rose_pine,
 	-- kanagawa,
-	-- catppuccin,
 }
