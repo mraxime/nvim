@@ -1,8 +1,9 @@
-local transparent_active = false
+local transparent_active = true
 
 local tokyonight = {
 	"folke/tokyonight.nvim",
 	enabled = true,
+	lazy = false,
 	priority = 1000,
 	opts = {
 		style = "night",
@@ -169,17 +170,19 @@ local night_owl = {
 	-- end,
 }
 
-local better_gruvbox = {
+-- Better gruvbox
+local moonbow = {
 	"arturgoms/moonbow.nvim",
-	lazy = false,
+	priority = 1000,
+	-- lazy = false,
 }
 
 -- { "shaunsingh/oxocarbon.nvim" },
 
 return {
 	tokyonight,
-	night_owl,
-	better_gruvbox,
+	-- moonbow,
+	-- night_owl,
 	-- catppuccin,
 	-- gruvbox,
 	-- rose_pine,

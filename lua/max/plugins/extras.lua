@@ -2,6 +2,15 @@
 local enabled = true
 
 return {
+	-- Indent
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		enabled = false,
+		event = "BufReadPre",
+		main = "ibl",
+		opts = {},
+	},
+
 	-- Autopairs
 	{
 		"windwp/nvim-autopairs",
@@ -76,7 +85,7 @@ return {
 		enabled = enabled,
 		opts = {
 			highlight = {
-				timer = 60,
+				timer = 80,
 			},
 		},
 		keys = {
@@ -145,7 +154,7 @@ return {
 		},
 		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTRun" },
 		keys = {
-			{ "<leader>h", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
+			{ "<c-c>", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
 		},
 		opts = {
 			api_key_cmd = "echo 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",

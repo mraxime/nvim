@@ -1,114 +1,117 @@
 return {
 	"ThePrimeagen/harpoon",
-	enabled = false,
+	dependencies = { "nvim-lua/plenary.nvim" },
+	lazy = false,
+	enabled = true,
+	version = false,
+	branch = "harpoon2",
+	config = function()
+		local harpoon = require("harpoon")
+		harpoon:setup({ settings = {
+			save_on_toggle = true,
+			sync_on_ui_close = true,
+		} })
+	end,
 	keys = {
+		-- Menu Toggle
 		{
-			"<leader>m",
+			"gh",
 			function()
-				require("harpoon.ui").toggle_quick_menu()
+				local harpoon = require("harpoon")
+				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			desc = "Toggle harpoon menu",
 		},
 		{
 			"sm",
 			function()
-				require("harpoon.ui").toggle_quick_menu()
-			end,
-			desc = "Toggle harpoon menu",
-		},
-		{
-			"sh",
-			function()
-				require("harpoon.ui").toggle_quick_menu()
+				local harpoon = require("harpoon")
+				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			desc = "Toggle harpoon menu",
 		},
 		{
 			"ms",
 			function()
-				require("harpoon.ui").toggle_quick_menu()
+				local harpoon = require("harpoon")
+				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			desc = "Toggle harpoon menu",
 		},
 		{
-			"ma",
+			"sh",
 			function()
-				require("harpoon.mark").add_file()
+				local harpoon = require("harpoon")
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end,
+			desc = "Toggle harpoon menu",
+		},
+
+		-- Menu Add
+		{
+			"ga",
+			function()
+				local harpoon = require("harpoon")
+				harpoon:list():append()
+				-- harpoon.ui:toggle_quick_menu(harpoon:list())
 			end,
 			desc = "Add buffer to harpoon",
 		},
 		{
 			"mm",
 			function()
-				require("harpoon.mark").add_file()
+				local harpoon = require("harpoon")
+				harpoon:list():append()
 			end,
 			desc = "Add buffer to harpoon",
 		},
-		-- {
-		-- 	"sj",
-		-- 	function()
-		-- 		require("harpoon.ui").nav_file(1)
-		-- 	end,
-		-- 	desc = "Go to harpoon file 1",
-		-- },
-		-- {
-		-- 	"sk",
-		-- 	function()
-		-- 		require("harpoon.ui").nav_file(2)
-		-- 	end,
-		-- 	desc = "Go to harpoon file 2",
-		-- },
-		-- {
-		-- 	"sl",
-		-- 	function()
-		-- 		require("harpoon.ui").nav_file(3)
-		-- 	end,
-		-- 	desc = "Go to harpoon file 3",
-		-- },
-		-- {
-		-- 	"s;",
-		-- 	function()
-		-- 		require("harpoon.ui").nav_file(4)
-		-- 	end,
-		-- 	desc = "Go to harpoon file 4",
-		-- },
 		{
-			"sJ",
+			"ma",
 			function()
-				require("harpoon.mark").set_current_at(1)
+				local harpoon = require("harpoon")
+				harpoon:list():append()
+				harpoon:list():open_quick_menu(harpoon:list())
+			end,
+			desc = "Add buffer to harpoon",
+		},
+
+		-- Navigation
+		{
+			"gu",
+			function()
+				local harpoon = require("harpoon")
+				harpoon:list():select(1)
 			end,
 			desc = "Set current harpoon to file 1",
 		},
 		{
-			"sK",
+			"gi",
 			function()
-				require("harpoon.mark").set_current_at(2)
+				local harpoon = require("harpoon")
+				harpoon:list():select(2)
 			end,
-			desc = "Set current harpoon to file 2",
+			desc = "Set current harpoon to file 1",
 		},
 		{
-			"sL",
+			"go",
 			function()
-				require("harpoon.mark").set_current_at(3)
+				local harpoon = require("harpoon")
+				harpoon:list():select(3)
 			end,
-			desc = "Set current harpoon to file 3",
+			desc = "Set current harpoon to file 1",
 		},
 		{
-			"s:",
+			"gp",
 			function()
-				require("harpoon.mark").set_current_at(4)
+				local harpoon = require("harpoon")
+				harpoon:list():select(4)
 			end,
-			desc = "Set current harpoon to file 4",
+			desc = "Set current harpoon to file 1",
 		},
+
+		-- Reset
 		{
 			"mc",
-			function()
-				require("harpoon.mark").clear_all()
-			end,
-			desc = "Reset harpoon",
-		},
-		{
-			"mr",
 			function()
 				require("harpoon.mark").clear_all()
 			end,

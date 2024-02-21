@@ -11,13 +11,6 @@ return {
 			desc = "Open Oil",
 		},
 		{
-			"sh",
-			function()
-				require("oil").toggle_float()
-			end,
-			desc = "Toggle Oil",
-		},
-		{
 			"si",
 			function()
 				require("oil").toggle_float()
@@ -64,6 +57,9 @@ return {
 			["g\\"] = "actions.toggle_trash",
 			["gs"] = "actions.change_sort",
 			["gx"] = "actions.open_external",
+		},
+		buf_options = {
+			buflisted = true, -- jumplist navigation
 		},
 		-- columns = {},
 		-- view_options = {

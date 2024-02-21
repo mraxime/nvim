@@ -6,7 +6,7 @@ return {
 		{ "hrsh7th/cmp-path" },
 		-- { "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "hrsh7th/cmp-nvim-lua" },
+		-- { "hrsh7th/cmp-nvim-lua" },
 		-- Snippets
 		-- { "L3MON4D3/LuaSnip" },
 		-- { "rafamadriz/friendly-snippets" },
@@ -67,10 +67,14 @@ return {
 
 			sources = {
 				{ name = "nvim_lsp" },
-				{ name = "nvim_lua" },
 				-- { name = "buffer", keyword_length = 3 },
 				-- { name = "luasnip", keyword_length = 2 },
 				{ name = "path", option = { trailing_slash = true } },
+
+				-- { name = "nvim_lsp", priority = 1000 },
+				-- { name = "luasnip", priority = 750 },
+				-- { name = "buffer", priority = 500 },
+				-- { name = "path", priority = 250 },
 			},
 
 			completion = {

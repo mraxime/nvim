@@ -5,4 +5,4 @@ require("max.mappings")
 require("max.autocmds")
 require("max.plugins-manager")
 
-vim.cmd([[colorscheme moonbow]])
+vim.cmd([[colorscheme tokyonight]])
