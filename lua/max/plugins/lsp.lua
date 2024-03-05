@@ -1,5 +1,4 @@
 return {
-
 	-- LSP setup
 	{
 		"neovim/nvim-lspconfig",
@@ -37,14 +36,14 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-			-- Common on_attach callback for any lsp
+			-- Callback for LSP when they're attached
 			local on_attach = function(client, bufnr)
 				local opts = { buffer = bufnr, remap = false }
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 				vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
-				-- vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+				vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
 				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 				vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
@@ -58,36 +57,9 @@ return {
 					vim.lsp.buf.format({ async = true })
 				end, opts)
 
-				-- experimental
-				-- local function old_tab_definition()
-				-- 	local org_path = vim.api.nvim_buf_get_name(0)
-				--
-				-- 	-- Go to definition:
-				-- 	vim.api.nvim_command("normal gd")
-				--
-				-- 	-- Wait LSP server response
-				-- 	vim.wait(100, function() end)
-				--
-				-- 	local new_path = vim.api.nvim_buf_get_name(0)
-				-- 	if not (org_path == new_path) then
-				-- 		-- Create a new tab for the original file
-				-- 		vim.api.nvim_command("0tabnew %")
-				--
-				-- 		-- Restore the cursor position
-				-- 		vim.api.nvim_command("b " .. org_path)
-				-- 		vim.api.nvim_command('normal! `"')
-				--
-				-- 		-- Switch to the original tab
-				-- 		vim.api.nvim_command("normal! gt")
-				-- 	end
-				-- end
-				--
-				-- vim.keymap.set("n", "gt", old_tab_definition, opts)
-
 				-- Highlight on CursorHold (better than vim-illuminate)
 				if client.supports_method("textDocument/documentHighlight") then
 					local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-					-- vim.opt.updatetime = 300
 
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						group = group,
@@ -109,7 +81,7 @@ return {
 				end
 			end
 
-			-- on_attach for all LSP
+			-- LSP Attach event
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP common attach",
 				callback = function(event)
@@ -119,23 +91,26 @@ return {
 				end,
 			})
 
-			-- Auto format
-
-			-- LSP configurations
+			-- LSP config
 			local lspconfig = require("lspconfig")
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 			require("mason-lspconfig").setup_handlers({
-				-- The first entry (without a key) will be the default handler
-				-- and will be called for each installed server that doesn't have
-				-- a dedicated handler.
-				function(server_name) -- default handler (optional)
+				-- Default handler
+				function(server_name)
+					-- handled by typescript-tools
 					if server_name == "tsserver" then
 						return
 					end
-					lspconfig[server_name].setup({ capabilities = lsp_capabilities })
+					lspconfig[server_name].setup({
+						capabilities = lsp_capabilities,
+						flags = {
+							debounce_text_changes = 150,
+						},
+					})
 				end,
 
-				-- Next, you can provide a dedicated handler for specific servers.
+				-- Dedicated handler for specific servers.
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
 						capabilities = lsp_capabilities,
@@ -155,8 +130,8 @@ return {
 								},
 								workspace = {
 									checkThirdParty = false,
+									-- Make the server aware of Neovim runtime files
 									library = {
-										-- Make the server aware of Neovim runtime files
 										[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 										[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
 										[vim.fn.stdpath("config") .. "/lua"] = true,

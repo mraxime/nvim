@@ -41,7 +41,7 @@ return {
 
 			-- split
 			["<C-s>"] = "actions.select_vsplit",
-			["<C-v>"] = "actions.select_split",
+			-- (will break vim visual_block mode) ["<C-v>"] = "actions.select_split",
 
 			-- close
 			["<C-c>"] = "actions.close",
