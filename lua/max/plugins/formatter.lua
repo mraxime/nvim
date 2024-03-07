@@ -9,6 +9,8 @@ return {
 			javascriptreact = { "prettierd" },
 			typescriptreact = { "prettierd" },
 			svelte = { "prettierd" },
+			bash = { "shfmt" },
+			sh = { "shfmt" },
 			html = { "prettierd" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
