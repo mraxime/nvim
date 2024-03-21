@@ -111,6 +111,12 @@ return {
 				end,
 
 				-- Dedicated handler for specific servers.
+				-- ["tailwindcss"] = function() -- temporary as my machine tailwindcss-language use the insiders version which support v4
+				-- 	lspconfig.tailwindcss.setup({
+				-- 		cmd = { "/run/user/1000/fnm_multishells/149402_1710017741789/bin/tailwindcss-language-server", "--stdio" },
+				-- 		capabilities = lsp_capabilities,
+				-- 	})
+				-- end,
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
 						capabilities = lsp_capabilities,

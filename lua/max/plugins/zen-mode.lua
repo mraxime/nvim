@@ -6,7 +6,7 @@ return {
 		opts = {
 			plugins = {
 				gitsigns = true,
-				tmux = true,
+				tmux = false,
 			},
 		},
 		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },

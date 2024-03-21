@@ -1,4 +1,4 @@
-local transparent_active = true
+local transparent_active = false
 
 local tokyonight = {
 	"folke/tokyonight.nvim",
@@ -7,7 +7,7 @@ local tokyonight = {
 	priority = 1000,
 	opts = {
 		style = "night",
-		transparent = transparent_active,
+		transparent = true,
 		styles = {
 			sidebars = "transparent",
 			floats = "transparent",
@@ -72,27 +72,64 @@ local gruvbox = {
 	enabled = true,
 	priority = 1000,
 	opts = {
-		contrast = "hard",
-		transparent_mode = transparent_active,
+		undercurl = true,
+		underline = true,
+		bold = false,
+		invert_selection = false,
+		invert_signs = false,
+		invert_tabline = false,
+		invert_intend_guides = false,
+		inverse = true, -- invert background for search, diffs, statuslines and errors
+		contrast = "hard", -- can be "hard", "soft" or empty string
 		overrides = {
-			-- CursorLineNr = { bg = "" },
-			DiffDelete = { reverse = false },
-			DiffAdd = { reverse = false },
-			DiffChange = { reverse = false },
-			DiffText = { reverse = false },
-			IndentContext1 = { link = "GruvboxRed" },
-			IndentContext2 = { link = "GruvboxOrange" },
-			IndentContext3 = { link = "GruvboxYellow" },
-			IndentContext4 = { link = "GruvboxGreen" },
-			IndentContext5 = { link = "GruvboxAqua" },
-			IndentContext6 = { link = "GruvboxBlue" },
-			IndentContext7 = { link = "GruvboxViolet" },
-
-			-- See: https://github.com/ellisonleao/gruvbox.nvim/pull/255
-			["@lsp.type.class"] = { link = "@type" },
-			["@lsp.type.decorator"] = { link = "@macro" },
-			["@lsp.type.interface"] = { link = "@constructor" },
-			["@lsp.type.struct"] = { link = "@type" },
+			SignColumn = { link = "GruvboxBg0" },
+			LspReferenceRead = { bg = "#272839" },
+			LspReferenceText = { link = "LspReferenceRead" },
+			LspReferenceWrite = { link = "LspReferenceRead" },
+			TelescopeBorder = { fg = "#313244" },
+			TelescopePreviewBorder = { link = "TelescopeBorder" },
+			TelescopeResultsBorder = { link = "TelescopeBorder" },
+			TelescopePromptBorder = { link = "TelescopeBorder" },
+		},
+		dim_inactive = false,
+		transparent_mode = false,
+		palette_overrides = {
+			dark0_hard = "#11111b", -- #11121d
+			dark0 = "#181825",
+			dark0_soft = "#1e1e2e",
+			dark1 = "#181825", -- cursor-line background, hover-box background, ...
+			dark2 = "#1e1e2e", -- bottom-bar
+			dark3 = "#313244", -- float borders
+			dark4 = "#444b6a", -- left numbers
+			light0_hard = "#f9f5d7",
+			light0 = "#fbf1c7",
+			light0_soft = "#f2e5bc",
+			light1 = "#ebdbb2", -- text, telescope borders, ...
+			light2 = "#d5c4a1",
+			light3 = "#bdae93",
+			light4 = "#a89984",
+			bright_red = "#fb4934",
+			bright_green = "#b8bb26",
+			bright_yellow = "#fabd2f",
+			bright_blue = "#83a598",
+			bright_purple = "#d3869b",
+			bright_aqua = "#8ec07c",
+			bright_orange = "#fe8019",
+			neutral_red = "#cc241d",
+			neutral_green = "#98971a",
+			neutral_yellow = "#d79921",
+			neutral_blue = "#458588",
+			neutral_purple = "#b16286",
+			neutral_aqua = "#689d6a",
+			neutral_orange = "#d65d0e",
+			faded_red = "#9d0006",
+			faded_green = "#79740e",
+			faded_yellow = "#b57614",
+			faded_blue = "#076678",
+			faded_purple = "#8f3f71",
+			faded_aqua = "#427b58",
+			faded_orange = "#af3a03",
+			gray = "#444b6a", -- comments, ...
 		},
 	},
 }
@@ -103,7 +140,7 @@ local rose_pine = {
 	enabled = true,
 	priority = 1000,
 	opts = {
-		variant = "moon",
+		variant = "main",
 	},
 }
 
@@ -180,11 +217,11 @@ local moonbow = {
 -- { "shaunsingh/oxocarbon.nvim" },
 
 return {
-	tokyonight,
+	-- tokyonight,
 	-- moonbow,
 	-- night_owl,
 	-- catppuccin,
-	-- gruvbox,
+	gruvbox,
 	-- rose_pine,
 	-- kanagawa,
 }

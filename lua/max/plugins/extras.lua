@@ -5,10 +5,37 @@ return {
 	-- Indent
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		enabled = false,
+		enabled = true,
 		event = "BufReadPre",
 		main = "ibl",
-		opts = {},
+		opts = {
+			indent = {
+				char = "▏",
+			},
+			exclude = {
+				filetypes = {
+					"help",
+					"terminal",
+					"starter",
+					"nvim-tree",
+					"packer",
+					"lspinfo",
+					"TelescopePrompt",
+					"TelescopeResults",
+					"mason",
+					"",
+				},
+				buftypes = {
+					"terminal",
+				},
+			},
+			scope = {
+				enabled = false,
+			},
+			whitespace = {
+				remove_blankline_trail = false,
+			},
+		},
 	},
 
 	-- Autopairs
