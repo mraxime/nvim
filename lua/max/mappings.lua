@@ -43,6 +43,14 @@ vim.keymap.set("n", "<C-h>", "<c-w>h")
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
 
+-- quickfix navigation
+vim.keymap.set("n", "[q", "<cmd>cprev<cr>")
+vim.keymap.set("n", "]q", "<cmd>cnext<cr>")
+vim.keymap.set("n", "[a", "<cmd>cprev<cr>")
+vim.keymap.set("n", "]a", "<cmd>cnext<cr>")
+vim.keymap.set("n", "[c", "<cmd>cprev<cr>")
+vim.keymap.set("n", "]c", "<cmd>cnext<cr>")
+
 -- experiments
 vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })
 vim.keymap.set("n", "<c-w>x", "<cmd>tabclose<cr>", { noremap = true })

@@ -7,7 +7,7 @@ local tokyonight = {
 	priority = 1000,
 	opts = {
 		style = "night",
-		transparent = true,
+		transparent = false,
 		styles = {
 			sidebars = "transparent",
 			floats = "transparent",
@@ -94,13 +94,13 @@ local gruvbox = {
 		dim_inactive = false,
 		transparent_mode = false,
 		palette_overrides = {
-			dark0_hard = "#11111b", -- #11121d
+			-- dark0_hard = "#11111b", -- #11121d
 			dark0 = "#181825",
-			dark0_soft = "#1e1e2e",
-			dark1 = "#181825", -- cursor-line background, hover-box background, ...
-			dark2 = "#1e1e2e", -- bottom-bar
-			dark3 = "#313244", -- float borders
-			dark4 = "#444b6a", -- left numbers
+			-- dark0_soft = "#1e1e2e",
+			dark1 = "#32302f", -- cursor-line background, hover-box background, ...
+			-- dark2 = "#1e1e2e", -- bottom-bar
+			-- dark3 = "#313244", -- float borders
+			-- dark4 = "#444b6a", -- left numbers
 			light0_hard = "#f9f5d7",
 			light0 = "#fbf1c7",
 			light0_soft = "#f2e5bc",
@@ -217,11 +217,11 @@ local moonbow = {
 -- { "shaunsingh/oxocarbon.nvim" },
 
 return {
-	-- tokyonight,
+	tokyonight,
+	gruvbox,
 	-- moonbow,
 	-- night_owl,
 	-- catppuccin,
-	gruvbox,
 	-- rose_pine,
 	-- kanagawa,
 }

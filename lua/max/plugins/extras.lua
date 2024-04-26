@@ -5,7 +5,7 @@ return {
 	-- Indent
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		enabled = true,
+		enabled = false,
 		event = "BufReadPre",
 		main = "ibl",
 		opts = {
