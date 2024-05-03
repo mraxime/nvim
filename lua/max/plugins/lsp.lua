@@ -79,6 +79,20 @@ return {
 						end,
 					})
 				end
+
+				-- Fix svelte files not knowing when types changes
+				-- https://github.com/sveltejs/language-tools/issues/2008
+				vim.api.nvim_create_autocmd("BufWritePost", {
+					pattern = { "*.js", "*.ts" },
+					group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
+					callback = function(ctx)
+						if client.name == "svelte" then
+							client.notify("$/onDidChangeTsOrJsFile", {
+								uri = ctx.match,
+							})
+						end
+					end,
+				})
 			end
 
 			-- LSP Attach event
@@ -91,10 +105,15 @@ return {
 				end,
 			})
 
+			-- LSP capabilities
+			local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+			-- cmp
+			lsp_capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
+			-- svelte
+			lsp_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
 			-- LSP config
 			local lspconfig = require("lspconfig")
-			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 			require("mason-lspconfig").setup_handlers({
 				-- Default handler
 				function(server_name)
