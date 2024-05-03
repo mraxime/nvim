@@ -38,50 +38,7 @@ return {
 		},
 	},
 
-	-- Autopairs
-	{
-		"windwp/nvim-autopairs",
-		enabled = enabled,
-		event = "InsertEnter",
-		opts = {
-			map_c_w = true,
-			map_c_h = true,
-		},
-		config = function(_, opts)
-			require("nvim-autopairs").setup(opts)
-
-			-- setup cmp for autopairs
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
-	},
-
 	-- { "echasnovski/mini.nvim", event = "VeryLazy", version = false },
-
-	-- Comments
-	{
-		"numToStr/Comment.nvim",
-		dependencies = {
-			{
-				"JoosepAlviste/nvim-ts-context-commentstring",
-				init = function() -- Performance
-					vim.g.skip_ts_context_commentstring_module = true
-				end,
-				opts = { enable_autocmd = false },
-			},
-		},
-		keys = {
-			{ "gcc", mode = "n", desc = "Comment toggle current line" },
-			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-			{ "gbc", mode = "n", desc = "Comment toggle current block" },
-			{ "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
-		},
-		config = function(_, opts)
-			require("Comment").setup(opts)
-		end,
-	},
 
 	-- Colorizer
 	{
@@ -112,7 +69,7 @@ return {
 		enabled = enabled,
 		opts = {
 			highlight = {
-				timer = 80,
+				timer = 90,
 			},
 		},
 		keys = {
@@ -173,7 +130,7 @@ return {
 	-- ChatGPT interaction
 	{
 		"jackMort/ChatGPT.nvim",
-		enabled = enabled,
+		enabled = false,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",

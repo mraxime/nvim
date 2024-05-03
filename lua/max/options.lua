@@ -35,9 +35,10 @@ vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- UI
-vim.opt.scrolloff = 8
-vim.opt.pumheight = 10
+vim.opt.background = "dark"
 vim.opt.cmdheight = 0
+vim.opt.pumheight = 10
+vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
