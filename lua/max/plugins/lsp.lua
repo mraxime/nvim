@@ -9,10 +9,10 @@ return {
 		},
 		config = function()
 			-- LSP signs
-			vim.fn.sign_define("DiagnosticSignInfo", { text = "»", texthl = "DiagnosticSignInfo", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignHint", { text = "⚑", texthl = "DiagnosticSignHint", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignWarn", { text = "▲", texthl = "DiagnosticSignWarn", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignError", { text = "✘", texthl = "DiagnosticSignError", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignHint", { text = "󰠠 ", texthl = "DiagnosticSignHint", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError", numhl = "" })
 
 			-- Diagnostics
 			vim.diagnostic.config({
@@ -79,20 +79,6 @@ return {
 						end,
 					})
 				end
-
-				-- Fix svelte files not knowing when types changes
-				-- https://github.com/sveltejs/language-tools/issues/2008
-				vim.api.nvim_create_autocmd("BufWritePost", {
-					pattern = { "*.js", "*.ts" },
-					-- group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
-					callback = function(ctx)
-						if client.name == "svelte" then
-							client.notify("$/onDidChangeTsOrJsFile", {
-								uri = ctx.match,
-							})
-						end
-					end,
-				})
 			end
 
 			-- LSP Attach event
@@ -115,27 +101,38 @@ return {
 			-- LSP config
 			local lspconfig = require("lspconfig")
 			require("mason-lspconfig").setup_handlers({
-				-- Default handler
+				-- default handler for installed servers
 				function(server_name)
-					-- handled by typescript-tools
-					if server_name == "tsserver" then
-						return
-					end
 					lspconfig[server_name].setup({
 						capabilities = lsp_capabilities,
-						flags = {
-							debounce_text_changes = 150,
-						},
+						-- flags = {
+						-- 	debounce_text_changes = 150,
+						-- },
 					})
 				end,
 
-				-- Dedicated handler for specific servers.
-				-- ["tailwindcss"] = function() -- temporary as my machine tailwindcss-language use the insiders version which support v4
-				-- 	lspconfig.tailwindcss.setup({
-				-- 		cmd = { "/run/user/1000/fnm_multishells/149402_1710017741789/bin/tailwindcss-language-server", "--stdio" },
-				-- 		capabilities = lsp_capabilities,
-				-- 	})
+				-- ["tsserver"] = function()
+				-- 	-- faster server handled by typescript-tools.nvim
+				-- 	require("lazy").load({ plugins = { "typescript-tools.nvim" } })
 				-- end,
+
+				["svelte"] = function()
+					lspconfig["svelte"].setup({
+						capabilities = lsp_capabilities,
+						on_attach = function(client, bufnr)
+							-- Fix .js & .ts files changes not notifying svelte lsp
+							-- https://github.com/sveltejs/language-tools/issues/2008
+							vim.api.nvim_create_autocmd("BufWritePost", {
+								pattern = { "*.js", "*.ts" },
+								group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
+								callback = function(ctx)
+									client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+								end,
+							})
+						end,
+					})
+				end,
+
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
 						capabilities = lsp_capabilities,
@@ -150,7 +147,7 @@ return {
 									path = vim.split(package.path, ";"),
 								},
 								diagnostics = {
-									-- Get the language server to recognize the `vim` global
+									-- Make the language server recognize the `vim` global
 									globals = { "vim" },
 								},
 								workspace = {
@@ -162,19 +159,39 @@ return {
 										[vim.fn.stdpath("config") .. "/lua"] = true,
 									},
 								},
+								completion = {
+									callSnippet = "Replace",
+								},
 							},
 						},
 					})
 				end,
+
+				-- ["tailwindcss"] = function() -- temporary as my machine tailwindcss-language use the insiders version which support v4
+				-- 	lspconfig.tailwindcss.setup({
+				-- 		cmd = { "/run/user/1000/fnm_multishells/149402_1710017741789/bin/tailwindcss-language-server", "--stdio" },
+				-- 		capabilities = lsp_capabilities,
+				-- 	})
+				-- end,
 			})
 		end,
 	},
 
 	-- Faster typescript server
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-		opts = {},
-	},
+	-- {
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 	},
+	-- 	-- ft = {
+	-- 	-- 	"typescript",
+	-- 	-- 	"typescriptreact",
+	-- 	-- 	"javascript",
+	-- 	-- 	"javascriptreact",
+	-- 	-- },
+	-- 	config = function()
+	-- 		require("typescript-tools").setup({})
+	-- 	end,
+	-- },
 }

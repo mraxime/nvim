@@ -1,10 +1,12 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	enabled = true,
-	version = false, -- last release is way too old
-	dependencies = { "windwp/nvim-ts-autotag" },
-	build = ":TSUpdate",
+	version = false, -- last release is too old
 	event = { "BufReadPost", "BufNewFile" },
+	build = ":TSUpdate",
+	dependencies = {
+		"windwp/nvim-ts-autotag",
+	},
 	cmd = {
 		"TSBufDisable",
 		"TSBufEnable",
@@ -20,7 +22,6 @@ return {
 		"TSUpdate",
 		"TSUpdateSync",
 	},
-	---@type TSConfig
 	opts = {
 		highlight = {
 			enable = true,
@@ -56,7 +57,6 @@ return {
 			"yaml",
 		},
 	},
-	---@param opts TSConfig
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)
 	end,

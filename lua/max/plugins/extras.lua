@@ -2,6 +2,30 @@
 local enabled = true
 
 return {
+	-- surround
+	{
+		"kylechui/nvim-surround",
+		event = { "BufReadPre", "BufNewFile" },
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = true,
+	},
+
+	-- better vim.ui
+	{
+		"stevearc/dressing.nvim",
+		enabled = true,
+		init = function()
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
+
 	-- colorizer
 	{
 		"NvChad/nvim-colorizer.lua",
