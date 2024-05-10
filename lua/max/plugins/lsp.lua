@@ -84,7 +84,7 @@ return {
 				-- https://github.com/sveltejs/language-tools/issues/2008
 				vim.api.nvim_create_autocmd("BufWritePost", {
 					pattern = { "*.js", "*.ts" },
-					group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
+					-- group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
 					callback = function(ctx)
 						if client.name == "svelte" then
 							client.notify("$/onDidChangeTsOrJsFile", {
