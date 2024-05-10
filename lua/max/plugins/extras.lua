@@ -2,7 +2,76 @@
 local enabled = true
 
 return {
-	-- Indent
+	-- colorizer
+	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			filetypes = { "*", "!lazy" },
+			buftype = { "*", "!prompt", "!nofile" },
+			user_default_options = {
+				RGB = true, -- #RGB hex codes
+				RRGGBB = true, -- #RRGGBB hex codes
+				names = false, -- "Name" codes like Blue
+				RRGGBBAA = true, -- #RRGGBBAA hex codes
+				AARRGGBB = false, -- 0xAARRGGBB hex codes
+				rgb_fn = true, -- CSS rgb() and rgba() functions
+				hsl_fn = true, -- CSS hsl() and hsla() functions
+				css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+				css_fn = true,
+				mode = "background",
+				virtualtext = "■",
+			},
+		},
+	},
+
+	-- better quickfix
+	{
+		"kevinhwang91/nvim-bqf",
+		enabled = enabled,
+		ft = "qf",
+	},
+
+	-- better yank/paste
+	{
+		"gbprod/yanky.nvim",
+		enabled = enabled,
+		opts = {
+			highlight = {
+				timer = 90,
+			},
+		},
+		keys = {
+			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+		},
+	},
+
+	-- search/replace in multiple files
+	{
+		"nvim-pack/nvim-spectre",
+		enabled = enabled,
+		cmd = "Spectre",
+		keys = {
+			{
+				"<leader>lR",
+				function()
+					require("spectre").open()
+				end,
+				desc = "Replace in files (Spectre)",
+			},
+		},
+	},
+
+	-- neodev
+	{
+		"folke/neodev.nvim",
+		enabled = enabled,
+		ft = "lua",
+	},
+
+	-- indent line
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		enabled = false,
@@ -38,67 +107,10 @@ return {
 		},
 	},
 
-	-- { "echasnovski/mini.nvim", event = "VeryLazy", version = false },
-
-	-- Colorizer
-	{
-		"NvChad/nvim-colorizer.lua",
-		event = "BufReadPre",
-		opts = {
-			filetypes = { "*", "!lazy" },
-			buftype = { "*", "!prompt", "!nofile" },
-			user_default_options = {
-				RGB = true, -- #RGB hex codes
-				RRGGBB = true, -- #RRGGBB hex codes
-				names = false, -- "Name" codes like Blue
-				RRGGBBAA = true, -- #RRGGBBAA hex codes
-				AARRGGBB = false, -- 0xAARRGGBB hex codes
-				rgb_fn = true, -- CSS rgb() and rgba() functions
-				hsl_fn = true, -- CSS hsl() and hsla() functions
-				css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = true,
-				mode = "background",
-				virtualtext = "■",
-			},
-		},
-	},
-
-	-- better yank/paste
-	{
-		"gbprod/yanky.nvim",
-		enabled = enabled,
-		opts = {
-			highlight = {
-				timer = 90,
-			},
-		},
-		keys = {
-			{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
-			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
-			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-		},
-	},
-
-	-- search/replace in multiple files
-	{
-		"nvim-pack/nvim-spectre",
-		enabled = enabled,
-		cmd = "Spectre",
-		keys = {
-			{
-				"<leader>lR",
-				function()
-					require("spectre").open()
-				end,
-				desc = "Replace in files (Spectre)",
-			},
-		},
-	},
-
 	-- annotation comments generator
 	{
 		"danymat/neogen",
-		enabled = enabled,
+		enabled = false,
 		dependencies = { "L3MON4D3/LuaSnip" },
 		cmd = { "Neogen" },
 		keys = {
@@ -125,66 +137,6 @@ return {
 			},
 		},
 		opts = { snippet_engine = "luasnip" },
-	},
-
-	-- ChatGPT interaction
-	{
-		"jackMort/ChatGPT.nvim",
-		enabled = false,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTRun" },
-		keys = {
-			{ "<c-c>", "<cmd>ChatGPT<cr>", desc = "Open ChatGPT" },
-		},
-		opts = {
-			api_key_cmd = "echo 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",
-			chat = {
-				keymaps = {
-					close = "<C-c>",
-					yank_last = "<C-y>",
-					scroll_up = "<C-u>",
-					scroll_down = "<C-d>",
-					new_session = "<C-n>",
-					cycle_windows = "<Tab>",
-					cycle_modes = "<C-f>",
-					select_session = "<CR>",
-					rename_session = "r",
-					delete_session = "d",
-					toggle_settings = "<C-o>",
-					toggle_message_role = "<C-r>",
-					toggle_system_role_open = "<C-s>",
-				},
-			},
-			popup_input = {
-				submit = "<CR>",
-				submit_n = "<C-CR>",
-			},
-			openai_params = {
-				model = "gpt-4", -- gpt-3.5-turbo
-				max_tokens = 300,
-			},
-		},
-		config = function(_, opts)
-			require("chatgpt").setup(opts)
-		end,
-	},
-
-	-- neodev
-	{
-		"folke/neodev.nvim",
-		enabled = enabled,
-		ft = "lua",
-	},
-
-	-- better quickfix
-	{
-		"kevinhwang91/nvim-bqf",
-		enabled = enabled,
-		ft = "qf",
 	},
 
 	-- buffer remove

@@ -47,6 +47,7 @@ return {
 			"regex",
 			"rust",
 			"scss",
+			"sql",
 			"svelte",
 			"tsx",
 			"typescript",

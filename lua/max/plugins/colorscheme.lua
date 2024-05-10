@@ -3,7 +3,6 @@ local transparent_active = false
 local tokyonight = {
 	"folke/tokyonight.nvim",
 	enabled = true,
-	lazy = false,
 	priority = 1000,
 	opts = {
 		style = "night",
@@ -190,7 +189,6 @@ local kanagawa = {
 local catppuccin = {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	lazy = false,
 	priority = 1000,
 	build = ":CatppuccinCompile",
 	enabled = true,
@@ -236,7 +234,6 @@ local catppuccin = {
 
 local night_owl = {
 	"oxfist/night-owl.nvim",
-	lazy = false, -- make sure we load this during startup if it is your main colorscheme
 	priority = 1000, -- make sure to load this before all the other start plugins
 	-- config = function()
 	-- 	-- load the colorscheme here
@@ -248,7 +245,6 @@ local night_owl = {
 local moonbow = {
 	"arturgoms/moonbow.nvim",
 	priority = 1000,
-	-- lazy = false,
 }
 
 -- { "shaunsingh/oxocarbon.nvim" },
