@@ -40,6 +40,9 @@ vim.keymap.set("n", "<leader>.", "<cmd>edit ~/.config/nvim/init.lua<cr>")
 vim.keymap.set("n", "<C-h>", "<c-w>h")
 -- vim.keymap.set("n", "<C-l>", "<c-w>l")
 
+-- TODO: keep yank position
+-- vim.keymap.set({ "n", "x" }, "y", "mcy`c", { noremap = true })
+
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
 
