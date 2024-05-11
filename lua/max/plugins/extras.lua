@@ -5,15 +5,15 @@ return {
 	-- surround
 	{
 		"kylechui/nvim-surround",
-		event = { "BufReadPre", "BufNewFile" },
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		enabled = enabled,
+		event = "VeryLazy",
 		config = true,
 	},
 
 	-- better vim.ui
 	{
 		"stevearc/dressing.nvim",
-		enabled = true,
+		enabled = enabled,
 		init = function()
 			vim.ui.select = function(...)
 				require("lazy").load({ plugins = { "dressing.nvim" } })
@@ -74,18 +74,20 @@ return {
 
 	-- search/replace in multiple files
 	{
-		"nvim-pack/nvim-spectre",
-		enabled = enabled,
-		cmd = "Spectre",
+		"MagicDuck/grug-far.nvim",
+		cmd = "GrugFar",
 		keys = {
 			{
 				"<leader>lR",
 				function()
-					require("spectre").open()
+					require("grug-far").grug_far()
 				end,
 				desc = "Replace in files (Spectre)",
 			},
 		},
+		config = function()
+			require("grug-far").setup({})
+		end,
 	},
 
 	-- neodev

@@ -11,7 +11,8 @@ autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({
 			higroup = "IncSearch",
-			timeout = 60,
+			priority = vim.highlight.priorities.user + 1,
+			timeout = 70,
 		})
 	end,
 })
@@ -34,6 +35,7 @@ autocmd("FileType", {
 		"notify",
 		"qf",
 		"spectre_panel",
+		"grug-far",
 		"startuptime",
 		"tsplayground",
 		"neotest-output",

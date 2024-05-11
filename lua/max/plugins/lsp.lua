@@ -9,25 +9,22 @@ return {
 		},
 		config = function()
 			-- LSP signs
-			vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignHint", { text = "󰠠 ", texthl = "DiagnosticSignHint", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn", numhl = "" })
 			vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignHint", { text = "󰠠 ", texthl = "DiagnosticSignHint", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo", numhl = "" })
+			vim.fn.sign_define("DiagnosticSignWarn", { text = "▲ ", texthl = "DiagnosticSignWarn", numhl = "" })
 
 			-- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = false,
 				update_in_insert = true,
-				-- signs = { active = signs },
 				underline = true,
 				severity_sort = true,
 				float = {
 					focusable = true,
 					style = "minimal",
 					border = "rounded",
-					source = "always",
-					-- header = "",
-					-- prefix = "",
+					source = true,
 				},
 			})
 
@@ -36,91 +33,76 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-			-- Callback for LSP when they're attached
-			local on_attach = function(client, bufnr)
-				local opts = { buffer = bufnr, remap = false }
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-				vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
-				vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-				vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, opts)
-				vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, opts)
-				vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-				vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-				vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
-				vim.keymap.set({ "n", "x" }, "<F3>", function()
-					vim.lsp.buf.format({ async = true })
-				end, opts)
-
-				-- Highlight on CursorHold (better than vim-illuminate)
-				if client.supports_method("textDocument/documentHighlight") then
-					local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-
-					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-						group = group,
-						buffer = bufnr,
-						desc = "highlight references when cursor holds",
-						callback = function()
-							vim.lsp.buf.document_highlight()
-						end,
-					})
-
-					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-						group = group,
-						buffer = bufnr,
-						desc = "clear references when cursor moves",
-						callback = function()
-							vim.lsp.buf.clear_references()
-						end,
-					})
-				end
-			end
-
-			-- LSP Attach event
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP common attach",
 				callback = function(event)
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					local bufnr = event.buf
-					on_attach(client, bufnr)
+
+					-- LSP keymap
+					local opts = { buffer = event.buf, silent = true, remap = false }
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+					vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+
+					-- LSP highlight when CursorHold
+					if client and client.supports_method("textDocument/documentHighlight") then
+						local group = vim.api.nvim_create_augroup("lsp_document_highlightt", { clear = false })
+
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+							group = group,
+							buffer = event.buf,
+							desc = "highlight references when cursor holds",
+							callback = function()
+								vim.lsp.buf.document_highlight()
+							end,
+						})
+
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							group = group,
+							buffer = event.buf,
+							desc = "clear references when cursor moves",
+							callback = function()
+								vim.lsp.buf.clear_references()
+							end,
+						})
+					end
 				end,
 			})
 
 			-- LSP capabilities
-			local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
-			-- cmp
-			lsp_capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
-			-- svelte
-			lsp_capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
 
 			-- LSP config
 			local lspconfig = require("lspconfig")
-			require("mason-lspconfig").setup_handlers({
-				-- default handler for installed servers
+			local mason_lspconfig = require("mason-lspconfig")
+
+			mason_lspconfig.setup_handlers({
+				-- Default handler for installed servers
 				function(server_name)
 					lspconfig[server_name].setup({
-						capabilities = lsp_capabilities,
-						-- flags = {
-						-- 	debounce_text_changes = 150,
-						-- },
+						capabilities = capabilities,
 					})
 				end,
 
-				-- ["tsserver"] = function()
-				-- 	-- faster server handled by typescript-tools.nvim
-				-- 	require("lazy").load({ plugins = { "typescript-tools.nvim" } })
-				-- end,
+				["tsserver"] = function()
+					-- faster server handled by typescript-tools.nvim
+				end,
 
 				["svelte"] = function()
 					lspconfig["svelte"].setup({
-						capabilities = lsp_capabilities,
+						capabilities = capabilities,
 						on_attach = function(client, bufnr)
-							-- Fix .js & .ts files changes not notifying svelte lsp
+							-- Fix .js/.ts files changes not affecting svelte lsp
 							-- https://github.com/sveltejs/language-tools/issues/2008
 							vim.api.nvim_create_autocmd("BufWritePost", {
 								pattern = { "*.js", "*.ts" },
@@ -135,7 +117,7 @@ return {
 
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
-						capabilities = lsp_capabilities,
+						capabilities = capabilities,
 						settings = {
 							Lua = {
 								-- Disable telemetry
@@ -178,20 +160,20 @@ return {
 	},
 
 	-- Faster typescript server
-	-- {
-	-- 	"pmizio/typescript-tools.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"neovim/nvim-lspconfig",
-	-- 	},
-	-- 	-- ft = {
-	-- 	-- 	"typescript",
-	-- 	-- 	"typescriptreact",
-	-- 	-- 	"javascript",
-	-- 	-- 	"javascriptreact",
-	-- 	-- },
-	-- 	config = function()
-	-- 		require("typescript-tools").setup({})
-	-- 	end,
-	-- },
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		ft = {
+			"typescript",
+			"typescriptreact",
+			"javascript",
+			"javascriptreact",
+		},
+		config = function()
+			require("typescript-tools").setup({})
+		end,
+	},
 }
