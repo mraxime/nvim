@@ -26,8 +26,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader><leader>", "<nop>")
 
 -- buffers
-vim.keymap.set("n", "gn", "<cmd>bnext<CR>", { noremap = true })
-vim.keymap.set("n", "gp", "<cmd>bprev<CR>", { noremap = true })
+-- vim.keymap.set("n", "gn", "<cmd>bnext<CR>", { noremap = true })
+-- vim.keymap.set("n", "gp", "<cmd>bprev<CR>", { noremap = true })
 vim.keymap.set("n", "<C-l>", "<C-^>", { noremap = true })
 
 -- Plugin Manager

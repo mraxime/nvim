@@ -74,21 +74,34 @@ return {
 
 	-- search/replace in multiple files
 	{
-		"MagicDuck/grug-far.nvim",
-		cmd = "GrugFar",
+		"nvim-pack/nvim-spectre",
+		cmd = "Spectre",
 		keys = {
 			{
 				"<leader>lR",
 				function()
-					require("grug-far").grug_far()
+					require("spectre").open()
 				end,
 				desc = "Replace in files (Spectre)",
 			},
 		},
-		config = function()
-			require("grug-far").setup({})
-		end,
 	},
+	-- {
+	-- 	"MagicDuck/grug-far.nvim",
+	-- 	cmd = "GrugFar",
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>lR",
+	-- 			function()
+	-- 				require("grug-far").grug_far()
+	-- 			end,
+	-- 			desc = "Replace in files (Spectre)",
+	-- 		},
+	-- 	},
+	-- 	config = function()
+	-- 		require("grug-far").setup({})
+	-- 	end,
+	-- },
 
 	-- neodev
 	{

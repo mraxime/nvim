@@ -1,4 +1,4 @@
-local transparent_active = false
+local transparent_active = true
 
 local tokyonight = {
 	"folke/tokyonight.nvim",
@@ -6,7 +6,7 @@ local tokyonight = {
 	priority = 1000,
 	opts = {
 		style = "night",
-		transparent = false,
+		transparent = true,
 		styles = {
 			sidebars = "transparent",
 			floats = "transparent",
@@ -177,6 +177,9 @@ local rose_pine = {
 	priority = 1000,
 	opts = {
 		variant = "main",
+		styles = {
+			transparency = true,
+		},
 	},
 }
 
@@ -186,24 +189,29 @@ local kanagawa = {
 	opts = {},
 }
 
+local ayu = {
+	"Shatur/neovim-ayu",
+	config = function()
+		require("ayu").setup({})
+	end,
+}
+
 local catppuccin = {
 	"catppuccin/nvim",
-	name = "catppuccin",
-	priority = 1000,
-	build = ":CatppuccinCompile",
 	enabled = true,
+	lazy = false,
+	priority = 1000,
+	name = "catppuccin",
+	build = ":CatppuccinCompile",
 	opts = {
 		flavour = "mocha",
-		background = { light = "latte", dark = "mocha" },
-		transparent_background = true,
-		term_colors = true,
+		-- background = { light = "latte", dark = "mocha" },
+		-- transparent_background = true,
+		-- term_colors = true,
 		integrations = {
 			bufferline = false,
 			cmp = true,
-			dap = { enabled = true, enable_ui = true },
-			fidget = true,
 			gitsigns = true,
-			illuminate = true,
 			indent_blankline = { enabled = true },
 			lsp_trouble = true,
 			markdown = true,
@@ -217,44 +225,28 @@ local catppuccin = {
 					information = { "undercurl" },
 				},
 			},
-			neotree = true,
-			noice = true,
-			notify = true,
-			rainbow_delimiters = true,
-			telescope = true,
-			treesitter = true,
-			treesitter_context = true,
 		},
 	},
 	config = function(_, opts)
 		require("catppuccin").setup(opts)
-		vim.cmd.colorscheme("catppuccin")
 	end,
-}
-
-local night_owl = {
-	"oxfist/night-owl.nvim",
-	priority = 1000, -- make sure to load this before all the other start plugins
-	-- config = function()
-	-- 	-- load the colorscheme here
-	-- 	vim.cmd.colorscheme("night-owl")
-	-- end,
 }
 
 -- Better gruvbox
 local moonbow = {
 	"arturgoms/moonbow.nvim",
-	priority = 1000,
+	priority = 999,
 }
 
 -- { "shaunsingh/oxocarbon.nvim" },
 
 return {
-	tokyonight,
-	-- gruvbox,
+	-- tokyonight,
+	catppuccin,
+	-- ayu,
 	-- moonbow,
-	-- night_owl,
-	-- catppuccin,
 	-- rose_pine,
+	-- gruvbox,
+	-- night_owl,
 	-- kanagawa,
 }

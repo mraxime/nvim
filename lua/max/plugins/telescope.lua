@@ -7,9 +7,17 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- faster than the default lua sorter
 		},
+		cmd = "Telescope",
 		keys = {
 			{
 				"sd",
+				function()
+					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
+				end,
+				desc = "Find Files",
+			},
+			{
+				"sk",
 				function()
 					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 				end,

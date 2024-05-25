@@ -1,7 +1,7 @@
 return {
 	{
 		"ThePrimeagen/harpoon",
-		enabled = false,
+		enabled = true,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		branch = "harpoon2",
 		keys = {
@@ -27,7 +27,7 @@ return {
 
 			-- Navigation
 			{
-				"sj",
+				"gu",
 				function()
 					local harpoon = require("harpoon")
 					harpoon:list():select(1)
@@ -35,7 +35,7 @@ return {
 				desc = "Set current harpoon to file 1",
 			},
 			{
-				"sk",
+				"gi",
 				function()
 					local harpoon = require("harpoon")
 					harpoon:list():select(2)
@@ -43,7 +43,7 @@ return {
 				desc = "Set current harpoon to file 2",
 			},
 			{
-				"sl",
+				"go",
 				function()
 					local harpoon = require("harpoon")
 					harpoon:list():select(3)
@@ -51,7 +51,7 @@ return {
 				desc = "Set current harpoon to file 3",
 			},
 			{
-				"s;",
+				"gp",
 				function()
 					local harpoon = require("harpoon")
 					harpoon:list():select(4)
@@ -81,7 +81,7 @@ return {
 
 	{
 		"cbochs/grapple.nvim",
-		enabled = true,
+		enabled = false,
 		opts = {
 			scope = "git", -- also try out "git_branch"
 			icons = true, -- setting to "true" requires "nvim-web-devicons"
@@ -92,7 +92,7 @@ return {
 			{ "gh", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
 
 			{ "sj", "<cmd>Grapple select index=1<cr>", desc = "Select first tag" },
-			{ "sk", "<cmd>Grapple select index=2<cr>", desc = "Select second tag" },
+			-- { "sk", "<cmd>Grapple select index=2<cr>", desc = "Select second tag" },
 			{ "sl", "<cmd>Grapple select index=3<cr>", desc = "Select third tag" },
 			{ "s;", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
 
