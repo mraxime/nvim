@@ -216,6 +216,7 @@ local catppuccin = {
 			lsp_trouble = true,
 			markdown = true,
 			mason = true,
+			neotree = true,
 			native_lsp = {
 				enabled = true,
 				underlines = {
