@@ -4,9 +4,6 @@ return {
 	version = false, -- last release is too old
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
-	dependencies = {
-		"windwp/nvim-ts-autotag",
-	},
 	cmd = {
 		"TSBufDisable",
 		"TSBufEnable",
@@ -31,7 +28,6 @@ return {
 		},
 		incremental_selection = { enable = true },
 		indent = { enable = true },
-		autotag = { enable = true },
 		ensure_installed = {
 			"bash",
 			"c",
