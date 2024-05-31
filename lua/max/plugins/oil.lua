@@ -2,14 +2,14 @@ return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = {
-		{
-			"-",
-			function()
-				vim.cmd("vsplit | wincmd l | vertical resize -10")
-				require("oil").open()
-			end,
-			desc = "Open Oil",
-		},
+		-- {
+		-- 	"-",
+		-- 	function()
+		-- 		vim.cmd("vsplit | wincmd l | vertical resize -10")
+		-- 		require("oil").open()
+		-- 	end,
+		-- 	desc = "Open Oil",
+		-- },
 		{
 			"si",
 			function()
@@ -17,13 +17,27 @@ return {
 			end,
 			desc = "Toggle Oil",
 		},
-		{
-			"so",
-			function()
-				require("oil").toggle_float()
-			end,
-			desc = "Toggle Oil",
-		},
+		-- {
+		-- 	"sk",
+		-- 	function()
+		-- 		require("oil").toggle_float()
+		-- 	end,
+		-- 	desc = "Toggle Oil",
+		-- },
+		-- {
+		-- 	"so",
+		-- 	function()
+		-- 		require("oil").toggle_float()
+		-- 	end,
+		-- 	desc = "Toggle Oil",
+		-- },
+		-- {
+		-- 	"sl",
+		-- 	function()
+		-- 		require("oil").toggle_float()
+		-- 	end,
+		-- 	desc = "Toggle Oil",
+		-- },
 	},
 	opts = {
 		keymaps = {

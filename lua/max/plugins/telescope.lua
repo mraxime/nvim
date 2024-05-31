@@ -23,13 +23,6 @@ return {
 				end,
 				desc = "Find Files",
 			},
-			-- {
-			-- 	"sf",
-			-- 	function()
-			-- 		require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
-			-- 	end,
-			-- 	desc = "Find Files",
-			-- },
 			{
 				"sg",
 				function()
@@ -46,32 +39,11 @@ return {
 			},
 			-- old muscle memory
 			{
-				"<leader>f",
-				function()
-					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
-				end,
-				desc = "Find Files",
-			},
-			{
 				"<c-p>",
 				function()
 					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 				end,
 				desc = "Find Files",
-			},
-			-- {
-			-- 	"st",
-			-- 	function()
-			-- 		require("telescope.builtin").live_grep()
-			-- 	end,
-			-- 	desc = "Search Text",
-			-- },
-			{
-				"s/",
-				function()
-					require("telescope.builtin").live_grep()
-				end,
-				desc = "Search Text",
 			},
 		},
 		config = function()
