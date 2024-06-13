@@ -6,3 +6,4 @@ require("max.autocmds")
 require("max.plugins-manager")
 
 vim.cmd.colorscheme("catppuccin")
+vim.keymap.del("n", "[d")

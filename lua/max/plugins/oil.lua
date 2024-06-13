@@ -17,6 +17,13 @@ return {
 			end,
 			desc = "Toggle Oil",
 		},
+		{
+			"[",
+			function()
+				require("oil").toggle_float()
+			end,
+			desc = "Toggle Oil",
+		},
 		-- {
 		-- 	"sk",
 		-- 	function()

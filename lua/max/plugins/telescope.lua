@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		enabled = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
@@ -103,30 +102,30 @@ return {
 		end,
 	},
 
-	{
-		"ibhagwan/fzf-lua",
-		enabled = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{
-				"sf",
-				function()
-					require("fzf-lua").files()
-				end,
-				desc = "Find Files",
-			},
-		},
-		init = function()
-			vim.ui.select = function(...)
-				require("fzf-lua.providers.ui_select").ui_select(...)
-			end
-		end,
-		opts = {
-			winopts = {
-				preview = {
-					delay = 10,
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	enabled = false,
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- 	keys = {
+	-- 		{
+	-- 			"sf",
+	-- 			function()
+	-- 				require("fzf-lua").files()
+	-- 			end,
+	-- 			desc = "Find Files",
+	-- 		},
+	-- 	},
+	-- 	init = function()
+	-- 		vim.ui.select = function(...)
+	-- 			require("fzf-lua.providers.ui_select").ui_select(...)
+	-- 		end
+	-- 	end,
+	-- 	opts = {
+	-- 		winopts = {
+	-- 			preview = {
+	-- 				delay = 10,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 }
