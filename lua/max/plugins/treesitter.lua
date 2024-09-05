@@ -1,5 +1,5 @@
 return {
-	"mraxime/nvim-treesitter",
+	"nvim-treesitter/nvim-treesitter",
 	enabled = true,
 	version = false, -- last release is too old
 	event = { "BufReadPost", "BufNewFile" },
