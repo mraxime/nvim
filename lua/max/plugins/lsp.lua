@@ -94,9 +94,9 @@ return {
 					})
 				end,
 
-				["tsserver"] = function()
-					-- faster server handled by typescript-tools.nvim
-				end,
+				-- ["tsserver"] = function()
+				-- 	-- faster server handled by typescript-tools.nvim
+				-- end,
 
 				["svelte"] = function()
 					lspconfig["svelte"].setup({
@@ -160,20 +160,20 @@ return {
 	},
 
 	-- Faster typescript server
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"neovim/nvim-lspconfig",
-		},
-		ft = {
-			"typescript",
-			"typescriptreact",
-			"javascript",
-			"javascriptreact",
-		},
-		config = function()
-			require("typescript-tools").setup({})
-		end,
-	},
+	-- {
+	-- 	"pmizio/typescript-tools.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 	},
+	-- 	ft = {
+	-- 		"typescript",
+	-- 		"typescriptreact",
+	-- 		"javascript",
+	-- 		"javascriptreact",
+	-- 	},
+	-- 	config = function()
+	-- 		require("typescript-tools").setup({})
+	-- 	end,
+	-- },
 }

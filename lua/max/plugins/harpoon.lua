@@ -2,8 +2,13 @@ return {
 	{
 		"ThePrimeagen/harpoon",
 		enabled = true,
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			-- harpoon tabline
+			"jasonpanosso/harpoon-tabline.nvim",
+		},
 		branch = "harpoon2",
+		event = "VeryLazy",
 		keys = {
 			-- Menu Toggle
 			{
@@ -14,7 +19,6 @@ return {
 				end,
 				desc = "Toggle harpoon menu",
 			},
-
 			-- Menu Add
 			{
 				"ga",
@@ -24,7 +28,6 @@ return {
 				end,
 				desc = "Add buffer to harpoon",
 			},
-
 			-- Navigation
 			{
 				"gu",
@@ -32,7 +35,7 @@ return {
 					local harpoon = require("harpoon")
 					harpoon:list():select(1)
 				end,
-				desc = "Set current harpoon to file 1",
+				desc = "Nav to harpoon file 1",
 			},
 			{
 				"gi",
@@ -40,7 +43,7 @@ return {
 					local harpoon = require("harpoon")
 					harpoon:list():select(2)
 				end,
-				desc = "Set current harpoon to file 2",
+				desc = "Nav to harpoon file 2",
 			},
 			{
 				"go",
@@ -48,7 +51,7 @@ return {
 					local harpoon = require("harpoon")
 					harpoon:list():select(3)
 				end,
-				desc = "Set current harpoon to file 3",
+				desc = "Nav to harpoon file 3",
 			},
 			{
 				"gp",
@@ -56,9 +59,8 @@ return {
 					local harpoon = require("harpoon")
 					harpoon:list():select(4)
 				end,
-				desc = "Set current harpoon to file 4",
+				desc = "Nav to harpoon file 4",
 			},
-
 			-- Reset
 			{
 				"gH",
@@ -76,28 +78,31 @@ return {
 					sync_on_ui_close = true,
 				},
 			})
+
+			-- tabline
+			require("harpoon-tabline").setup()
 		end,
 	},
 
-	{
-		"cbochs/grapple.nvim",
-		enabled = false,
-		opts = {
-			scope = "git", -- also try out "git_branch"
-			icons = true, -- setting to "true" requires "nvim-web-devicons"
-			status = false,
-		},
-		keys = {
-			{ "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
-			{ "gh", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
-
-			{ "sj", "<cmd>Grapple select index=1<cr>", desc = "Select first tag" },
-			-- { "sk", "<cmd>Grapple select index=2<cr>", desc = "Select second tag" },
-			{ "sl", "<cmd>Grapple select index=3<cr>", desc = "Select third tag" },
-			{ "s;", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
-
-			{ "sn", "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
-			{ "sp", "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
-		},
-	},
+	-- {
+	-- 	"cbochs/grapple.nvim",
+	-- 	enabled = false,
+	-- 	opts = {
+	-- 		scope = "git", -- also try out "git_branch"
+	-- 		icons = true, -- setting to "true" requires "nvim-web-devicons"
+	-- 		status = false,
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
+	-- 		{ "gh", "<cmd>Grapple toggle_tags<cr>", desc = "Toggle tags menu" },
+	--
+	-- 		{ "sj", "<cmd>Grapple select index=1<cr>", desc = "Select first tag" },
+	-- 		-- { "sk", "<cmd>Grapple select index=2<cr>", desc = "Select second tag" },
+	-- 		{ "sl", "<cmd>Grapple select index=3<cr>", desc = "Select third tag" },
+	-- 		{ "s;", "<cmd>Grapple select index=4<cr>", desc = "Select fourth tag" },
+	--
+	-- 		{ "sn", "<cmd>Grapple cycle_tags next<cr>", desc = "Go to next tag" },
+	-- 		{ "sp", "<cmd>Grapple cycle_tags prev<cr>", desc = "Go to previous tag" },
+	-- 	},
+	-- },
 }
