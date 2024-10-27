@@ -94,9 +94,8 @@ return {
 					})
 				end,
 
-				-- ["tsserver"] = function()
-				-- 	-- faster server handled by typescript-tools.nvim
-				-- end,
+				-- faster server handled by typescript-tools.nvim
+				-- ["ts_ls"] = function() end,
 
 				["svelte"] = function()
 					lspconfig["svelte"].setup({
