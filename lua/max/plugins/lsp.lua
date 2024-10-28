@@ -21,7 +21,7 @@ return {
 				underline = true,
 				severity_sort = true,
 				float = {
-					focusable = true,
+					focusable = false,
 					style = "minimal",
 					border = "rounded",
 					source = true,
@@ -29,7 +29,9 @@ return {
 			})
 
 			-- Rounded borders
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/hover"] =
+				vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = false })
+
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
@@ -38,20 +40,24 @@ return {
 				callback = function(event)
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-					-- LSP keymap
-					local opts = { buffer = event.buf, silent = true, remap = false }
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-					vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
-					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
-					-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-					vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+					local function opts(desc)
+						return { buffer = event.buf, silent = true, remap = false, desc = "LSP " .. desc }
+					end
+
+					-- LSP keymaps
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
+					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("Go to type definition"))
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic"))
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
+					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts("Show diagnostics"))
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
+					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
+					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
+					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename all references"))
+					vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, opts("Show signature help"))
+					vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts("Code action"))
 
 					-- LSP highlight when CursorHold
 					if client and client.supports_method("textDocument/documentHighlight") then
@@ -80,7 +86,36 @@ return {
 
 			-- LSP capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
+			-- capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
+			capabilities.textDocument.completion.completionItem = {
+				documentationFormat = { "markdown", "plaintext" },
+				snippetSupport = true,
+				preselectSupport = true,
+				insertReplaceSupport = true,
+				labelDetailsSupport = true,
+				deprecatedSupport = true,
+				commitCharactersSupport = true,
+				tagSupport = { valueSet = { 1 } },
+				resolveSupport = {
+					properties = {
+						"documentation",
+						"detail",
+						"additionalTextEdits",
+					},
+				},
+			}
+
+			-- [Svelte] LSP capabilities
+			-- See `https://github.com/sveltejs/language-tools/issues/2008#issuecomment-2148860446`
+			local svelte_capabilities = vim.tbl_deep_extend("force", {}, capabilities)
+			svelte_capabilities.workspace.didChangeWatchedFiles = false
+
+			-- disable semanticTokens
+			local on_init = function(client, _)
+				if client.supports_method("textDocument/semanticTokens") then
+					client.server_capabilities.semanticTokensProvider = nil
+				end
+			end
 
 			-- LSP config
 			local lspconfig = require("lspconfig")
@@ -91,6 +126,7 @@ return {
 				function(server_name)
 					lspconfig[server_name].setup({
 						capabilities = capabilities,
+						on_init = on_init,
 					})
 				end,
 
@@ -99,7 +135,9 @@ return {
 
 				["svelte"] = function()
 					lspconfig["svelte"].setup({
-						capabilities = capabilities,
+						capabilities = svelte_capabilities,
+						on_init = on_init,
+						init = on_init,
 						on_attach = function(client, bufnr)
 							-- Fix .js/.ts files changes not affecting svelte lsp
 							-- https://github.com/sveltejs/language-tools/issues/2008
@@ -117,31 +155,23 @@ return {
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
 						capabilities = capabilities,
+						on_init = on_init,
 						settings = {
 							Lua = {
-								-- Disable telemetry
 								telemetry = { enable = false },
-								runtime = {
-									-- Tell the language server which version of Lua you're using
-									-- (most likely LuaJIT in the case of Neovim)
-									version = "LuaJIT",
-									path = vim.split(package.path, ";"),
-								},
 								diagnostics = {
-									-- Make the language server recognize the `vim` global
 									globals = { "vim" },
 								},
 								workspace = {
-									checkThirdParty = false,
-									-- Make the server aware of Neovim runtime files
 									library = {
-										[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-										[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
-										[vim.fn.stdpath("config") .. "/lua"] = true,
+										vim.fn.expand("$VIMRUNTIME/lua"),
+										vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+										vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
+										vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
+										"${3rd}/luv/library",
 									},
-								},
-								completion = {
-									callSnippet = "Replace",
+									maxPreload = 100000,
+									preloadFileSize = 10000,
 								},
 							},
 						},
@@ -155,6 +185,47 @@ return {
 				-- 	})
 				-- end,
 			})
+
+			-- vtsls
+			-- lspconfig.vtsls.setup({
+			-- 	capabilities = capabilities,
+			-- })
+
+			-- biome
+			-- lspconfig.biome.setup({
+			-- 	capabilities = capabilities,
+			-- 	filetypes = {
+			-- 		"typescript",
+			-- 		"javascript",
+			-- 		"json",
+			-- 		"jsonc",
+			-- 	},
+			-- })
+
+			-- eslint
+			-- lspconfig.eslint.setup({
+			-- 	capabilities = capabilities,
+			-- 	filetypes = {
+			-- 		"svelte",
+			-- 	},
+			-- })
+			--
+			-- lspconfig.svelte.setup({
+			-- 	capabilities = svelte_capabilities,
+			-- 	filetypes = {
+			-- 		"svelte",
+			-- 	},
+			-- })
+			--
+			-- -- tailwindcss
+			-- lspconfig.tailwindcss.setup({
+			-- 	capabilities = capabilities,
+			-- 	filetypes = {
+			-- 		"html",
+			-- 		"css",
+			-- 		"svelte",
+			-- 	},
+			-- })
 		end,
 	},
 
