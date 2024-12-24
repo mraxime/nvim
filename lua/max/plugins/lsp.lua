@@ -47,7 +47,7 @@ return {
 					-- LSP keymaps
 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
-					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
+					vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts("Go to implementation"))
 					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("Go to type definition"))
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic"))
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
@@ -86,29 +86,29 @@ return {
 
 			-- LSP capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			-- capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
-			capabilities.textDocument.completion.completionItem = {
-				documentationFormat = { "markdown", "plaintext" },
-				snippetSupport = true,
-				preselectSupport = true,
-				insertReplaceSupport = true,
-				labelDetailsSupport = true,
-				deprecatedSupport = true,
-				commitCharactersSupport = true,
-				tagSupport = { valueSet = { 1 } },
-				resolveSupport = {
-					properties = {
-						"documentation",
-						"detail",
-						"additionalTextEdits",
-					},
-				},
-			}
+			capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
+			-- capabilities.textDocument.completion.completionItem = {
+			-- 	documentationFormat = { "markdown", "plaintext" },
+			-- 	snippetSupport = true,
+			-- 	preselectSupport = true,
+			-- 	insertReplaceSupport = true,
+			-- 	labelDetailsSupport = true,
+			-- 	deprecatedSupport = true,
+			-- 	commitCharactersSupport = true,
+			-- 	tagSupport = { valueSet = { 1 } },
+			-- 	resolveSupport = {
+			-- 		properties = {
+			-- 			"documentation",
+			-- 			"detail",
+			-- 			"additionalTextEdits",
+			-- 		},
+			-- 	},
+			-- }
 
 			-- [Svelte] LSP capabilities
 			-- See `https://github.com/sveltejs/language-tools/issues/2008#issuecomment-2148860446`
 			local svelte_capabilities = vim.tbl_deep_extend("force", {}, capabilities)
-			svelte_capabilities.workspace.didChangeWatchedFiles = false
+			svelte_capabilities.workspace = { didChangeWatchedFiles = false }
 
 			-- disable semanticTokens
 			local on_init = function(client, _)
