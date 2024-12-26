@@ -85,8 +85,9 @@ return {
 			})
 
 			-- LSP capabilities
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
+			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			-- capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
 			-- capabilities.textDocument.completion.completionItem = {
 			-- 	documentationFormat = { "markdown", "plaintext" },
 			-- 	snippetSupport = true,
