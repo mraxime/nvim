@@ -1,9 +1,9 @@
 return {
 	"windwp/nvim-autopairs",
 	event = "InsertEnter",
-	dependencies = {
-		"hrsh7th/nvim-cmp",
-	},
+	-- dependencies = {
+	-- 	"hrsh7th/nvim-cmp",
+	-- },
 	config = function()
 		require("nvim-autopairs").setup({
 			check_ts = true, -- enable treesitter
@@ -16,10 +16,10 @@ return {
 			map_c_h = true,
 		})
 
-		local cmp = require("cmp")
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
-		-- make autopairs and completion work together
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		-- local cmp = require("cmp")
+		-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+		--
+		-- -- make autopairs and completion work together
+		-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }
