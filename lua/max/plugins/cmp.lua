@@ -29,18 +29,24 @@ return {
 		},
 		completion = {
 			list = { selection = "auto_insert" },
-			-- menu = {
-			-- 	draw = {
-			-- 		columns = {
-			-- 			{ "label", "label_description", gap = 1 },
-			-- 			{ "kind_icon", "kind" },
-			-- 		},
-			-- 	},
+			-- Don't show completion menu automatically in cmdline mode
+			menu = {
+				-- border = "single",
+				auto_show = function(ctx)
+					return ctx.mode ~= "cmdline"
+				end,
+			},
+			-- documentation = {
+			-- window = { border = "single" },
 			-- },
 		},
+
+		-- Experimental signature help support
+		-- signature = {
+		-- 	enabled = true,
+		-- 	window = { border = "single" },
+		-- },
 	},
-	-- opts_extend = { "sources.default" },
-	-- ignature = { enabled = true },
 }
 -- return {
 -- 	"hrsh7th/nvim-cmp",

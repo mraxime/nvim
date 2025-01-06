@@ -21,7 +21,7 @@ return {
 				underline = true,
 				severity_sort = true,
 				float = {
-					focusable = false,
+					focusable = true,
 					style = "minimal",
 					border = "rounded",
 					source = true,
@@ -30,7 +30,7 @@ return {
 
 			-- Rounded borders
 			vim.lsp.handlers["textDocument/hover"] =
-				vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = false })
+				vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = true })
 
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
