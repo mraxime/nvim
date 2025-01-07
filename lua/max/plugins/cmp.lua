@@ -17,8 +17,16 @@ return {
 			},
 		},
 		completion = {
-			list = { selection = "auto_insert" },
-			accept = { auto_brackets = { enabled = true } },
+			list = {
+				selection = {
+					auto_insert = true,
+				},
+			},
+			accept = {
+				auto_brackets = {
+					enabled = true,
+				},
+			},
 			menu = {
 				-- Don't show completion menu automatically in cmdline mode
 				auto_show = function(ctx)
