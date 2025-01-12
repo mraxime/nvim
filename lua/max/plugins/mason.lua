@@ -24,7 +24,7 @@ return {
 			"shellcheck",
 			"taplo",
 			"shfmt",
-			"stylelint",
+			-- "stylelint",
 			"stylua",
 			"svelte-language-server",
 			"tailwindcss-language-server",
