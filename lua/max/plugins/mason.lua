@@ -19,6 +19,7 @@ return {
 			"lua-language-server",
 			"marksman",
 			"prettierd",
+			"prisma-language-server",
 			-- "biome",
 			"selene",
 			"shellcheck",

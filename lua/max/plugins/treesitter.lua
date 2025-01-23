@@ -41,6 +41,7 @@ return {
 			"luap",
 			"markdown",
 			"markdown_inline",
+			"prisma",
 			"query",
 			"regex",
 			"rust",
