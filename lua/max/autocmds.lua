@@ -66,3 +66,9 @@ autocmd("RecordingLeave", {
 		vim.opt.cmdheight = 0
 	end,
 })
+
+-- Define `filtype=conf` to dotenv files
+autocmd({ "BufEnter", "BufNewFile" }, {
+	pattern = ".env*",
+	command = "set filetype=conf",
+})

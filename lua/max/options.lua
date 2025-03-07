@@ -1,3 +1,5 @@
+vim.filetype.add({ pattern = { [".?env.?.*"] = "dotenv" } })
+
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus" -- yank sync with system clipboard
 vim.opt.cursorline = true -- show cursor line
