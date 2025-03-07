@@ -10,6 +10,20 @@ return {
 		config = true,
 	},
 
+	-- better quickfix
+	{
+		"kevinhwang91/nvim-bqf",
+		enabled = enabled,
+		ft = "qf",
+	},
+
+	-- Neodev
+	{
+		"folke/neodev.nvim",
+		enabled = enabled,
+		ft = "lua",
+	},
+
 	-- better vim.ui
 	{
 		"stevearc/dressing.nvim",
@@ -26,88 +40,35 @@ return {
 		end,
 	},
 
-	-- colorizer
-	{
-		"NvChad/nvim-colorizer.lua",
-		event = "BufReadPre",
-		opts = {
-			filetypes = { "*", "!lazy" },
-			buftype = { "*", "!prompt", "!nofile" },
-			user_default_options = {
-				RGB = true, -- #RGB hex codes
-				RRGGBB = true, -- #RRGGBB hex codes
-				names = false, -- "Name" codes like Blue
-				RRGGBBAA = true, -- #RRGGBBAA hex codes
-				AARRGGBB = false, -- 0xAARRGGBB hex codes
-				rgb_fn = true, -- CSS rgb() and rgba() functions
-				hsl_fn = true, -- CSS hsl() and hsla() functions
-				css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = true,
-				mode = "background",
-				virtualtext = "■",
-			},
-		},
-	},
-
-	-- better quickfix
-	{
-		"kevinhwang91/nvim-bqf",
-		enabled = enabled,
-		ft = "qf",
-	},
-
-	-- better yank/paste
-	-- {
-	-- 	"gbprod/yanky.nvim",
-	-- 	enabled = enabled,
-	-- 	opts = {
-	-- 		highlight = {
-	-- 			timer = 90,
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
-	-- 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
-	-- 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
-	-- 	},
-	-- },
-
 	-- search/replace in multiple files
-	{
-		"nvim-pack/nvim-spectre",
-		cmd = "Spectre",
-		keys = {
-			{
-				"<leader>lR",
-				function()
-					require("spectre").open()
-				end,
-				desc = "Replace in files (Spectre)",
-			},
-		},
-	},
 	-- {
-	-- 	"MagicDuck/grug-far.nvim",
-	-- 	cmd = "GrugFar",
+	-- 	"nvim-pack/nvim-spectre",
+	-- 	cmd = "Spectre",
 	-- 	keys = {
 	-- 		{
 	-- 			"<leader>lR",
 	-- 			function()
-	-- 				require("grug-far").grug_far()
+	-- 				require("spectre").open()
 	-- 			end,
 	-- 			desc = "Replace in files (Spectre)",
 	-- 		},
 	-- 	},
-	-- 	config = function()
-	-- 		require("grug-far").setup({})
-	-- 	end,
 	-- },
-
-	-- neodev
 	{
-		"folke/neodev.nvim",
-		enabled = enabled,
-		ft = "lua",
+		"MagicDuck/grug-far.nvim",
+		cmd = "GrugFar",
+		keys = {
+			{
+				"<leader>lR",
+				function()
+					require("grug-far").grug_far()
+				end,
+				desc = "Replace in files (Spectre)",
+			},
+		},
+		config = function()
+			require("grug-far").setup({})
+		end,
 	},
 
 	-- better folding
@@ -126,5 +87,21 @@ return {
 	-- 			require("ufo").closeAllFolds()
 	-- 		end)
 	-- 	end,
+	-- },
+
+	-- better yank/paste
+	-- {
+	-- 	"gbprod/yanky.nvim",
+	-- 	enabled = enabled,
+	-- 	opts = {
+	-- 		highlight = {
+	-- 			timer = 90,
+	-- 		},
+	-- 	},
+	-- 	keys = {
+	-- 		{ "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+	-- 		{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+	-- 		{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+	-- 	},
 	-- },
 }
