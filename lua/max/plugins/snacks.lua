@@ -119,7 +119,7 @@ return {
 		-- TERMINAL MAPS
 		----------------------------------------------------
 		{
-			"<C-f>'",
+			"<c-/>",
 			function()
 				Snacks.terminal()
 			end,
@@ -127,7 +127,15 @@ return {
 			desc = "Toggle Terminal",
 		},
 		{
-			"<C-f><C-'>",
+			"<c-f>'",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+		{
+			"<c-f><C-'>",
 			function()
 				Snacks.terminal()
 			end,
