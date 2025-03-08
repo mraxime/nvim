@@ -9,11 +9,13 @@ return {
 	opts = {
 		bigfile = { enabled = true },
 		quickfile = { enabled = true },
+		explorer = { enabled = true },
+		lazygit = { enabled = true },
+		statuscolumn = { enabled = true },
 		picker = {
 			enabled = true,
 			win = { input = { keys = { ["<Esc>"] = { "close", mode = { "n", "i" } } } } },
 		},
-		explorer = { enabled = true },
 		zen = {
 			enabled = true,
 			win = {
@@ -29,15 +31,16 @@ return {
 				-- inlay_hints = false,
 			},
 		},
-		statuscolumn = { enabled = true },
-		lazygit = { enabled = true },
-		-- indent = { enabled = true },
-		-- words = { enabled = true },
-		-- input = { enabled = true },
+		terminal = {
+			enabled = true,
+			win = {
+				position = "float",
+			},
+		},
 	},
 	keys = {
-		-- PICKER MAPS --
-		-------------------------------------------------------------------------
+		-- PICKER MAPS
+		----------------------------------------------------
 		{
 			"<leader>e",
 			function()
@@ -53,8 +56,8 @@ return {
 			desc = "Toggle explorer",
 		},
 
-		-- PICKER MAPS --
-		-------------------------------------------------------------------------
+		-- PICKER MAPS
+		----------------------------------------------------
 		{
 			"<leader>f",
 			function()
@@ -113,18 +116,37 @@ return {
 			desc = "Find Files",
 		},
 
-		-- LAZYGIT MAPS --
-		-------------------------------------------------------------------------
+		-- TERMINAL MAPS
+		----------------------------------------------------
 		{
-			"<leader>h",
+			"<C-f>'",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+		{
+			"<C-f><C-'>",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+
+		-- LAZYGIT MAPS
+		----------------------------------------------------
+		{
+			"<C-f>h",
 			function()
 				Snacks.lazygit()
 			end,
 			desc = "Open Lazygit",
 		},
 
-		-- ZEN MAPS --
-		-------------------------------------------------------------------------
+		-- ZEN MAPS
+		----------------------------------------------------
 		{
 			"<leader>z",
 			function()

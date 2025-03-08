@@ -19,9 +19,13 @@ return {
 
 	-- neodev
 	{
-		"folke/neodev.nvim",
-		enabled = enabled,
-		ft = "lua",
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				"~/.local/share/nvim/lazy/",
+			},
+		},
 	},
 
 	-- better vim.ui
