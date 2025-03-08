@@ -17,7 +17,7 @@ return {
 		ft = "qf",
 	},
 
-	-- Neodev
+	-- neodev
 	{
 		"folke/neodev.nvim",
 		enabled = enabled,
@@ -41,25 +41,13 @@ return {
 	},
 
 	-- search/replace in multiple files
-	-- {
-	-- 	"nvim-pack/nvim-spectre",
-	-- 	cmd = "Spectre",
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>lR",
-	-- 			function()
-	-- 				require("spectre").open()
-	-- 			end,
-	-- 			desc = "Replace in files (Spectre)",
-	-- 		},
-	-- 	},
-	-- },
 	{
 		"MagicDuck/grug-far.nvim",
+		enabled = enabled,
 		cmd = "GrugFar",
 		keys = {
 			{
-				"<leader>lR",
+				"<leader>R",
 				function()
 					require("grug-far").grug_far()
 				end,

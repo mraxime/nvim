@@ -55,7 +55,7 @@ return {
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
-					vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename all references"))
+					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts("Rename all references"))
 					vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, opts("Show signature help"))
 					vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts("Code action"))
 

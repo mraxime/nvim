@@ -9,36 +9,51 @@ return {
 		cmd = "Telescope",
 		keys = {
 			{
-				"sd",
+				"<leader>f",
 				function()
 					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 				end,
 				desc = "Find Files",
 			},
 			{
-				"sk",
-				function()
-					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
-				end,
-				desc = "Find Files",
-			},
-			{
-				"sg",
+				"<leader>/",
 				function()
 					require("telescope.builtin").live_grep()
 				end,
-				desc = "Search Text",
+				desc = "Find Text",
 			},
 			{
-				"ss",
+				"<leader>g",
+				function()
+					require("telescope.builtin").git_status()
+				end,
+				desc = "Find Git Changes",
+			},
+			{
+				"<leader>b",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Find Buffers",
+			},
+			{
+				"<leader>s",
+				function()
+					require("telescope.builtin").symbols()
+				end,
+				desc = "Find Symbols",
+			},
+			{
+				"<leader>'",
 				function()
 					require("telescope.builtin").resume()
 				end,
 				desc = "Resume Telescope",
 			},
-			-- old muscle memory
+
+			-- old muscule memory
 			{
-				"<c-p>",
+				"sd",
 				function()
 					require("telescope.builtin").find_files({ no_ignore = false, hidden = true })
 				end,
