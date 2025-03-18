@@ -15,6 +15,15 @@ return {
 		picker = {
 			enabled = true,
 			win = { input = { keys = { ["<Esc>"] = { "close", mode = { "n", "i" } } } } },
+			sources = {
+				explorer = {
+					layout = {
+						layout = {
+							width = 38,
+						},
+					},
+				},
+			},
 		},
 		zen = {
 			enabled = true,
@@ -39,15 +48,15 @@ return {
 		},
 	},
 	keys = {
-		-- PICKER MAPS
+		-- Explorer Maps
 		----------------------------------------------------
-		{
-			"<leader>e",
-			function()
-				Snacks.explorer()
-			end,
-			desc = "Toggle explorer",
-		},
+		-- {
+		-- 	"<leader>e",
+		-- 	function()
+		-- 		Snacks.explorer()
+		-- 	end,
+		-- 	desc = "Toggle explorer",
+		-- },
 		{
 			"se",
 			function()
@@ -56,14 +65,28 @@ return {
 			desc = "Toggle explorer",
 		},
 
-		-- PICKER MAPS
+		-- Picker Maps
 		----------------------------------------------------
 		{
 			"<leader>f",
 			function()
 				Snacks.picker.files()
 			end,
-			desc = "Find Files",
+			desc = "Find files",
+		},
+		{
+			"<leader>F",
+			function()
+				Snacks.picker.files({ cwd = vim.fn.getcwd() })
+			end,
+			desc = "Find files at cwd",
+		},
+		{
+			"<leader>i",
+			function()
+				Snacks.picker.files({ cwd = vim.fn.expand("%:p:h") })
+			end,
+			desc = "File picker at cd",
 		},
 		{
 			"<leader>/",
@@ -73,18 +96,11 @@ return {
 			desc = "Find Text",
 		},
 		{
-			"sg",
+			"<leader>'",
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.resume()
 			end,
-			desc = "Find Text",
-		},
-		{
-			"<leader>g",
-			function()
-				Snacks.picker.git_status()
-			end,
-			desc = "Find Git Changes",
+			desc = "Resume Telescope",
 		},
 		{
 			"<leader>b",
@@ -94,32 +110,46 @@ return {
 			desc = "Find Buffers",
 		},
 		{
+			"<leader>d",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Diagnostic picker",
+		},
+		{
+			"<leader>g",
+			function()
+				Snacks.picker.git_status()
+			end,
+			desc = "Find Git Changes",
+		},
+		{
+			"<leader>j",
+			function()
+				Snacks.picker.jumps()
+			end,
+			desc = "Jumplist picker",
+		},
+		{
 			"<leader>s",
 			function()
 				Snacks.picker.lsp_symbols()
 			end,
-			desc = "Find Symbols",
-		},
-		{
-			"<leader>'",
-			function()
-				Snacks.picker.resume()
-			end,
-			desc = "Resume Telescope",
-		},
-		-- old muscule memory
-		{
-			"sd",
-			function()
-				Snacks.picker.files()
-			end,
-			desc = "Find Files",
+			desc = "Symbols picker",
 		},
 
-		-- TERMINAL MAPS
+		-- Terminal Maps
 		----------------------------------------------------
 		{
 			"<c-/>",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+		{
+			"<c-'>",
 			function()
 				Snacks.terminal()
 			end,
@@ -142,8 +172,24 @@ return {
 			mode = { "n", "t" },
 			desc = "Toggle Terminal",
 		},
+		{
+			"g'",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+		{
+			"g;",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
 
-		-- LAZYGIT MAPS
+		-- Lazygit Maps
 		----------------------------------------------------
 		{
 			"<C-f>h",
@@ -153,7 +199,7 @@ return {
 			desc = "Open Lazygit",
 		},
 
-		-- ZEN MAPS
+		-- Zen Maps
 		----------------------------------------------------
 		{
 			"<leader>z",
