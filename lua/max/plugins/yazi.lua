@@ -1,16 +1,21 @@
 ---@type LazySpec
 return {
 	"mikavilpas/yazi.nvim",
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	dependencies = { "folke/snacks.nvim", lazy = true },
 	keys = {
 		-- 👇 in this section, choose your own keymappings!
 		{
-			"<leader>e",
+			"<leader>y",
 			mode = { "n", "v" },
 			"<cmd>Yazi<cr>",
 			desc = "Open yazi at the current file",
 		},
+		-- {
+		-- 	"se",
+		-- 	"<cmd>Yazi<cr>",
+		-- 	desc = "Open yazi at the current file",
+		-- },
 	},
 	---@type YaziConfig | {}
 	opts = {

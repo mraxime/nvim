@@ -137,11 +137,26 @@ return {
 			end,
 			desc = "Symbols picker",
 		},
+		{
+			"<leader>\\",
+			function()
+				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+			end,
+			desc = "File picker at cd",
+		},
 
 		-- Terminal Maps
 		----------------------------------------------------
 		{
 			"<c-/>",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle Terminal",
+		},
+		{
+			"<c-;>",
 			function()
 				Snacks.terminal()
 			end,
