@@ -1,14 +1,13 @@
 return {
 	{
 		"ThePrimeagen/harpoon",
-		enabled = true,
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			-- harpoon tabline
 			"jasonpanosso/harpoon-tabline.nvim",
 		},
 		branch = "harpoon2",
-		event = "VeryLazy",
 		keys = {
 			-- Menu Toggle
 			{

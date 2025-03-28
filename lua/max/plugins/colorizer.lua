@@ -13,9 +13,9 @@ return {
 		enable_hsl = true, -- Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
 		enable_hsl_without_function = true, -- Highlight hsl colors without function, e.g. '--foreground: 0 69% 69%;'
 		enable_named_colors = true, --Highlight named colors, e.g. 'green'
+		enable_var_usage = true, -- Highlight CSS variables, e.g. 'var(--testing-color)'
 		enable_ansi = false, -- Highlight ansi colors, e.g '\033[0;34m'
 		enable_tailwind = true, -- Highlight tailwind colors, e.g. 'bg-blue-500'
-		enable_var_usage = true, -- Highlight CSS variables, e.g. 'var(--testing-color)'
 
 		-- Exclude filetypes or buftypes from highlighting e.g. 'exclude_buftypes = {'text'}'
 		exclude_filetypes = { "lazy", "typescript", "javascript" },

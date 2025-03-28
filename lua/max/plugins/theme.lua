@@ -206,9 +206,9 @@ local moonbow = {
 }
 
 return {
-	tokyonight,
 	catppuccin,
-	gruvbox,
+	-- tokyonight,
+	-- gruvbox,
 	-- ayu,
 	-- moonbow,
 	-- rose_pine,

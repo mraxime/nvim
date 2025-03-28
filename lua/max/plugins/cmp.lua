@@ -2,6 +2,7 @@
 return {
 	"saghen/blink.cmp",
 	build = "cargo build --release",
+	version = false,
 	opts = {
 		keymap = { preset = "enter" },
 		appearance = {

@@ -26,8 +26,8 @@ return {
 				return vim.api.nvim_buf_line_count(bufnr) > 10000
 			end,
 		},
-		incremental_selection = { enable = true },
-		indent = { enable = true },
+		-- incremental_selection = { enable = true },
+		-- indent = { enable = true },
 		ensure_installed = {
 			"bash",
 			"c",

@@ -15,6 +15,7 @@ end
 -- When snacks loads, it loads just one file and creates a couple of autocmds, that's it.
 return {
 	"folke/snacks.nvim",
+	dependencies = { "echasnovski/mini.icons" },
 	priority = 1000,
 	lazy = false,
 	---@type snacks.Config
