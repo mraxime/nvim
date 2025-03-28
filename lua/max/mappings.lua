@@ -58,6 +58,11 @@ vim.keymap.set("n", "s", "<nop>")
 vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })
 vim.keymap.set("n", "<c-w>x", "<cmd>tabclose<cr>", { noremap = true })
 vim.keymap.set("n", "sv", "<cmd>vsplit<cr>", { noremap = true })
+
+vim.keymap.set("n", "U", "<c-r>")
+vim.keymap.set({ "n", "v" }, "gh", "0")
+vim.keymap.set({ "n", "v" }, "gl", "$")
+
 -- vim.keymap.set("n", "ss", "<cmd>split<cr>", { noremap = true })
 -- vim.keymap.set("n", "sq", "<cmd>close<cr>", { noremap = true })
 

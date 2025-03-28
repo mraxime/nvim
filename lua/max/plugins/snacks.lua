@@ -1,3 +1,15 @@
+-- @param markers - Predefined list of files to look for
+local function find_project_root()
+	local dir = vim.fn.getcwd()
+	while dir ~= "/" do
+		if vim.fn.isdirectory(dir .. "/.git") == 1 then
+			return dir
+		end
+		dir = vim.fn.fnamemodify(dir, ":h")
+	end
+	return vim.fn.getcwd()
+end
+
 -- Concerns about lazyloading:
 -- Snacks is really well designed and does not need to be lazy loaded.
 -- When snacks loads, it loads just one file and creates a couple of autocmds, that's it.
@@ -11,6 +23,7 @@ return {
 		quickfile = { enabled = true },
 		explorer = { enabled = true },
 		lazygit = { enabled = true },
+		input = { enabled = false },
 		statuscolumn = { enabled = true },
 		picker = {
 			enabled = true,
@@ -60,7 +73,7 @@ return {
 		{
 			"se",
 			function()
-				Snacks.explorer()
+				Snacks.explorer({ cwd = find_project_root() })
 			end,
 			desc = "Toggle explorer",
 		},
@@ -70,14 +83,14 @@ return {
 		{
 			"<leader>f",
 			function()
-				Snacks.picker.files()
+				Snacks.picker.files({ cwd = find_project_root() })
 			end,
 			desc = "Find files",
 		},
 		{
 			"<leader>F",
 			function()
-				Snacks.picker.files({ cwd = vim.fn.getcwd() })
+				Snacks.picker.files()
 			end,
 			desc = "Find files at cwd",
 		},

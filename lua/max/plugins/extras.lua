@@ -3,12 +3,12 @@ local enabled = true
 
 return {
 	-- surround
-	{
-		"kylechui/nvim-surround",
-		enabled = enabled,
-		event = "VeryLazy",
-		config = true,
-	},
+	-- {
+	-- 	"kylechui/nvim-surround",
+	-- 	enabled = enabled,
+	-- 	event = "VeryLazy",
+	-- 	config = true,
+	-- },
 
 	-- better quickfix
 	{
@@ -30,6 +30,7 @@ return {
 
 	-- better vim.ui
 	{
+		-- deprecated
 		"stevearc/dressing.nvim",
 		enabled = enabled,
 		init = function()

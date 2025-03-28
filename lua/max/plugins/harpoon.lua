@@ -12,7 +12,7 @@ return {
 		keys = {
 			-- Menu Toggle
 			{
-				"gh",
+				"<leader>h",
 				function()
 					local harpoon = require("harpoon")
 					harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -62,13 +62,13 @@ return {
 				desc = "Nav to harpoon file 4",
 			},
 			-- Reset
-			{
-				"gH",
-				function()
-					require("harpoon.mark").clear_all()
-				end,
-				desc = "Reset harpoon",
-			},
+			-- {
+			-- 	"<leader>H",
+			-- 	function()
+			-- 		require("harpoon.mark").clear_all()
+			-- 	end,
+			-- 	desc = "Reset harpoon",
+			-- },
 		},
 		config = function()
 			local harpoon = require("harpoon")

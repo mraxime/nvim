@@ -7,7 +7,16 @@ return {
 		-- 👇 in this section, choose your own keymappings!
 		{
 			"<leader>y",
-			mode = { "n", "v" },
+			"<cmd>Yazi<cr>",
+			desc = "Open yazi at the current file",
+		},
+		{
+			"<leader>o",
+			"<cmd>Yazi<cr>",
+			desc = "Open yazi at the current file",
+		},
+		{
+			"<C-y>",
 			"<cmd>Yazi<cr>",
 			desc = "Open yazi at the current file",
 		},
@@ -19,8 +28,9 @@ return {
 	},
 	---@type YaziConfig | {}
 	opts = {
-		-- if you want to open yazi instead of netrw, see below for more info
 		open_for_directories = false,
+		floating_window_scaling_factor = 1,
+		highlight_hovered_buffers_in_same_directory = false,
 		keymaps = {
 			show_help = "<f1>",
 		},
