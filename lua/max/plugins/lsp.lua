@@ -54,6 +54,7 @@ return {
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
 					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts("Show diagnostics"))
 					vim.keymap.set("n", "<leader>l", vim.diagnostic.open_float, opts("Show diagnostics"))
+					vim.keymap.set("n", "<c-k>", vim.diagnostic.open_float, opts("Show diagnostics"))
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
