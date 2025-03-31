@@ -62,104 +62,101 @@ return {
 		},
 	},
 	keys = {
-		-- Explorer Maps
-		----------------------------------------------------
-		-- {
-		-- 	"<leader>e",
-		-- 	function()
-		-- 		Snacks.explorer()
-		-- 	end,
-		-- 	desc = "Toggle explorer",
-		-- },
-		{
-			"se",
-			function()
-				Snacks.explorer({ cwd = find_project_root() })
-			end,
-			desc = "Toggle explorer",
-		},
-
-		-- Picker Maps
+		-- Picker
 		----------------------------------------------------
 		{
 			"<leader>f",
 			function()
 				Snacks.picker.files({ cwd = find_project_root() })
 			end,
-			desc = "Find files",
+			desc = "Open file picker",
 		},
 		{
 			"<leader>F",
 			function()
 				Snacks.picker.files()
 			end,
-			desc = "Find files at cwd",
+			desc = "Open file picker at current working directory",
 		},
 		{
 			"<leader>i",
 			function()
 				Snacks.picker.files({ cwd = vim.fn.expand("%:p:h") })
 			end,
-			desc = "File picker at cd",
+			desc = "Open file picker at buffer directory",
 		},
 		{
-			"<leader>/",
+			"se",
 			function()
-				Snacks.picker.grep()
+				Snacks.explorer({ cwd = find_project_root() })
 			end,
-			desc = "Find Text",
-		},
-		{
-			"<leader>'",
-			function()
-				Snacks.picker.resume()
-			end,
-			desc = "Resume Telescope",
+			desc = "Open file explorer",
 		},
 		{
 			"<leader>b",
 			function()
 				Snacks.picker.buffers()
 			end,
-			desc = "Find Buffers",
-		},
-		{
-			"<leader>d",
-			function()
-				Snacks.picker.diagnostics()
-			end,
-			desc = "Diagnostic picker",
-		},
-		{
-			"<leader>g",
-			function()
-				Snacks.picker.git_status()
-			end,
-			desc = "Find Git Changes",
+			desc = "Open buffer picker",
 		},
 		{
 			"<leader>j",
 			function()
 				Snacks.picker.jumps()
 			end,
-			desc = "Jumplist picker",
+			desc = "Open jumplist picker",
 		},
 		{
 			"<leader>s",
 			function()
 				Snacks.picker.lsp_symbols()
 			end,
-			desc = "Symbols picker",
+			desc = "Open symbol picker",
+		},
+		{
+			"<leader>d",
+			function()
+				Snacks.picker.diagnostics()
+			end,
+			desc = "Open diagnostic picker",
+		},
+		{
+			"<leader>g",
+			function()
+				Snacks.picker.git_diff()
+			end,
+			desc = "Open git diff picker",
+		},
+		{
+			"<leader>'",
+			function()
+				Snacks.picker.resume()
+			end,
+			desc = "Open last picker",
+		},
+		{
+			"<leader>/",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Open grep picker",
+		},
+		{
+			"<leader>?",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "Open keymaps picker",
 		},
 		{
 			"<leader>\\",
 			function()
 				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 			end,
-			desc = "File picker at cd",
+			desc = "Open file picker at Neovim config",
 		},
 
-		-- Terminal Maps
+		-- Terminal
 		----------------------------------------------------
 		{
 			"<c-/>",
@@ -218,7 +215,7 @@ return {
 			desc = "Toggle Terminal",
 		},
 
-		-- Lazygit Maps
+		-- Others
 		----------------------------------------------------
 		{
 			"<C-f>h",
@@ -227,9 +224,6 @@ return {
 			end,
 			desc = "Open Lazygit",
 		},
-
-		-- Zen Maps
-		----------------------------------------------------
 		{
 			"<leader>z",
 			function()
