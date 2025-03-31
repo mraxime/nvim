@@ -52,17 +52,18 @@ return {
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic"))
 					vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts("Show hover informations"))
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
-					vim.keymap.set("n", "go", vim.diagnostic.open_float, opts("Show diagnostics"))
+					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts("Show diagnostics"))
+					vim.keymap.set("n", "<leader>l", vim.diagnostic.open_float, opts("Show diagnostics"))
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
 					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts("Rename all references"))
 					-- vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename all references"))
 					vim.keymap.set({ "n", "i" }, "<c-k>", vim.lsp.buf.signature_help, opts("Show signature help"))
-					vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts("Code action"))
+					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts("Code action"))
 
 					-- LSP highlight when CursorHold
-					if client and client.supports_method("textDocument/documentHighlight", event.buf) then
+					if client and client:supports_method("textDocument/documentHighlight", event.buf) then
 						local group = vim.api.nvim_create_augroup("lsp_document_highlightt", { clear = false })
 
 						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

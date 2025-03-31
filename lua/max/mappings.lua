@@ -20,7 +20,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-s>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+-- vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 
 -- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader><leader>", "<nop>")
@@ -61,7 +61,7 @@ vim.keymap.set("n", "sv", "<cmd>vsplit<cr>", { noremap = true })
 
 vim.keymap.set("n", "U", "<c-r>")
 vim.keymap.set({ "n", "v" }, "gh", "0")
-vim.keymap.set({ "n", "v" }, "gl", "$")
+-- vim.keymap.set({ "n", "v" }, "gl", "$")
 
 -- vim.keymap.set("n", "ss", "<cmd>split<cr>", { noremap = true })
 -- vim.keymap.set("n", "sq", "<cmd>close<cr>", { noremap = true })
