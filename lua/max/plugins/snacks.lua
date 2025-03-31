@@ -225,6 +225,13 @@ return {
 			desc = "Open Lazygit",
 		},
 		{
+			"<C-f><C-h>",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Open Lazygit",
+		},
+		{
 			"<leader>z",
 			function()
 				Snacks.zen()

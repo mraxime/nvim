@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>p", "<cmd>Lazy<cr>")
 vim.keymap.set("n", "<leader>.", "<cmd>edit ~/.config/nvim/init.lua<cr>")
 
 -- old muscle memory
-vim.keymap.set("n", "<C-h>", "<c-w>h")
+-- vim.keymap.set("n", "<C-h>", "<c-w>h")
 -- vim.keymap.set("n", "<C-l>", "<c-w>l")
 
 -- TODO: keep yank position
