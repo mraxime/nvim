@@ -8,20 +8,21 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			-- LSP signs
-			vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignHint", { text = "󰠠 ", texthl = "DiagnosticSignHint", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo", numhl = "" })
-			vim.fn.sign_define("DiagnosticSignWarn", { text = "▲ ", texthl = "DiagnosticSignWarn", numhl = "" })
-
 			-- Diagnostics
 			vim.diagnostic.config({
 				virtual_text = false,
 				update_in_insert = true,
 				underline = true,
 				severity_sort = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.HINT] = "󰠠 ",
+						[vim.diagnostic.severity.INFO] = " ",
+						[vim.diagnostic.severity.WARN] = "▲ ",
+					},
+				},
 				float = {
-					focusable = true,
 					style = "minimal",
 					border = "rounded",
 					source = true,
@@ -117,7 +118,7 @@ return {
 
 			-- disable semanticTokens
 			local on_init = function(client, _)
-				if client.supports_method("textDocument/semanticTokens") then
+				if client:supports_method("textDocument/semanticTokens") then
 					client.server_capabilities.semanticTokensProvider = nil
 				end
 			end
@@ -150,7 +151,7 @@ return {
 								pattern = { "*.js", "*.ts" },
 								group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
 								callback = function(ctx)
-									client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+									client:notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
 								end,
 							})
 						end,

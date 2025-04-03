@@ -27,7 +27,7 @@ return {
 			end,
 		},
 		-- incremental_selection = { enable = true },
-		-- indent = { enable = true },
+		indent = { enable = true },
 		ensure_installed = {
 			"bash",
 			"c",
