@@ -60,6 +60,9 @@ return {
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
 					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts("Rename all references"))
+					vim.keymap.set("n", "<leader>I", function()
+						vim.lsp.buf.code_action({ context = { only = { "source.addMissingImports.ts" } } })
+					end, opts("Add missing imports"))
 					-- vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename all references"))
 					vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, opts("Show signature help"))
 					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts("Code action"))
@@ -113,15 +116,19 @@ return {
 
 			-- [Svelte] LSP capabilities
 			-- See `https://github.com/sveltejs/language-tools/issues/2008#issuecomment-2148860446`
-			local svelte_capabilities = vim.tbl_deep_extend("force", {}, capabilities)
-			svelte_capabilities.workspace = { didChangeWatchedFiles = false }
+			-- local svelte_capabilities = vim.tbl_deep_extend("force", {}, capabilities)
+			-- svelte_capabilities.workspace = { didChangeWatchedFiles = false }
 
 			-- disable semanticTokens
-			local on_init = function(client, _)
-				if client:supports_method("textDocument/semanticTokens") then
-					client.server_capabilities.semanticTokensProvider = nil
-				end
-			end
+			-- local on_init = function(client, _)
+			-- 	if client:supports_method("textDocument/semanticTokens") then
+			-- 		client.server_capabilities.semanticTokensProvider = nil
+			-- 	end
+			-- end
+
+			-- Prevent LSP from overwriting treesitter color settings
+			-- https://github.com/NvChad/NvChad/issues/1907
+			vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
 
 			-- LSP config
 			local lspconfig = require("lspconfig")
@@ -132,36 +139,36 @@ return {
 				function(server_name)
 					lspconfig[server_name].setup({
 						capabilities = capabilities,
-						on_init = on_init,
+						-- on_init = on_init,
 					})
 				end,
 
 				-- faster server handled by typescript-tools.nvim
 				-- ["ts_ls"] = function() end,
 
-				["svelte"] = function()
-					lspconfig["svelte"].setup({
-						capabilities = svelte_capabilities,
-						on_init = on_init,
-						init = on_init,
-						on_attach = function(client, bufnr)
-							-- Fix .js/.ts files changes not affecting svelte lsp
-							-- https://github.com/sveltejs/language-tools/issues/2008
-							vim.api.nvim_create_autocmd("BufWritePost", {
-								pattern = { "*.js", "*.ts" },
-								group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
-								callback = function(ctx)
-									client:notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-								end,
-							})
-						end,
-					})
-				end,
+				-- ["svelte"] = function()
+				-- 	lspconfig["svelte"].setup({
+				-- 		capabilities = svelte_capabilities,
+				-- 		on_init = on_init,
+				-- 		init = on_init,
+				-- 		on_attach = function(client, bufnr)
+				-- 			-- Fix .js/.ts files changes not affecting svelte lsp
+				-- 			-- https://github.com/sveltejs/language-tools/issues/2008
+				-- 			vim.api.nvim_create_autocmd("BufWritePost", {
+				-- 				pattern = { "*.js", "*.ts" },
+				-- 				group = vim.api.nvim_create_augroup("svelte_onDidChangeTsOrJsFile", { clear = true }),
+				-- 				callback = function(ctx)
+				-- 					client:notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+				-- 				end,
+				-- 			})
+				-- 		end,
+				-- 	})
+				-- end,
 
 				["lua_ls"] = function()
 					lspconfig.lua_ls.setup({
 						capabilities = capabilities,
-						on_init = on_init,
+						-- on_init = on_init,
 						settings = {
 							Lua = {
 								telemetry = { enable = false },

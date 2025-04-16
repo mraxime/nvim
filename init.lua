@@ -1,4 +1,4 @@
-vim.loader.enable() -- https://github.com/neovim/neovim/pull/22668
+vim.loader.enable(true) -- https://github.com/neovim/neovim/pull/22668
 require("max.disabled")
 require("max.options")
 require("max.mappings")
