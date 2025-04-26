@@ -4,6 +4,9 @@ return {
 	version = false, -- last release is too old
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	cmd = {
 		"TSBufDisable",
 		"TSBufEnable",
@@ -20,14 +23,24 @@ return {
 		"TSUpdateSync",
 	},
 	opts = {
+		auto_install = true,
 		highlight = {
 			enable = true,
 			disable = function(_, bufnr)
 				return vim.api.nvim_buf_line_count(bufnr) > 10000
 			end,
 		},
-		-- incremental_selection = { enable = true },
 		indent = { enable = true },
+		textobjects = {
+			select = {
+				enable = true,
+				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+				},
+			},
+		},
 		ensure_installed = {
 			"bash",
 			"c",
@@ -37,13 +50,8 @@ return {
 			"javascript",
 			"json",
 			"lua",
-			"luadoc",
-			"luap",
 			"markdown",
-			"markdown_inline",
 			"prisma",
-			"query",
-			"regex",
 			"rust",
 			"scss",
 			"sql",

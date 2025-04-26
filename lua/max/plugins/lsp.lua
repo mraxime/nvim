@@ -8,27 +8,6 @@ return {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
-			-- Diagnostics
-			vim.diagnostic.config({
-				virtual_text = false,
-				update_in_insert = true,
-				underline = true,
-				severity_sort = true,
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = " ",
-						[vim.diagnostic.severity.HINT] = "󰠠 ",
-						[vim.diagnostic.severity.INFO] = " ",
-						[vim.diagnostic.severity.WARN] = "▲ ",
-					},
-				},
-				float = {
-					style = "minimal",
-					border = "rounded",
-					source = true,
-				},
-			})
-
 			-- Rounded borders
 			vim.lsp.handlers["textDocument/hover"] =
 				vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", focusable = true })
@@ -50,12 +29,8 @@ return {
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
 					vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts("Go to implementation"))
 					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("Go to type definition"))
-					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts("Go to next diagnostic"))
 					vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts("Show hover informations"))
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
-					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts("Show diagnostics"))
-					vim.keymap.set("n", "<leader>l", vim.diagnostic.open_float, opts("Show diagnostics"))
-					vim.keymap.set("n", "<c-k>", vim.diagnostic.open_float, opts("Show diagnostics"))
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
@@ -96,8 +71,11 @@ return {
 			})
 
 			-- LSP capabilities
-			-- local capabilities = vim.lsp.protocol.make_client_capabilities()
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			vim.lsp.config("*", {
+				-- vim.lsp.protocol.make_client_capabilities()
+				capabilities = require("blink.cmp").get_lsp_capabilities(),
+			})
+
 			-- capabilities.textDocument.completion = require("cmp_nvim_lsp").default_capabilities().textDocument.completion
 			-- capabilities.textDocument.completion.completionItem = {
 			-- 	documentationFormat = { "markdown", "plaintext" },

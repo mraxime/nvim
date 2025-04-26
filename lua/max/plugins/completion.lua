@@ -3,6 +3,8 @@ return {
 	"saghen/blink.cmp",
 	build = "cargo build --release",
 	version = false,
+	---@module 'blink.cmp'
+	---@type blink.cmp.Config
 	opts = {
 		keymap = { preset = "enter" },
 		appearance = {
