@@ -23,7 +23,6 @@ return {
 		"TSUpdateSync",
 	},
 	opts = {
-		auto_install = true,
 		highlight = {
 			enable = true,
 			disable = function(_, bufnr)
@@ -41,6 +40,15 @@ return {
 				},
 			},
 		},
+		-- incremental_selection = {
+		-- 	enable = true,
+		-- 	keymaps = {
+		-- 		init_selection = "<leader>ss",
+		-- 		node_incremental = "<leader>si",
+		-- 		scope_incremental = "<leader>m",
+		-- 		node_decremental = "<leader>sd",
+		-- 	},
+		-- },
 		ensure_installed = {
 			"bash",
 			"c",
