@@ -60,32 +60,35 @@ return {
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
 					vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts("Rename all references"))
+					vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, opts("Show signature help"))
+					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts("Code action"))
 					vim.keymap.set("n", "<leader>I", function()
 						vim.lsp.buf.code_action({ context = { only = { "source.addMissingImports.ts" } } })
 					end, opts("Add missing imports"))
-					-- vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts("Rename all references"))
-					vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, opts("Show signature help"))
-					vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts("Code action"))
 
 					-- LSP highlight when CursorHold
-					if client and client:supports_method("textDocument/documentHighlight", event.buf) then
-						local group = vim.api.nvim_create_augroup("lsp_document_highlightt", { clear = false })
+					if client and client.server_capabilities.documentHighlightProvider then
+						local highlight_augroup = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
 
 						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-							group = group,
 							buffer = event.buf,
+							group = highlight_augroup,
 							desc = "highlight references when cursor holds",
-							callback = function()
-								vim.lsp.buf.document_highlight()
-							end,
+							callback = vim.lsp.buf.document_highlight,
 						})
 
 						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-							group = group,
 							buffer = event.buf,
+							group = highlight_augroup,
 							desc = "clear references when cursor moves",
-							callback = function()
+							callback = vim.lsp.buf.clear_references,
+						})
+
+						vim.api.nvim_create_autocmd("LspDetach", {
+							group = vim.api.nvim_create_augroup("lsp_detach", { clear = true }),
+							callback = function(event2)
 								vim.lsp.buf.clear_references()
+								vim.api.nvim_clear_autocmds({ group = "lsp_document_highlight", buffer = event2.buf })
 							end,
 						})
 					end
@@ -190,13 +193,6 @@ return {
 						},
 					})
 				end,
-
-				-- ["tailwindcss"] = function() -- temporary as my machine tailwindcss-language use the insiders version which support v4
-				-- 	lspconfig.tailwindcss.setup({
-				-- 		cmd = { "/run/user/1000/fnm_multishells/149402_1710017741789/bin/tailwindcss-language-server", "--stdio" },
-				-- 		capabilities = lsp_capabilities,
-				-- 	})
-				-- end,
 			})
 
 			-- vtsls
