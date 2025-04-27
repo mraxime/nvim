@@ -8,32 +8,31 @@ return {
 	},
 	opts = {
 		ensure_installed = {
+			-- Lsp
 			"css-lsp",
 			"docker-compose-language-service",
 			"dockerfile-language-server",
 			"eslint-lsp",
 			"gopls",
-			"hadolint",
 			"html-lsp",
 			"json-lsp",
 			"lua-language-server",
 			"marksman",
-			"prettierd",
 			"prisma-language-server",
-			-- "biome",
-			"selene",
-			"shellcheck",
-			"taplo",
-			"shfmt",
-			-- "stylelint",
-			"stylua",
 			"svelte-language-server",
 			"tailwindcss-language-server",
+			"taplo",
 			"templ",
-			-- "typescript-language-server",
-			"vtsls", -- better typscript lsp?
-			"vim-language-server",
+			"vtsls", -- or "typescript-language-server"
 			"yaml-language-server",
+			-- Formatters
+			"prettierd",
+			"shfmt",
+			"stylua",
+			-- Linters
+			"hadolint",
+			"selene",
+			"shellcheck",
 		},
 	},
 	config = function(_, opts)

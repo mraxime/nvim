@@ -4,9 +4,9 @@ return {
 	version = false, -- last release is too old
 	event = { "BufReadPost", "BufNewFile" },
 	build = ":TSUpdate",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-	},
+	-- dependencies = {
+	-- 	"nvim-treesitter/nvim-treesitter-textobjects",
+	-- },
 	cmd = {
 		"TSBufDisable",
 		"TSBufEnable",
@@ -30,16 +30,16 @@ return {
 			end,
 		},
 		indent = { enable = true },
-		textobjects = {
-			select = {
-				enable = true,
-				keymaps = {
-					-- You can use the capture groups defined in textobjects.scm
-					["af"] = "@function.outer",
-					["if"] = "@function.inner",
-				},
-			},
-		},
+		-- textobjects = {
+		-- 	select = {
+		-- 		enable = true,
+		-- 		keymaps = {
+		-- 			-- You can use the capture groups defined in textobjects.scm
+		-- 			["af"] = "@function.outer",
+		-- 			["if"] = "@function.inner",
+		-- 		},
+		-- 	},
+		-- },
 		-- incremental_selection = {
 		-- 	enable = true,
 		-- 	keymaps = {

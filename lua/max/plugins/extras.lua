@@ -10,6 +10,9 @@ return {
 	-- 	config = true,
 	-- },
 
+	-- Schemastores
+	{ "b0o/schemastore.nvim" },
+
 	-- better quickfix
 	{
 		"kevinhwang91/nvim-bqf",
@@ -17,13 +20,13 @@ return {
 		ft = "qf",
 	},
 
-	-- neodev
+	-- Neovim lua_ls setup
 	{
 		"folke/lazydev.nvim",
 		ft = "lua", -- only load on lua files
 		opts = {
 			library = {
-				"~/.local/share/nvim/lazy/",
+				vim.fn.stdpath("data") .. "/lazy/lazy.nvim",
 			},
 		},
 	},
@@ -54,7 +57,7 @@ return {
 			{
 				"<leader>R",
 				function()
-					require("grug-far").grug_far()
+					require("grug-far").open()
 				end,
 				desc = "Replace in files (Spectre)",
 			},
