@@ -8,12 +8,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- LSP keymaps
+		-- vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
+		-- vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts("Show hover informations"))
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
 		vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts("Go to implementation"))
 		vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("Go to type definition"))
-		vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts("Show hover informations"))
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show hover informations"))
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Show references"))
 		vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
 		vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
