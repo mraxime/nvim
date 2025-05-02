@@ -20,10 +20,10 @@ return {
 			graphql = { "prettierd" },
 			toml = { "taplo" },
 			svelte = { "prettierd" },
-			svx = { "prettierd" },
+			-- lsp format fallback on other files
+			["_"] = { lsp_format = "fallback" },
 		},
 		format_on_save = {
-			lsp_fallback = false,
 			async = false,
 			timeout_ms = 500,
 		},
