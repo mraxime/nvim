@@ -68,16 +68,23 @@ return {
 		{
 			"<leader>f",
 			function()
-				Snacks.picker.files({ cwd = find_project_root() })
+				Snacks.picker.files()
 			end,
 			desc = "Open file picker",
 		},
 		{
 			"<leader>F",
 			function()
-				Snacks.picker.files()
+				Snacks.picker.files({ cwd = find_project_root() })
 			end,
 			desc = "Open file picker at current working directory",
+		},
+		{
+			"sd",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Open file picker",
 		},
 		{
 			"<leader>i",
