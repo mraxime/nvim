@@ -96,7 +96,7 @@ return {
 		{
 			"se",
 			function()
-				Snacks.explorer({ cwd = find_project_root() })
+				Snacks.explorer()
 			end,
 			desc = "Open file explorer",
 		},
