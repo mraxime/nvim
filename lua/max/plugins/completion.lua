@@ -1,8 +1,7 @@
 -- Autocompletion
 return {
 	"saghen/blink.cmp",
-	build = "cargo build --release",
-	version = false,
+	version = "1.*",
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
