@@ -114,13 +114,13 @@ return {
 			end,
 			desc = "Open jumplist picker",
 		},
-		{
-			"<leader>s",
-			function()
-				Snacks.picker.lsp_symbols()
-			end,
-			desc = "Open symbol picker",
-		},
+		-- {
+		-- 	"<leader>s",
+		-- 	function()
+		-- 		Snacks.picker.lsp_symbols()
+		-- 	end,
+		-- 	desc = "Open symbol picker",
+		-- },
 		{
 			"<leader>d",
 			function()
@@ -144,6 +144,13 @@ return {
 		},
 		{
 			"<leader>/",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Open grep picker",
+		},
+		{
+			"<leader>s",
 			function()
 				Snacks.picker.grep()
 			end,
