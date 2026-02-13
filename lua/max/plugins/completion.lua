@@ -2,6 +2,7 @@
 return {
 	"saghen/blink.cmp",
 	version = "1.*",
+	event = { "InsertEnter", "CmdlineEnter" },
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
@@ -50,10 +51,6 @@ return {
 			-- },
 		},
 
-		-- Experimental signature help support
-		-- signature = {
-		-- 	enabled = true,
-		-- 	window = { border = "single" },
-		-- },
+		signature = { enabled = true },
 	},
 }

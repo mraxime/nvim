@@ -25,7 +25,7 @@ return {
 		quickfile = { enabled = true },
 		explorer = { enabled = true },
 		lazygit = { enabled = true },
-		input = { enabled = false },
+		input = { enabled = true },
 		statuscolumn = { enabled = true },
 		picker = {
 			enabled = true,
@@ -61,6 +61,7 @@ return {
 				position = "float",
 			},
 		},
+
 	},
 	keys = {
 		-- Picker

@@ -12,18 +12,8 @@ vim.diagnostic.config({
 		},
 	},
 	float = {
-		style = "minimal",
-		border = "rounded",
 		source = true,
 	},
 })
 
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostics", remap = false })
-
--- vim.keymap.set("n", "[d", function()
--- 	vim.diagnostic.jump({ count = -1, float = true })
--- end, { desc = "Go to previous diagnostic", remap = false })
---
--- vim.keymap.set("n", "]d", function()
--- 	vim.diagnostic.jump({ count = 1, float = true })
--- end, { desc = "Go to next diagnostic", remap = false })

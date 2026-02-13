@@ -51,15 +51,6 @@ local tokyonight = {
 			-- hl.LineNr = { fg = c.orange, bold = true }
 			hl.FloatBorder = { fg = c.fg_gutter }
 			hl.LineNrBelow = { fg = c.fg_gutter }
-			-- local prompt = "#2d3149"
-			-- hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg_dark }
-			hl.TelescopeBorder = { fg = c.fg_gutter }
-			-- hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
-			-- hl.TelescopePromptNormal = { bg = prompt }
-			-- hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
-			hl.TelescopePromptTitle = { fg = c.orange }
-			hl.TelescopePreviewTitle = { fg = c.orange }
-			hl.TelescopeResultsTitle = { fg = c.orange }
 		end,
 	},
 }
@@ -83,10 +74,6 @@ local gruvbox = {
 			LspReferenceRead = { bg = "#272839" },
 			LspReferenceText = { link = "LspReferenceRead" },
 			LspReferenceWrite = { link = "LspReferenceRead" },
-			TelescopeBorder = { fg = "#313244" },
-			TelescopePreviewBorder = { link = "TelescopeBorder" },
-			TelescopeResultsBorder = { link = "TelescopeBorder" },
-			TelescopePromptBorder = { link = "TelescopeBorder" },
 		},
 		dim_inactive = false,
 		transparent_mode = false,
@@ -163,7 +150,6 @@ local catppuccin = {
 	lazy = false,
 	priority = 1000,
 	name = "catppuccin",
-	build = ":CatppuccinCompile",
 	opts = {
 		flavour = "mocha",
 		-- background = { light = "latte", dark = "mocha" },
@@ -175,14 +161,11 @@ local catppuccin = {
 		-- 	},
 		-- },
 		integrations = {
-			bufferline = false,
-			cmp = true,
+			blink_cmp = true,
 			gitsigns = true,
-			indent_blankline = { enabled = true },
-			lsp_trouble = true,
 			markdown = true,
 			mason = true,
-			neotree = true,
+			snacks = true,
 			native_lsp = {
 				enabled = true,
 				underlines = {

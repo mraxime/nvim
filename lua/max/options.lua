@@ -46,5 +46,4 @@ vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.termguicolors = true
 -- vim.opt.colorcolumn = "80" -- ruler

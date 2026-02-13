@@ -76,10 +76,10 @@ M.fileInfo = function()
 	local filename = (fn.expand("%") == "" and "Empty ") or fn.expand("%F")
 
 	if filename ~= "Empty " then
-		local devicons_present, devicons = pcall(require, "nvim-web-devicons")
+		local icons_present, icons = pcall(require, "mini.icons")
 
-		if devicons_present then
-			local ft_icon = devicons.get_icon(filename)
+		if icons_present then
+			local ft_icon = icons.get("file", filename)
 			icon = (ft_icon ~= nil and " " .. ft_icon) or ""
 		end
 
@@ -106,25 +106,16 @@ end
 
 -- LSP STUFF
 M.LSP_progress = function()
-	if not rawget(vim, "lsp") or vim.lsp.status then
+	if not rawget(vim, "lsp") then
 		return ""
 	end
 
-	local Lsp = vim.lsp.util.get_progress_messages()[1]
-
-	if vim.o.columns < 120 or not Lsp then
+	local status = vim.lsp.status()
+	if vim.o.columns < 120 or status == "" then
 		return ""
 	end
 
-	local msg = Lsp.message or ""
-	local percentage = Lsp.percentage or 0
-	local title = Lsp.title or ""
-	local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" }
-	local ms = vim.loop.hrtime() / 1000000
-	local frame = math.floor(ms / 120) % #spinners
-	local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
-
-	return ("%#St_LspProgress#" .. content) or ""
+	return "%#St_LspProgress#" .. " " .. status .. " "
 end
 
 M.LSP_Diagnostics = function()
@@ -147,7 +138,7 @@ end
 
 M.LSP_status = function()
 	if rawget(vim, "lsp") then
-		for _, client in ipairs(vim.lsp.get_active_clients()) do
+		for _, client in ipairs(vim.lsp.get_clients()) do
 			if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
 				return (vim.o.columns > 100 and "%#St_LspStatus#" .. "   LSP ~ " .. client.name .. " ") or "   LSP "
 			end

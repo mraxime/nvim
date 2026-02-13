@@ -25,8 +25,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader><leader>", "<nop>")
 
 -- buffers
--- vim.keymap.set("n", "gn", "<cmd>bnext<CR>", { noremap = true })
--- vim.keymap.set("n", "gp", "<cmd>bprev<CR>", { noremap = true })
 vim.keymap.set("n", "<C-l>", "<C-^>", { noremap = true })
 
 -- Plugin Manager
@@ -44,14 +42,6 @@ vim.keymap.set("n", "<leader>.", "<cmd>edit ~/.config/nvim/init.lua<cr>")
 
 -- anoying
 vim.keymap.set("n", "s", "<nop>")
-
--- quickfix navigation
--- vim.keymap.set("n", "[q", "<cmd>cprev<cr>")
--- vim.keymap.set("n", "]q", "<cmd>cnext<cr>")
--- vim.keymap.set("n", "[a", "<cmd>cprev<cr>")
--- vim.keymap.set("n", "]a", "<cmd>cnext<cr>")
--- vim.keymap.set("n", "[c", "<cmd>cprev<cr>")
--- vim.keymap.set("n", "]c", "<cmd>cnext<cr>")
 
 -- experiments
 vim.keymap.set("n", "<c-w>c", "<cmd>tabnew<cr>", { noremap = true })

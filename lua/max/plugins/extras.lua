@@ -31,23 +31,6 @@ return {
 		},
 	},
 
-	-- better vim.ui
-	{
-		-- deprecated
-		"stevearc/dressing.nvim",
-		enabled = enabled,
-		init = function()
-			vim.ui.select = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.select(...)
-			end
-			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.input(...)
-			end
-		end,
-	},
-
 	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
