@@ -81,19 +81,33 @@ vim.lsp.config("yamlls", {
 	},
 })
 
+-- Disable LSP formatting except oxfmt and gopls
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if client and client.name ~= "oxfmt" and client.name ~= "gopls" then
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end
+	end,
+})
+
+-- vim.lsp.enable("eslint")
+-- vim.lsp.enable("cssmodules_ls")
 vim.lsp.enable("cssls")
-vim.lsp.enable("dockerls")
 vim.lsp.enable("docker_compose_language_service")
-vim.lsp.enable("eslint")
+vim.lsp.enable("dockerls")
 vim.lsp.enable("gopls")
+vim.lsp.enable("graphql")
 vim.lsp.enable("html")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("omnisharp")
+vim.lsp.enable("oxfmt")
+vim.lsp.enable("oxlint")
+vim.lsp.enable("postgres_lsp")
+vim.lsp.enable("prismals")
 vim.lsp.enable("svelte")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("vtsls")
 vim.lsp.enable("yamlls")
-vim.lsp.enable("prismals")
-vim.lsp.enable("cssmodules_ls")
-vim.lsp.enable("omnisharp")
-vim.lsp.enable("graphql")

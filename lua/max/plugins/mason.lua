@@ -12,7 +12,7 @@ return {
 			"css-lsp",
 			"docker-compose-language-service",
 			"dockerfile-language-server",
-			"eslint-lsp",
+			-- "eslint-lsp",
 			"gopls",
 			"html-lsp",
 			"json-lsp",
@@ -26,10 +26,12 @@ return {
 			"vtsls", -- or "typescript-language-server"
 			"yaml-language-server",
 			-- Formatters
+			-- "shfmt",
+			"oxfmt",
 			"prettierd",
-			"shfmt",
 			"stylua",
 			-- Linters
+			"oxlint",
 			"hadolint",
 			"selene",
 			"shellcheck",

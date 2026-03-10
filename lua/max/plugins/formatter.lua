@@ -4,24 +4,32 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			javascript = { "prettierd" },
-			typescript = { "prettierd" },
-			javascriptreact = { "prettierd" },
-			typescriptreact = { "prettierd" },
 			bash = { "shfmt" },
 			sh = { "shfmt" },
-			html = { "prettierd" },
-			css = { "prettierd" },
-			scss = { "prettierd" },
+			javascript = { "prettierd" },
+			javascriptreact = { "prettierd" },
+			typescript = { "prettierd" },
+			typescriptreact = { "prettierd" },
 			json = { "prettierd" },
 			jsonc = { "prettierd" },
 			yaml = { "prettierd" },
+			html = { "prettierd" },
+			css = { "prettierd" },
+			scss = { "prettierd" },
+			less = { "prettierd" },
 			markdown = { "prettierd" },
 			graphql = { "prettierd" },
-			toml = { "taplo" },
+			vue = { "prettierd" },
 			svelte = { "prettierd" },
-			-- lsp format fallback on other files
-			["_"] = { lsp_format = "fallback" },
+		},
+		-- Skip prettierd if no prettier config exists; oxfmt LSP handles the rest
+		formatters = {
+			prettierd = {
+				require_cwd = true,
+			},
+		},
+		default_format_opts = {
+			lsp_format = "fallback",
 		},
 		format_on_save = {
 			async = false,
