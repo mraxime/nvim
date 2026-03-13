@@ -7,5 +7,5 @@ require("max.diagnostic")
 require("max.plugins-manager")
 require("max.lsp")
 
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("catppuccin-nvim")
 vim.keymap.del("n", "[d")

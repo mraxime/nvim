@@ -149,7 +149,7 @@ local catppuccin = {
 	enabled = true,
 	lazy = false,
 	priority = 1000,
-	name = "catppuccin",
+	name = "catppuccin-nvim",
 	opts = {
 		flavour = "mocha",
 		-- background = { light = "latte", dark = "mocha" },
