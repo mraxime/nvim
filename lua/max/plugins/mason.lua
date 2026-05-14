@@ -25,6 +25,7 @@ return {
 			"templ",
 			"vtsls", -- or "typescript-language-server"
 			"yaml-language-server",
+			"tree-sitter-cli",
 			-- Formatters
 			-- "shfmt",
 			"oxfmt",
