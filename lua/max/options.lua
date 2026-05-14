@@ -1,7 +1,7 @@
 vim.filetype.add({ pattern = { [".?env.?.*"] = "dotenv" } })
 vim.o.winborder = "rounded"
 
-vim.wo.wrap = false
+vim.wo.wrap = true
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus" -- yank sync with system clipboard
 vim.opt.cursorline = true -- show cursor line

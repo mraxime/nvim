@@ -234,14 +234,7 @@ return {
 		-- Others
 		----------------------------------------------------
 		{
-			"<C-f>h",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "Open Lazygit",
-		},
-		{
-			"<C-f><C-h>",
+			"<C-g>",
 			function()
 				Snacks.lazygit()
 			end,
